@@ -1,0 +1,1810 @@
+// Decompiled by Jad v1.5.8e2. Copyright 2001 Pavel Kouznetsov.
+// Jad home page: http://kpdus.tripod.com/jad.html
+// Decompiler options: packimports(3) fieldsfirst ansi space 
+// Source File Name:   CalMode_IS_ResDeal.java
+
+package com.sinosoft.lis.calfactor;
+
+import com.sinosoft.lis.aml.CalculatorInterface;
+import com.sinosoft.lis.aml.DataInterfaceOfLWMission;
+import com.sinosoft.lis.db.LXCalResultDB;
+import com.sinosoft.lis.pubfun.*;
+import com.sinosoft.lis.schema.*;
+import com.sinosoft.lis.vschema.*;
+import com.sinosoft.utility.*;
+
+import java.io.PrintStream;
+import java.sql.Connection;
+
+public class CalMode_IS_ResDeal
+	implements CalculatorInterface
+{
+
+	public String className;
+	public CErrors mErrors;
+	MMap mMap;
+	private SSRS tSSRS;
+	public VData mInputData;
+	SSRS rs;
+	StringBuffer sb;
+	ExeSQL mExeSQL;
+	ExeSQL mELocal;
+	public GlobalInput mGI;
+	Connection mConn;
+	String mCsnm;
+	String mAppId;
+	String mCalCode;
+	String mCrcd;
+	String mUri;
+	String mMakedate;
+	String mOperator;
+	String mDealNo;
+	String mMngCom;
+	LXCalResultSchema mLXCalResultSchema;
+	LXCalResultSet mLXCalResultSet;
+	LXCalResultDB mLXCalResultDB;
+	LXISTradeDetailSet mLXISTDetailSet;
+	LXISTradeContSet mLXISTradeContSet;
+	LXISTradeBnfSet mLXISTradeBnfSet;
+	LXISTradeInsuredSet mLXISTInsuredSet;
+
+	public CalMode_IS_ResDeal()
+	{
+		className = getClass().getName().substring(getClass().getName().lastIndexOf(".") + 1);
+		mErrors = new CErrors();
+		mMap = new MMap();
+		tSSRS = new SSRS();
+		mInputData = new VData();
+		rs = new SSRS();
+		sb = new StringBuffer();
+		mExeSQL = new ExeSQL();
+		mELocal = new ExeSQL();
+		mGI = new GlobalInput();
+		mCsnm = "";
+		mAppId = "";
+		mCalCode = "";
+		mCrcd = "";
+		mUri = "";
+		mMakedate = "";
+		mOperator = "";
+		mDealNo = "";
+		mMngCom = "";
+		mLXCalResultSchema = new LXCalResultSchema();
+		mLXCalResultSet = new LXCalResultSet();
+		mLXCalResultDB = new LXCalResultDB();
+		mLXISTDetailSet = new LXISTradeDetailSet();
+		mLXISTradeContSet = new LXISTradeContSet();
+		mLXISTradeBnfSet = new LXISTradeBnfSet();
+		mLXISTInsuredSet = new LXISTradeInsuredSet();
+	}
+
+	public boolean submitData(String dealno, String csnm, String appId, String calCode, String crcd, String uri, String makedate, 
+			String operator, String mngcom)
+	{
+		if (!getInputData(dealno, csnm, appId, calCode, crcd, uri, makedate, operator, mngcom))
+			return false;
+//		if (!dealData())
+//			return false;
+		try
+	      {
+	        if (!(dealData()))
+	          return false;
+	      }
+	      catch (Exception e) {
+	        System.out.println("==========错误异常：" + this.mCalCode + "算法，" + mCsnm + "客户时出错！=================");
+	        this.mErrors.addOneError("==========处理" + this.mCalCode + "算法，" + mCsnm + "客户时出错！=================");
+	        return false;
+	      }
+	    try
+	    {
+	      mConn.close();
+	    }
+	    // Misplaced declaration of an exception variable
+	    catch (Exception ex)
+	    {
+	      System.out.println(ex.toString());
+	      return false;
+	    }
+		return true;
+	}
+
+	public boolean dealData()
+	{
+		if (mCalCode == null)
+		{
+			buildError("dealData", "在CalMode_IS_ResDeal类中,检验mCalCode标识为空！");
+			return false;
+		}
+		if (mCsnm == null || "".equals(mCsnm))
+		{
+			buildError("dealData", "在CalMode_IS_ResDeal类中，检验mCsnm标识为空！");
+			return false;
+		}
+		mLXCalResultSchema = new LXCalResultSchema();
+		mLXCalResultSet = new LXCalResultSet();
+		mLXCalResultDB = new LXCalResultDB();
+		mLXCalResultDB.setAppId(mAppId);
+		mLXCalResultDB.setCalCode(mCalCode);
+		mLXCalResultDB.setHTDT(mMakedate);
+		mLXCalResultDB.setCSNM(mCsnm);
+		String tSQL_Res = "";
+		tSQL_Res = (new StringBuilder("SELECT * FROM LXCALRESULT WHERE APPID = '")).append(mAppId).append("' AND CALCODE = '").append(mCalCode).append("' ").append("AND HTDT = '").append(mMakedate).append("' AND CSNM = '").append(mCsnm).append("' ").toString();
+		System.out.println("=========== tSQL_Res ===========");
+		System.out.println(tSQL_Res);
+		mLXCalResultSet = mLXCalResultDB.executeQuery(tSQL_Res);
+		if (mLXCalResultDB.mErrors.needDealError())
+		{
+			mErrors.addOneError((new StringBuilder("在通过mLXCalResultDB查询客户")).append(mCsnm).append("，库").append(mAppId).append("，算法").append(mCalCode).append("，日期").append(mMakedate).append("信息时出错！").toString());
+			return false;
+		}
+		if (mLXCalResultSet.size() == 0)
+			return true;
+		
+		mLXISTDetailSet = new LXISTradeDetailSet();
+		mLXISTradeContSet = new LXISTradeContSet();
+		mLXISTradeBnfSet = new LXISTradeBnfSet();
+		mLXISTInsuredSet = new LXISTradeInsuredSet();
+		if (!setLXISTradeCusPartner())
+		{
+			mErrors.addOneError("在准备LXISTradeCusPartner表中数据时出错！");
+			return false;
+		}
+		if (!setLXISTradeMain(mCsnm))
+		{
+			mErrors.addOneError("在准备LXISTradeMain表中数据时出错！");
+			return false;
+		}
+		if (!setLXISTradeDetail(mCsnm))
+		{
+			mErrors.addOneError("在准备LXISTradeDetail表中数据时出错！");
+			return false;
+		}
+		if (!LXISChengdu())
+		{
+			mErrors.addOneError("在判断可疑程度时出错！");
+			return false;
+		} else
+		{
+			return true;
+		}
+	}
+
+	public boolean LXISChengdu()
+	{
+		for (int i = 1; i <= mLXISTradeContSet.size(); i++)
+		{
+			String tContNo = mLXISTradeContSet.get(i).getCSNM();
+			String tDealNo = mLXISTradeContSet.get(i).getDealNo();
+			String SQLCd = (new StringBuilder("SELECT NVL(SUM(SUMPREM),0) FROM LCPOL WHERE CONTNO = '")).append(tContNo).append("' OR GRPCONTNO = '").append(tContNo).append("' ").toString();
+			System.out.println("=========== SQLCd ===========");
+			System.out.println(SQLCd);
+			SSRS tSSRS = new SSRS();
+			tSSRS = mExeSQL.execSQL(SQLCd);
+			String tSumPrem = tSSRS.GetText(1, 1);
+			if (Double.parseDouble(tSumPrem) < 10000000D)
+				continue;
+			mMap.put((new StringBuilder("UPDATE LXISTRADEMAIN SET SDGR = '02' WHERE DEALNO = '")).append(tDealNo).append("'").toString(), "UPDATE");
+			break;
+		}
+
+		return true;
+	}
+
+	public boolean setLXISTradeMain(String tAppntNo)
+	{
+		System.out.println((new StringBuilder("==========")).append(PubFun.getCurrentDate()).append(" ").append(PubFun.getCurrentTime()).append(" =========== 进入插入可疑主表的信息 ！action========================").toString());
+		String tAppnt_S = "";
+		tAppnt_S = (new StringBuilder("SELECT DISTINCT APPNTNAME,IDTYPE,NVL(IDNO,'@N'),NVL(WORKTYPE,'@I'),'07',MAKETIME,NVL(NATIVEPLACE,'@N'),TO_CHAR(APPNTBIRTHDAY,'YYYYMMDD'),'@N' FROM LCAPPNT WHERE APPNTNO = '")).append(tAppntNo).append("' ").append("AND ROWNUM=1 ").append("UNION ALL ").append("SELECT DISTINCT NAME,'21','@N',").append("(SELECT NVL(P.BUSINESSTYPE,'@I') FROM LDGRP P WHERE P.CUSTOMERNO = '").append(tAppntNo).append("'),'02',MAKETIME,'@N','@N','@I' ").append("FROM LCGRPAPPNT WHERE CUSTOMERNO = '").append(tAppntNo).append("'").append("AND ROWNUM=1 ").toString();
+		System.out.println("=========== tAppnt_S ===========");
+		System.out.println(tAppnt_S);
+		SSRS tSSRS = new SSRS();
+		tSSRS = mExeSQL.execSQL(tAppnt_S);
+		if (tSSRS == null || tSSRS.getMaxRow() == 0)
+		{
+			System.out.println("可疑投保人号未查到数据！！！");
+			return true;
+		}
+		String tName = "";
+		String tIDType = "";
+		String tIDNo = "";
+		String tOccType = "";
+		String tCTTP = "";
+		String tTime = "";
+		String tNative = "";
+		String tNCLIDType = "";
+		String tBirthday = "";
+		String tCRNM = "";
+		tName = tSSRS.GetText(1, 1);
+		tNCLIDType = tSSRS.GetText(1, 2);
+		tIDNo = tSSRS.GetText(1, 3);
+		tOccType = tSSRS.GetText(1, 4);
+		tCTTP = tSSRS.GetText(1, 5);
+		tTime = tSSRS.GetText(1, 6);
+		tNative = tSSRS.GetText(1, 7);
+		tBirthday = tSSRS.GetText(1, 8);
+		tCRNM = tSSRS.GetText(1, 9);
+		if (tNCLIDType.trim().equals("0"))
+			tIDType = "11";
+		if (tNCLIDType.trim().equals("1"))
+			if (tNative.trim().equals("CHN"))
+			{
+				tIDType = "19";
+				tIDNo = (new StringBuilder("护照")).append(tIDNo).toString();
+			} else
+			{
+				tIDType = "14";
+			}
+		if (tNCLIDType.trim().equals("2"))
+			tIDType = "12";
+		if (tNCLIDType.trim().equals("3"))
+		{
+			tIDType = "19";
+			tIDNo = (new StringBuilder("驾照")).append(tIDNo).toString();
+		}
+		if (tNCLIDType.trim().equals("4") || tNCLIDType.trim().equals("5"))
+		{
+			tIDType = "19";
+			tIDNo = (new StringBuilder("户口本")).append(tBirthday).toString();
+		}
+		if (tNCLIDType.trim().equals("8") || tNCLIDType.trim().equals("9") || tNCLIDType.trim().equals(""))
+		{
+			tIDType = "19";
+			if (tIDNo.trim().equals(""))
+				tIDNo = "@N";
+		}
+		if (tNCLIDType.trim().equals("21"))
+		{
+			tIDType = "21";
+			tIDNo = "@N";
+		}
+		if (tIDType.equals(""))
+		{
+			tIDType = "19";
+			tIDNo = "@N";
+		}
+		String tCrcd_SQL = "";
+		tCrcd_SQL = (new StringBuilder("SELECT CRCD FROM LXCALMODE WHERE APPID = '")).append(mAppId).append("' AND CALCODE = '").append(mCalCode).append("' ").append("AND NO = '0' AND VALIDITY = '1' ").toString();
+		System.out.println("=========== tCrcd_SQL ===========");
+		System.out.println(tCrcd_SQL);
+		mCrcd = mELocal.getOneValue(tCrcd_SQL);
+		if (mELocal.mErrors.needDealError())
+			mCrcd = "@N";
+		if (mCrcd == null || mCrcd.equals(""))
+			mCrcd = "@N";
+		String tCTVC_SQL = (new StringBuilder("SELECT NVL(CODE1,'@I') FROM LDCODERELA R WHERE R.RELATYPE = 'areatype' AND CODE3 IN ('1','2') AND CODE2 = '")).append(tOccType).append("' ").toString();
+		System.out.println("=========== tCTVC_SQL ===========");
+		System.out.println(tCTVC_SQL);
+		SSRS tSSRS_CTVC = mELocal.execSQL(tCTVC_SQL);
+		if (tSSRS_CTVC == null || tSSRS_CTVC.getMaxRow() == 0)
+			System.out.println("未查到 客户行业或职业的数据!!!");
+		String tCTVC = "@I";
+		if (tSSRS_CTVC.getMaxRow() > 0)
+			tCTVC = tSSRS_CTVC.GetText(1, 1);
+		String tMngCom = "";
+		String tComCode="";
+		String tTRCD = "";
+		String tMid_SQL = "";
+		tMid_SQL = (new StringBuilder("SELECT DISTINCT MANAGECOM FROM LCGRPCONT WHERE APPNTNO = '")).append(tAppntNo).append("' AND SIGNDATE <= TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') UNION ALL ").append("SELECT DISTINCT MANAGECOM FROM LCCONT ").append("WHERE APPNTNO = '").append(tAppntNo).append("' AND CONTTYPE = '1' AND SIGNDATE <= TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') ").toString();
+		SSRS aSSRS = new SSRS();
+		aSSRS = mExeSQL.execSQL(tMid_SQL);
+		if (mExeSQL.mErrors.needDealError())
+		{
+			System.out.println("查找可疑客户管理机构代码出错,用技术机构代码替代!!!");
+			tMngCom = mMngCom;
+			tComCode=mMngCom;
+		}
+		if (aSSRS.getMaxRow() > 0){
+			tMngCom = aSSRS.GetText(1, 1);
+			tComCode=aSSRS.GetText(1, 1);
+		}else{
+			tMngCom = mMngCom;
+			tComCode=mMngCom;
+		}
+		if (tMngCom.length() > 6)
+			tMngCom = tMngCom.substring(0, 6);
+		String tTrcd_SQL = (new StringBuilder("SELECT DISTINCT CODENAME FROM LDCODE WHERE CODETYPE = 'regcode6' AND COMCODE = '")).append(tMngCom).append("' AND ROWNUM = 1 ").toString();
+		System.out.println("=========== tTrcd_SQL ===========");
+		System.out.println((new StringBuilder("交易发生地查询SQL:")).append(tTrcd_SQL).toString());
+		tTRCD = mELocal.getOneValue(tTrcd_SQL);
+		if (mELocal.mErrors.needDealError() || tTRCD == null || "".equals(tTRCD))
+			tTRCD = "100000";
+		if (!tTRCD.equals(""))
+			tTRCD = (new StringBuilder("CHN")).append(tTRCD).toString();
+		String tSSDS = "";
+		String tSSDS_SQL = "";
+		tSSDS_SQL = (new StringBuilder("SELECT REMARK FROM LXCALMODE WHERE VALIDITY = '1' AND NO = '0' AND APPID = '")).append(mAppId).append("' AND CALCODE = '").append(mCalCode).append("' ").toString();
+		System.out.println("=========== tSSDS_SQL ===========");
+		System.out.println(tSSDS_SQL);
+		tSSDS = mELocal.getOneValue(tSSDS_SQL);
+		if (mELocal.mErrors.needDealError())
+			tSSDS = "符合可疑规则被提取";
+		String tCCTL = "@N";
+		String tCCTL_SQL = "";
+		tCCTL_SQL = (new StringBuilder("SELECT S.mobile,S.ADDRESSNO FROM LCADDRESS S WHERE TRIM(S.mobile) IS NOT NULL AND S.CUSTOMERNO = '")).append(tAppntNo).append("' ORDER BY S.ADDRESSNO DESC ").toString();
+		System.out.println("=========== tCCTL_SQL ===========");
+		System.out.println(tCCTL_SQL);
+		SSRS cSSRS = new SSRS();
+		cSSRS = mExeSQL.execSQL(tCCTL_SQL);
+		if (mExeSQL.mErrors.needDealError())
+			tCCTL = "@N";
+		if (cSSRS.getMaxRow() > 0)
+			tCCTL = cSSRS.GetText(1, 1);
+		String tCTAR = "@N";
+		String tCTAR_SQL = (new StringBuilder("SELECT DISTINCT S.POSTALADDRESS,S.ADDRESSNO FROM LCADDRESS S WHERE TRIM(S.POSTALADDRESS) IS NOT NULL AND S.CUSTOMERNO = '")).append(tAppntNo).append("' ORDER BY S.ADDRESSNO DESC ").toString();
+		System.out.println("=========== tCTAR_SQL ===========");
+		System.out.println(tCTAR_SQL);
+		SSRS rSSRS = new SSRS();
+		rSSRS = mExeSQL.execSQL(tCTAR_SQL);
+		if (mExeSQL.mErrors.needDealError())
+			tCTAR = "@N";
+		if (rSSRS.getMaxRow() > 0)
+			tCTAR = rSSRS.GetText(1, 1);
+		LXISTradeMainSchema tLXISTradeMainSchema = new LXISTradeMainSchema();
+		tLXISTradeMainSchema.setDealNo(mDealNo);
+		tLXISTradeMainSchema.setSTCR(mCrcd);
+		tLXISTradeMainSchema.setSDGR("01");
+		tLXISTradeMainSchema.setTKMS("上报反洗钱监控中心或人行");
+		tLXISTradeMainSchema.setSSDS(tSSDS);
+		tLXISTradeMainSchema.setCSNM(mCsnm);
+		tLXISTradeMainSchema.setCTNM(tName);
+		tLXISTradeMainSchema.setCITP(tIDType);
+		tLXISTradeMainSchema.setCTID(tIDNo);
+		tLXISTradeMainSchema.setCTTP(tCTTP);
+		tLXISTradeMainSchema.setCCTL(tCCTL);
+		tLXISTradeMainSchema.setCTAR(tCTAR);
+		tLXISTradeMainSchema.setCCEI("@N");
+		tLXISTradeMainSchema.setCTVC(tCTVC);
+		tLXISTradeMainSchema.setTRCD(tTRCD);
+		tLXISTradeMainSchema.setCRNM(tCRNM);
+		tLXISTradeMainSchema.setCRIT("@N");
+		tLXISTradeMainSchema.setCRID("@N");
+		tLXISTradeMainSchema.setDataState("S00");
+		tLXISTradeMainSchema.setFileName("");
+		tLXISTradeMainSchema.setFilePath("");
+		tLXISTradeMainSchema.setDealDate(mMakedate);
+		tLXISTradeMainSchema.setDealTime(tTime);
+		tLXISTradeMainSchema.setRPNM(mOperator);
+		tLXISTradeMainSchema.setOperator(mOperator);
+		tLXISTradeMainSchema.setManageCom(tMngCom);
+		tLXISTradeMainSchema.setComCode(tComCode);
+		tLXISTradeMainSchema.setIsmanual("");
+		tLXISTradeMainSchema.setMakeDate(PubFun.getCurrentDate());
+		tLXISTradeMainSchema.setMakeTime(PubFun.getCurrentTime());
+		mMap.put(tLXISTradeMainSchema, "INSERT");
+		mGI = new GlobalInput();
+		mGI.Operator = mOperator;
+		mGI.ManageCom = mMngCom;
+		mGI.ComCode = mMngCom;
+		DataInterfaceOfLWMission tDataInterfaceOfLWMission = new DataInterfaceOfLWMission();
+		if (!tDataInterfaceOfLWMission.makeLWMission(tLXISTradeMainSchema, mGI))
+		{
+			mErrors.copyAllErrors(tDataInterfaceOfLWMission.mErrors);
+			return false;
+		} else
+		{
+			mMap.add(tDataInterfaceOfLWMission.getMap());
+			System.out.println((new StringBuilder("==========")).append(PubFun.getCurrentDate()).append(" ").append(PubFun.getCurrentTime()).append(" =========== 成功插入可疑主表的信息 ！success========================").toString());
+			return true;
+		}
+	}
+
+	public boolean setLXISTradeDetail(String tAppntNo)
+	{
+		if (mCalCode.equals("ISX01301"))
+			getDetailInfo_ISX01301(tAppntNo, "ISX01301");
+		else
+		if (mCalCode.equals("ISX01302"))
+			getDetailInfo_ISX01302(tAppntNo, "ISX01302");
+		else
+		if (mCalCode.equals("ISX01303"))
+			getDetailInfo_ISX01303(tAppntNo, "ISX01303");
+		else
+		if (mCalCode.equals("ISX01304"))
+			getDetailInfo_ISX01304(tAppntNo, "ISX01304");
+		else
+		if (mCalCode.equals("ISX01305"))
+			getDetailInfo_ISX01305(tAppntNo, "ISX01305");
+		else
+		if (mCalCode.equals("ISX01306"))
+			getDetailInfo_ISX01306(tAppntNo, "ISX01306");
+		else
+		if (mCalCode.equals("ISX01307"))
+			getDetailInfo_ISX01307(tAppntNo, "ISX01307");
+		else
+		if (mCalCode.equals("ISX01308"))
+			getDetailInfo_ISX01308(tAppntNo, "ISX01308");
+		else
+		if (mCalCode.equals("ISX01309"))
+			getDetailInfo_ISX01309(tAppntNo, "ISX01309");
+		else
+		if (mCalCode.equals("ISX01310"))
+			getDetailInfo_ISX01310(tAppntNo, "ISX01310");
+		else
+		if (mCalCode.equals("ISX01311"))
+			getDetailInfo_ISX01311(tAppntNo, "ISX01311");
+		else
+		if (mCalCode.equals("ISX01312"))
+			getDetailInfo_ISX01312(tAppntNo, "ISX01312");
+		else
+		if (mCalCode.equals("ISX01313"))
+			getDetailInfo_ISX01313(tAppntNo, "ISX01313");
+		else
+		if (mCalCode.equals("ISX01314"))
+			getDetailInfo_ISX01314(tAppntNo, "ISX01314");
+		else
+		if (mCalCode.equals("ISX01315"))
+			getDetailInfo_ISX01315(tAppntNo, "ISX01315");
+		else
+		if (mCalCode.equals("ISX01316"))
+			getDetailInfo_ISX01316(tAppntNo, "ISX01316");
+		else
+		if (mCalCode.equals("ISX01317"))
+			getDetailInfo_ISX01317(tAppntNo, "ISX01317");
+		else
+		if (mCalCode.equals("ISX01318"))
+			getDetailInfo_ISX01318(tAppntNo, "ISX01318");
+		else
+		if (mCalCode.equals("ISX01319"))
+			getDetailInfo_ISX01319(tAppntNo, "ISX01319");
+		else
+		if (mCalCode.equals("ISX01320"))
+			getDetailInfo_ISX01320(tAppntNo, "ISX01320");
+		else
+		if (mCalCode.equals("ISX01321"))
+			getDetailInfo_ISX01321(tAppntNo, "ISX01321");
+		else
+		if (mCalCode.equals("ISX01322"))
+			getDetailInfo_ISX01322(tAppntNo, "ISX01322");
+		else
+		if (mCalCode.equals("ISX01323"))
+			getDetailInfo_ISX01323(tAppntNo, "ISX01323");
+		else
+			return true;
+		mMap.put(mLXISTDetailSet, "INSERT");
+		mMap.put(mLXISTradeContSet, "INSERT");
+		mMap.put(mLXISTInsuredSet, "INSERT");
+		return true;
+	}
+
+	public boolean getDetailInfo(String tAppntNo, String tContNo, String tCalCode)
+	{
+		System.out.println("===================== 进入插入可疑明细的信息 ！action========================");
+		int t = mLXISTDetailSet.size();
+		String tCont_SQL = (new StringBuilder("SELECT DISTINCT NVL((SELECT SUM(A.SUMACTUPAYMONEY) FROM LJAPAY A WHERE A.INCOMENO =C.CONTNO AND A.APPNTNO = '")).append(tAppntNo).append("' AND A.PAYDATE = (SELECT MAX(A.PAYDATE) FROM LJAPAY A ").append("WHERE A.INCOMENO = C.CONTNO AND A.APPNTNO = '").append(tAppntNo).append("')),0),").append("NVL(C.AGENTCODE,'@N'),TO_CHAR(C.CVALIDATE,'YYYY-MM-DD')||C.MAKETIME,C.Salechnl,C.SELLTYPE ").append("FROM LCCONT C WHERE C.APPNTNO = '").append(tAppntNo).append("' AND C.CONTTYPE = '1' AND C.CONTNO = '").append(tContNo).append("' ").append("UNION ALL ").append("SELECT DISTINCT NVL((SELECT SUM(A.SUMACTUPAYMONEY) ").append("FROM LJAPAY A WHERE A.INCOMENO = G.GRPCONTNO ").append("AND A.APPNTNO = '").append(tAppntNo).append("' AND A.PAYDATE = (SELECT MAX(A.PAYDATE) FROM LJAPAY A ").append("WHERE A.INCOMENO = G.GRPCONTNO AND A.APPNTNO = '").append(tAppntNo).append("')),0),").append("NVL(G.AGENTCODE,'@N'),TO_CHAR(G.CVALIDATE,'YYYY-MM-DD')||G.MAKETIME,G.Salechnl,'' ").append("FROM LCGRPCONT G WHERE G.APPNTNO = '").append(tAppntNo).append("' AND G.GRPCONTNO = '").append(tContNo).append("' ").toString();
+		System.out.println("=========== tCont_SQL ===========");
+		System.out.println(tCont_SQL);
+		SSRS tSSRS = new SSRS();
+		tSSRS = mExeSQL.execSQL(tCont_SQL);
+		if (tSSRS == null || tSSRS.getMaxRow() == 0)
+			System.out.println(" tCont_SQL==rss kong !!!!!!!");
+		String tSumMoney = "";
+		String tBankCode = "@N";
+		String tBankAccNo = "@N";
+		String tTBNMCode = "";
+		String tPolAppyDate = "";
+		String tTSTM = "";
+		String tCSTP = "03";
+		String tTSTP = "01";
+		String tCRDR = "01";
+		String tPayMode = "";
+		String tedoracceptno = "";
+		String tSalechnl="";
+		String tSellType="";
+		tSumMoney = tSSRS.GetText(1, 1);
+		tTBNMCode = tSSRS.GetText(1, 2);
+		tPolAppyDate = tSSRS.GetText(1, 3);
+		tSalechnl = tSSRS.GetText(1, 4);
+		tSellType=tSSRS.GetText(1, 5);
+		System.out.println("========== 以下为银行，帐号，交费方式查询转换 开始！Start ==========");
+		String tS_bankcode = " SELECT NVL(b.BANKCODE,'@N'),NVL(b.BANKACCNO,'@N') FROM ljtempfee a,ljtempfeeclass b WHERE a.tempfeeno=b.tempfeeno and a.otherno = '"+tContNo+"'  and  tempfeetype='1' " ;
+		SSRS lSSRS = mExeSQL.execSQL(tS_bankcode);
+		if (lSSRS.getMaxRow() > 0)
+		{
+			tBankCode = lSSRS.GetText(1, 1);
+			tBankAccNo = lSSRS.GetText(1, 2);
+		}
+		String tS_PayMode = " SELECT DISTINCT b.paymode FROM ljtempfee a,ljtempfeeclass b WHERE a.tempfeeno=b.tempfeeno and a.otherno = '"+tContNo+"'  and  tempfeetype='1' " ;
+		SSRS bSSRS = mExeSQL.execSQL(tS_PayMode);
+		if (bSSRS.getMaxRow() > 0)
+		{
+			tPayMode = bSSRS.GetText(1, 1);
+			if (tPayMode.trim().equals("1") || tPayMode.trim().equals("2") || tPayMode.trim().equals("6"))
+				tCSTP = "01";
+			if (tPayMode.trim().equals("4"))
+				tCSTP = "02";
+			if (tPayMode.trim().equals("A"))
+				tCSTP = tBankAccNo.equals("@N") ? "01" : "03";
+			if (tPayMode.trim().equals("3") || tPayMode.trim().equals("7"))
+			{
+				tBankCode = "@N";
+				tBankAccNo = "@N";
+				tCSTP = "03";
+			}
+			if (tCSTP == null || tCSTP.trim().length() == 0)
+				tCSTP = "03";
+			if (tCSTP.equals("01"))
+			{
+				tBankCode = "@N";
+				tBankAccNo = "@N";
+			}
+		}
+		System.out.println("========== 以下为银行，帐号，交费方式查询转换 结束！ END　==========");
+		tTSTM = tPolAppyDate.replaceAll("-", "").substring(0, 10);
+		String tUName_SQL = "";
+		tUName_SQL = (new StringBuilder("SELECT DISTINCT NAME,(CASE IDTYPE WHEN '0' THEN '11' WHEN '1' THEN '14' WHEN '2' THEN '12' WHEN NULL THEN '@I' ELSE '19' END),NVL(IDNO,'@I') FROM LAAGENT WHERE AGENTCODE = '")).append(tTBNMCode).append("' ").toString();
+		String tTBNM = "";
+		String tTBIT = "";
+		String tTBID = "";
+		SSRS nSSRS = new SSRS();
+		nSSRS = mExeSQL.execSQL(tUName_SQL);
+		if (mExeSQL.mErrors.needDealError())
+		{
+			System.out.println((new StringBuilder("setLXISTradeDetail方法中查询")).append(tTBNMCode).append("用户名称出错，用@I代替！").toString());
+			tTBNM = "无无";
+			tTBIT = "@I";
+			tTBID = "@I";
+		}
+		if (nSSRS.getMaxRow() <= 0)
+		{
+			System.out.println((new StringBuilder("setLXISTradeDetail方法中没有查到")).append(tTBNMCode).append("用户名称，用@I代替！").toString());
+			tTBNM = "无无";
+			tTBIT = "@I";
+			tTBID = "@I";
+		} else
+		{
+			tTBNM = nSSRS.GetText(1, 1);
+			tTBIT = nSSRS.GetText(1, 2);
+			tTBID = nSSRS.GetText(1, 3);
+		}
+		String t_item = (new StringBuilder("SELECT DISTINCT NVL(EDORACCEPTNO,'@N') FROM LPEDORITEM WHERE CONTNO = '")).append(tContNo).append("' ").append("UNION ALL ").append("SELECT DISTINCT NVL(EDORACCEPTNO,'@N') FROM LPGRPEDORITEM WHERE GRPCONTNO = '").append(tContNo).append("' ").toString();
+		tSSRS = mExeSQL.execSQL(t_item);
+		if (tSSRS.getMaxRow() > 0)
+			tedoracceptno = tSSRS.GetText(1, 1);
+		if (tedoracceptno == null || "".equals(tedoracceptno))
+			tedoracceptno = "@N";
+		LXISTradeDetailSchema tLXISTradeDetailSchema = new LXISTradeDetailSchema();
+		tLXISTradeDetailSchema.setDealNo(mDealNo);
+		tLXISTradeDetailSchema.setListNo(t + 1);
+		tLXISTradeDetailSchema.setCSNM(tContNo);
+		tLXISTradeDetailSchema.setTICD(tedoracceptno);
+		tLXISTradeDetailSchema.setTSTM(tTSTM);
+		tLXISTradeDetailSchema.setTSTP(tTSTP);
+		tLXISTradeDetailSchema.setCRTP("CNY");
+		tLXISTradeDetailSchema.setCRAT(tSumMoney);
+		tLXISTradeDetailSchema.setCRDR(tCRDR);
+		tLXISTradeDetailSchema.setCSTP(tCSTP);
+		tLXISTradeDetailSchema.setCAOI(tBankCode);
+		tLXISTradeDetailSchema.setTCAN(tBankAccNo);
+		tLXISTradeDetailSchema.setTBNM(tTBNM);
+		tLXISTradeDetailSchema.setTBIT(tTBIT);
+		tLXISTradeDetailSchema.setTBID(tTBID);
+		tLXISTradeDetailSchema.setSalechnl(tSalechnl);
+		tLXISTradeDetailSchema.setSellType(tSellType);
+		mLXISTDetailSet.add(tLXISTradeDetailSchema);
+		if (!getContSavd(tAppntNo, tContNo, tCalCode) && !getContNoWillSavd(tContNo))
+			setLXISTradeCont(tAppntNo, tContNo);
+		System.out.println("===================== 成功插入可疑明细的信息 ！success========================");
+		return true;
+	}
+
+	public boolean getDetailInfo_LP(String tAppntNo, String tEdoracceptNo, String tContNo, String tCalCode, String edortype)
+	{
+		System.out.println("========== 进入退费明细信息插入！start ==========");
+		int t = mLXISTDetailSet.size();
+		String tCont_SQL = (new StringBuilder("SELECT DISTINCT NVL((SELECT SUM(LJ.GETMONEY) FROM lpedoritem LJ WHERE LJ.edortype = M.EDORTYPE AND LJ.edoracceptno = '")).append(tEdoracceptNo).append("' AND LJ.CONTNO = '").append(tContNo).append("'),0),").append("NVL(G.AGENTCODE,'@N'),TO_CHAR(M.EDORVALIDATE,'YYYY-MM-DD')||M.MAKETIME,").append("CASE WHEN M.EDORTYPE IN('WP','AT','WT','CT','OP','SF','SS','LN','RN','FG','LG','IC','IO','CM') THEN '03' ELSE '02' END, ").append("'02' END,G.Salechnl,'' FROM LCGRPCONT G,LPEDORITEM M WHERE M.GRPCONTNO=G.GRPCONTNO ").append("AND M.EDORACCEPTNO = '").append(tEdoracceptNo).append("'AND M.EDORSTATE = '0' AND G.APPNTNO = '").append(tAppntNo).append("' AND G.GRPCONTNO = '").append(tContNo).append("' ").append("AND M.EDORTYPE = '").append(edortype).append("' ").append("UNION ALL ").append("SELECT DISTINCT NVL((SELECT SUM(LJ.GETMONEY) FROM lpedoritem LJ WHERE LJ.edortype = M.EDORTYPE  AND LJ.edoracceptno = '").append(tEdoracceptNo).append("' AND LJ.CONTNO = '").append(tContNo).append("'),0),").append("NVL(G.AGENTCODE,'@N'),TO_CHAR(M.EDORVALIDATE,'YYYY-MM-DD')||M.MAKETIME,").append("CASE WHEN M.EDORTYPE IN('WP','AT','WT','CT','OP','SF','SS','LN','RN','FG','LG','IC','IO','CM') THEN '03' ELSE '02' END,").append("'02' END,G.Salechnl,G.selltype FROM LCCONT G,LPEDORITEM M WHERE G.CONTTYPE = '1' ").append("AND M.CONTNO = G.CONTNO AND M.EDORACCEPTNO = '").append(tEdoracceptNo).append("' AND M.EDORSTATE = '0' AND G.APPNTNO = '").append(tAppntNo).append("' AND G.CONTNO = '").append(tContNo).append("' AND M.EDORTYPE = '").append(edortype).append("' ").toString();
+		System.out.println("=========== tCont_SQLc  getDetailInfo_LP ===========");
+		System.out.println(tCont_SQL);
+		SSRS tSSRS = new SSRS();
+		tSSRS = mExeSQL.execSQL(tCont_SQL);
+		String tSumMoney = "";
+		Double tGetCost=0.0;
+		String salechnl="";
+		String tSellType="";
+		Double tGetMoney=0.0;
+		String tBankCode = "";
+		String tBankAccNo = "";
+		String tTBNMCode = "";
+		String tEdorvalidate = "";
+		String tTSTM = "";
+		String tCSTP = "";
+		String tTSTP = "03";
+		String tCRDR = "02";
+		if (tSSRS.MaxRow <= 0)
+			return false;
+		tSumMoney = tSSRS.GetText(1, 1);
+		tTBNMCode = tSSRS.GetText(1, 2);
+		tEdorvalidate = tSSRS.GetText(1, 3);
+		tTSTP = tSSRS.GetText(1, 4);
+		tCRDR = tSSRS.GetText(1, 5);
+		salechnl=tSSRS.GetText(1, 6);
+		tSellType=tSSRS.GetText(1, 7);
+		if (Double.parseDouble(tSumMoney) > 0.0D)
+		{
+			tTSTP = "01";
+			tCRDR = "01";
+		} else
+		if (Double.parseDouble(tSumMoney) < 0.0D)
+			tSumMoney = tSumMoney.substring(tSumMoney.indexOf("-") + 1, tSumMoney.length());
+		tTSTM = tEdorvalidate.replaceAll("-", "").substring(0, 10);
+		
+		tGetCost=Double.parseDouble(mExeSQL.getOneValue("SELECT NVL(abs(SUM(LJ.GETMONEY)),0.0) FROM LJAGETENDORSE LJ WHERE LJ.FEEOPERATIONTYPE = '"+edortype+"' AND LJ.FeeFinaType='TBFY' AND LJ.APPNTNO = '"+tAppntNo+"' AND LJ.CONTNO = '"+tContNo+"'"));
+		
+		tGetMoney=Double.parseDouble(mExeSQL.getOneValue("select NVL(abs(sum(M.Getmoney)),0.0) from LPEDORITEM M WHERE (M.GRPCONTNO = '"+tContNo+"' or M.CONTNO = '"+tContNo+"') "
+				+"AND M.EDORACCEPTNO = '"+tEdoracceptNo+"' AND M.EDORSTATE = '0' AND M.EDORTYPE = '"+edortype+"'"));
+		
+		System.out.println("========== 以下为银行，帐号，交费方式查询转换 开始！Start ==========");
+		String tS_Bank = " SELECT DISTINCT NVL(B.BANKCODE,'@N'), NVL(B.BANKACCNO,'@N') FROM lpedorapp B WHERE B.EdoracceptNo = '"+tEdoracceptNo+"' " ;
+		SSRS aSSRS = mExeSQL.execSQL(tS_Bank);
+		if (aSSRS.getMaxRow() > 0)
+		{
+			tBankCode = aSSRS.GetText(1, 1);
+			tBankAccNo = aSSRS.GetText(1, 2);
+		} else
+		if (aSSRS.getMaxRow() == 0)
+		{
+			tBankCode = "@N";
+			tBankAccNo = "@N";
+		}
+		String tS_PayMode = " SELECT DISTINCT B.getform FROM lpedorapp B WHERE B.EdoracceptNo = '"+tEdoracceptNo+"'";
+		SSRS bSSRS = mExeSQL.execSQL(tS_PayMode);
+		String tPayMode = "";
+		if (bSSRS.getMaxRow() <= 0)
+		{
+			tBankCode = "@N";
+			tBankAccNo = "@N";
+			System.out.println((new StringBuilder("=========RRRRRRRRRRRA==========")).append(tBankCode).toString());
+			System.out.println((new StringBuilder("=========RRRRRRRRRRRB==========")).append(tBankAccNo).toString());
+			tPayMode = "1";
+		} else
+		{
+			tPayMode = bSSRS.GetText(1, 1);
+		}
+		if (tPayMode.trim().equals("1") || tPayMode.trim().equals("2"))
+			tCSTP = "01";
+		if (tPayMode.trim().equals("4"))
+			tCSTP = "02";
+		if (tPayMode.trim().equals("A"))
+			tCSTP = tBankAccNo.equals("@N") ? "01" : "03";
+		if (tCSTP == null || tCSTP.trim().length() == 0)
+			tCSTP = "03";
+		if (tCSTP.equals("01"))
+		{
+			tBankCode = "@N";
+			tBankAccNo = "@N";
+		}
+		System.out.println("========== 银行,帐号,交费方式查询转换 结束！END ==========");
+		String tUName_SQL = "";
+		tUName_SQL = (new StringBuilder("SELECT DISTINCT NAME,(CASE IDTYPE WHEN '0' THEN '11' WHEN '1' THEN '14' WHEN '2' THEN '12' WHEN NULL THEN '@I' ELSE '19' END),NVL(IDNO,'@I') FROM LAAGENT WHERE AGENTCODE = '")).append(tTBNMCode).append("' ").toString();
+		String tTBNM = "";
+		String tTBIT = "";
+		String tTBID = "";
+		SSRS nSSRS = new SSRS();
+		nSSRS = mExeSQL.execSQL(tUName_SQL);
+		if (mExeSQL.mErrors.needDealError())
+		{
+			System.out.println((new StringBuilder("setLXISTradeDetail方法中查询")).append(tTBNMCode).append("用户名称出错，用@I代替！").toString());
+			tTBNM = "无无";
+			tTBIT = "@I";
+			tTBID = "@I";
+		}
+		if (nSSRS.getMaxRow() <= 0)
+		{
+			System.out.println((new StringBuilder("setLXISTradeDetail方法中没有查到")).append(tTBNMCode).append("用户名称，用@I代替！").toString());
+			tTBNM = "无无";
+			tTBIT = "@I";
+			tTBID = "@I";
+		} else
+		{
+			tTBNM = nSSRS.GetText(1, 1);
+			tTBIT = nSSRS.GetText(1, 2);
+			tTBID = nSSRS.GetText(1, 3);
+		}
+		LXISTradeDetailSchema tLXISTradeDetailSchema = new LXISTradeDetailSchema();
+		tLXISTradeDetailSchema.setDealNo(mDealNo);
+		tLXISTradeDetailSchema.setListNo(t + 1);
+		tLXISTradeDetailSchema.setCSNM(tContNo);
+		tLXISTradeDetailSchema.setTICD(tEdoracceptNo);
+		tLXISTradeDetailSchema.setTSTM(tTSTM);
+		tLXISTradeDetailSchema.setTSTP(tTSTP);
+		tLXISTradeDetailSchema.setCRTP("CNY");
+		tLXISTradeDetailSchema.setCRAT(tSumMoney);
+		tLXISTradeDetailSchema.setCRDR(tCRDR);
+		tLXISTradeDetailSchema.setCSTP(tCSTP);
+		tLXISTradeDetailSchema.setCAOI(tBankCode);
+		tLXISTradeDetailSchema.setTCAN(tBankAccNo);
+		tLXISTradeDetailSchema.setTBNM(tTBNM);
+		tLXISTradeDetailSchema.setTBIT(tTBIT);
+		tLXISTradeDetailSchema.setTBID(tTBID);
+		tLXISTradeDetailSchema.setSalechnl(salechnl);
+		tLXISTradeDetailSchema.setSellType(tSellType);
+		tLXISTradeDetailSchema.setGetCost(tGetCost);
+		tLXISTradeDetailSchema.setGetMoney(tGetMoney);
+		tLXISTradeDetailSchema.setEdorType(edortype);
+		mLXISTDetailSet.add(tLXISTradeDetailSchema);
+		System.out.println("========== 进入退保明细信息插入！end ==========");
+		if (!getContSavd(tAppntNo, tContNo, tCalCode) && !getContNoWillSavd(tContNo))
+			setLXISTradeCont(tAppntNo, tContNo);
+		return true;
+	}
+
+	public boolean getDetailInfo_ISX01301(String tAppntNo, String tCalCode)
+	{
+		System.out.println("===================== getDetailInfo_ISX01301(String tAppntNo, String tCalCode) Start ！========================");
+		SSRS mSSRS = new SSRS();
+		int tListNo = 1;
+		String tSQL_G = (new StringBuilder("SELECT DISTINCT A.CONTNO FROM LCCONT A,LPEDORITEM B WHERE A.CONTNO = B.CONTNO AND A.SALECHNL <> '01' AND B.EDORTYPE IN('WT','CT','XT','IT') AND A.APPNTNO = '")).append(tAppntNo).append("' ").append("UNION ALL ").append("SELECT DISTINCT A.GRPCONTNO ").append("FROM LCGRPCONT A,LPEDORITEM B ").append("WHERE A.GRPCONTNO = B.GRPCONTNO ").append("AND A.SALECHNL = '01' ").append("AND B.EDORTYPE IN('WT','CT','XT','IT') ").append("AND A.APPNTNO = '").append(tAppntNo).append("' ").append("UNION ALL ").append("SELECT DISTINCT A.CONTNO ").append("FROM LCCONT A,LPEDORITEM B ").append("WHERE A.CONTNO = B.CONTNO ").append("AND A.SALECHNL <> '01' ").append("AND B.EDORTYPE IN('AT','CT','XT','CB') ").append("AND A.APPNTNO = '").append(tAppntNo).append("' ").append("AND EXISTS(SELECT 1 FROM LPEDORITEM BB WHERE BB.CONTNO = A.CONTNO ").append("AND BB.CONTNO <> B.CONTNO AND BB.EDORVALIDATE <> B.EDORVALIDATE ").append("AND ABS(BB.EDORVALIDATE - B.EDORVALIDATE) <= 10) ").append("UNION ALL ").append("SELECT DISTINCT A.GRPCONTNO ").append("FROM LCGRPCONT A,LPEDORITEM B ").append("WHERE A.GRPCONTNO = B.GRPCONTNO ").append("AND A.SALECHNL = '01' ").append("AND B.EDORTYPE IN('AT','CT','XT','CB') ").append("AND A.APPNTNO = '").append(tAppntNo).append("' ").append("AND EXISTS(SELECT 1 FROM LPEDORITEM BB WHERE BB.GRPCONTNO = A.GRPCONTNO ").append("AND BB.GRPCONTNO <> B.GRPCONTNO AND BB.EDORVALIDATE <> B.EDORVALIDATE ").append("AND ABS(BB.EDORVALIDATE - B.EDORVALIDATE) <= 10) ").toString();
+		mSSRS = mExeSQL.execSQL(tSQL_G);
+		for (int t = 1; t <= mSSRS.getMaxRow(); t++)
+		{
+			String tContNo = mSSRS.GetText(t, 1);
+			String sql = (new StringBuilder("SELECT EDORTYPE,EDORACCEPTNO FROM LPEDORITEM WHERE CONTNO = '")).append(tContNo).append("' ").toString();
+			tSSRS = mExeSQL.execSQL(sql);
+			String tEdorType = tSSRS.GetText(1, 1);
+			String tedoracceptno = tSSRS.GetText(1, 2);
+			getDetailInfo_LP(tAppntNo, tedoracceptno, tContNo, tCalCode, tEdorType);
+			tListNo++;
+		}
+
+		if (tListNo <= 1)
+			delCusInfo(tAppntNo, tCalCode);
+		System.out.println("===================== getDetailInfo_ISX01301(String tAppntNo, String tCalCode) Done ！========================");
+		return true;
+	}
+
+	public boolean getDetailInfo_ISX01302(String tAppntNo, String tCalCode)
+	{
+		System.out.println("===================== getDetailInfo_ISX01302(String tAppntNo, String tCalCode) Start ！========================"+mOperator+"====");
+		SSRS mSSRS = new SSRS();
+		int tListNo = 1;
+		String tSQL_M2 = "";
+		
+		if("Bacth1".equals(mOperator)){
+			tSQL_M2 = (new StringBuilder("SELECT DISTINCT A.CONTNO FROM LCCONT A where  A.APPNTNO = '")).append(tAppntNo).append("' ").append("AND A.signdate = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') ").append("UNION ALL ").append("SELECT DISTINCT b.GRPCONTNO ").append("FROM LCGRPCONT b where  b.APPNTNO = '").append(tAppntNo).append("' AND b.signdate = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') ").toString();
+		}else{
+			tSQL_M2 = "SELECT DISTINCT A.CONTNO "
+					+"FROM LCCONT A "
+					+"where A.APPNTNO = '"+tAppntNo+"' "
+					+"AND A.signdate between date'"+mMakedate+"'-4 and date'"+mMakedate+"' "
+					+"UNION ALL "
+					+"SELECT DISTINCT b.GRPCONTNO "
+					+"FROM LCGRPCONT b "
+					+"where b.APPNTNO = '"+tAppntNo+"' "
+					+"AND b.signdate between date'"+mMakedate+"'-4 and date'"+mMakedate+"' ";
+		}
+		
+		mSSRS = mExeSQL.execSQL(tSQL_M2);
+		for (int t = 1; t <= mSSRS.getMaxRow(); t++)
+		{
+			String tContNo = mSSRS.GetText(t, 1);
+			getDetailInfo(tAppntNo, tContNo, tCalCode);
+			tListNo++;
+		}
+		
+		if("Bacth1".equals(mOperator)){
+			tSQL_M2 = (new StringBuilder("SELECT DISTINCT A.CONTNO FROM LCCONT A,lpedorapp B WHERE A.CONTNO = B.otherno AND A.SALECHNL <> '01' AND  exists(select 1 from lpedoritem where  edortype in('WP','WT','CT','OP','SF','SS','LN','RN','FG','LG','IC','IO','CM') and contno=B.otherno and edoracceptno=B.edoracceptno )  AND A.APPNTNO = '")).append(tAppntNo).append("' ").append("AND B.confdate = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') ").append("UNION ALL ").append("SELECT DISTINCT A.GRPCONTNO ").append("FROM LCGRPCONT A,LPEDORITEM B WHERE A.GRPCONTNO = B.GRPCONTNO ").append("AND A.SALECHNL = '01' AND B.EDORTYPE IN('WP','WT','CT','OP','SF','SS','LN','RN','FG','LG','IC','IO','CM')  AND A.APPNTNO = '").append(tAppntNo).append("' AND A.POLAPPLYDATE = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') ").toString();
+		}else{
+			
+			tSQL_M2 ="SELECT DISTINCT A.CONTNO "
+					+"FROM LCCONT A, lpedorapp B "
+					+"WHERE A.CONTNO = B.otherno "
+					+"AND A.SALECHNL <> '01' "
+					+" and exists(select 1 from lpedoritem where  edortype in('WP','WT','CT','OP','SF','SS','LN','RN','FG','LG','IC','IO','CM')and contno=B.otherno and edoracceptno=B.edoracceptno )"
+					+"AND A.APPNTNO = '"+tAppntNo+"' AND "
+					+" B.confdate between date'"+mMakedate+"'-4 and date'"+mMakedate+"' "
+					
+					+"UNION ALL "
+					+"SELECT DISTINCT A.GRPCONTNO "
+					+"FROM LCGRPCONT A, LPEDORITEM B "
+					+"WHERE A.GRPCONTNO = B.GRPCONTNO AND "
+					+"A.SALECHNL = '01' "
+					+"AND B.EDORTYPE IN ('WP','WT','CT','OP','SF','SS','LN','RN','FG','LG','IC','IO','CM') "
+					+"AND A.APPNTNO = '"+tAppntNo+"' "
+					+"AND A.POLAPPLYDATE between date'"+mMakedate+"'-4 and date'"+mMakedate+"' ";
+		}
+		mSSRS = new SSRS();
+		mSSRS = mExeSQL.execSQL(tSQL_M2);
+		for (int t = 1; t <= mSSRS.getMaxRow(); t++)
+		{
+			String tContNo = mSSRS.GetText(t, 1);
+			String sql = (new StringBuilder("SELECT DISTINCT EDORTYPE,EDORACCEPTNO FROM LPEDORITEM WHERE CONTNO = '")).append(tContNo).append("' ").append("UNION ALL ").append("SELECT DISTINCT EDORTYPE,EDORACCEPTNO FROM LPGRPEDORITEM WHERE GRPCONTNO = '").append(tContNo).append("' ").toString();
+			tSSRS = mExeSQL.execSQL(sql);
+			String tEdorType = tSSRS.GetText(1, 1);
+			String tedoracceptno = tSSRS.GetText(1, 2);
+			getDetailInfo_LP(tAppntNo, tedoracceptno, tContNo, tCalCode, tEdorType);
+			tListNo++;
+		}
+
+		if (tListNo <= 1)
+			delCusInfo(tAppntNo, tCalCode);
+		System.out.println("===================== getDetailInfo_ISX01302(String tAppntNo, String tCalCode) Done ！========================");
+		return true;
+	}
+
+	public boolean getDetailInfo_ISX01303(String tAppntNo, String tCalCode)
+	{
+		return true;
+	}
+
+	public boolean getDetailInfo_ISX01304(String tAppntNo, String tCalCode)
+	{
+		System.out.println("===================== getDetailInfo_ISX01304(String tAppntNo, String tCalCode) Start ！========================");
+		int tListNo = 1;
+		//String tSQL_D2 = (new StringBuilder("SELECT DISTINCT A.CONTNO,A.APPNTNO,B.EDORACCEPTNO,B.EDORTYPE FROM LCCONT A,LPEDORITEM B,LJAGET C,LJAGETENDORSE D WHERE A.CONTNO = D.CONTNO AND D.CONTNO = B.CONTNO AND D.ACTUGETNO = C.ACTUGETNO AND B.EDORTYPE = 'WT' AND A.APPNTNO = '")).append(tAppntNo).append("' ").append("AND C.CONFDATE <= TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') ").append("AND C.CONFDATE >= TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') - 9 ").append("UNION ALL ").append("SELECT DISTINCT A.GRPCONTNO,A.APPNTNO,B.EDORACCEPTNO,B.EDORTYPE ").append("FROM LCGRPCONT A,LPEDORITEM B,LJAGET C,LJAGETENDORSE D ").append("WHERE A.GRPCONTNO = D.GRPCONTNO AND D.GRPCONTNO = B.GRPCONTNO ").append("AND D.ACTUGETNO = C.ACTUGETNO AND B.EDORTYPE = 'WT' AND A.APPNTNO = '").append(tAppntNo).append("' ").append("AND C.CONFDATE <= TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') ").append("AND C.CONFDATE >= TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') - 9 ").toString();
+		String tSQL_D2 = " select distinct otherno,EDORACCEPTNO from lpedorapp a  where   -a.getmoney>=200000 and a.confdate=date'"+mMakedate+"' " 
+		              + " and exists(select 1 from lcappnt where contno=a.otherno and appntno='"+tAppntNo+"') "
+		              + " and exists(select 1 from lpedoritem f where f.edortype='WT' and f.edoracceptno=a.edoracceptno ) ";
+		SSRS mSSRS_D2 = new SSRS();
+		mSSRS_D2 = mExeSQL.execSQL(tSQL_D2);
+		for (int n = 1; n <= mSSRS_D2.getMaxRow(); n++)
+		{
+			String tContNo = mSSRS_D2.GetText(n, 1);
+			String tEdorAcceptNo = mSSRS_D2.GetText(n, 2);
+			String edortype = "WT";
+			getDetailInfo_LP(tAppntNo, tEdorAcceptNo, tContNo, tCalCode, edortype);
+			tListNo++;
+		}
+
+		if (tListNo <= 1)
+			delCusInfo(tAppntNo, tCalCode);
+		System.out.println("===================== getDetailInfo_ISX01304(String tAppntNo, String tCalCode) Done ！========================");
+		return true;
+	}
+
+	public boolean getDetailInfo_ISX01305(String tAppntNo, String tCalCode)
+	{
+		System.out.println("===================== getDetailInfo_ISX01305(String tAppntNo, String tCalCode) Start ！========================");
+		SSRS mSSRS = new SSRS();
+		int tListNo = 1;
+		//String tSQL_M2 = (new StringBuilder("SELECT DISTINCT A.CONTNO FROM LCCONT A,LJAGETENDORSE B,LJAGET C WHERE A.CONTNO = B.CONTNO AND B.ACTUGETNO = C.ACTUGETNO AND A.BANKACCNO <> C.BANKACCNO AND C.CONFDATE = TO_DATE('")).append(mMakedate).append("','YYYY-MM-DD') AND A.APPNTNO = '").append(tAppntNo).append("' ").append("UNION ALL ").append("SELECT DISTINCT A.CONTNO ").append("FROM LCCONT A,LJAGETCLAIM B,LJAGET C ").append("WHERE A.CONTNO = B.CONTNO ").append("AND B.ACTUGETNO = C.ACTUGETNO ").append("AND A.BANKACCNO <> C.BANKACCNO ").append("AND C.CONFDATE = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') AND A.APPNTNO = '").append(tAppntNo).append("' ").append("UNION ALL ").append("SELECT DISTINCT A.GRPCONTNO ").append("FROM LCGRPCONT A,LJAGETENDORSE B,LJAGET C ").append("WHERE A.GRPCONTNO = B.GRPCONTNO ").append("AND B.ACTUGETNO = C.ACTUGETNO ").append("AND A.BANKACCNO <> C.BANKACCNO ").append("AND C.CONFDATE = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') AND A.APPNTNO = '").append(tAppntNo).append("' ").append("UNION ALL ").append("SELECT DISTINCT A.GRPCONTNO ").append("FROM LCGRPCONT A,LJAGETCLAIM B,LJAGET C ").append("WHERE A.GRPCONTNO = B.GRPCONTNO ").append("AND B.ACTUGETNO = C.ACTUGETNO ").append("AND A.BANKACCNO <> C.BANKACCNO ").append("AND C.CONFDATE = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') AND A.APPNTNO = '").append(tAppntNo).append("' ").toString();
+		String tSQL_M2 = " select distinct a.otherno from lpedorapp a ,lccont b,ldperson f where f.customerno in(b.appntno,b.insuredno) and  b.contno=a.otherno "
+			  + " and exists(select 1 from lpedorapp c,lpedoritem d,lpcont e where e.edorno=d.edorno and e.contno=b.contno "
+			  + " and (e.appntname<>b.appntname or e.appntidno<>b.appntidno or e.insuredname<>b.insuredname or e.insuredno<>b.insuredno) "
+			  + " and d.edoracceptno=c.edoracceptno and d.edortype in('AE','CM','IC') and d.contno=b.contno "
+			  + " and c.confdate=a.confdate-3 and  c.otherno=b.contno  ) and b.appntno='"+tAppntNo+"' "
+			  + " and exists(select 1 from lpedoritem where edoracceptno=a.edoracceptno "
+			  + " and edortype in('WP','WT','CT','OP','SF','SS','LN','RN','FG','LG','IC','IO','CM'))"
+			  + " and -a.getmoney>=500000 and a.confdate=date'"+mMakedate+"' ";
+		mSSRS = mExeSQL.execSQL(tSQL_M2);
+		for (int t = 1; t <= mSSRS.getMaxRow(); t++)
+		{
+			String tContNo = mSSRS.GetText(t, 1);
+			getDetailInfo(tAppntNo, tContNo, tCalCode);
+			tListNo++;
+		}
+
+		if (tListNo <= 1)
+			delCusInfo(tAppntNo, tCalCode);
+		System.out.println("===================== getDetailInfo_ISX01305(String tAppntNo, String tCalCode) Done ！========================");
+		return true;
+	}
+
+	public boolean getDetailInfo_ISX01306(String tAppntNo, String tCalCode)
+	{
+		System.out.println("===================== getDetailInfo_ISX01306(String tAppntNo, String tCalCode) Start ！========================");
+		System.out.println("===================== getDetailInfo_ISX01306(String tAppntNo, String tCalCode) Done ！========================");
+		return true;
+	}
+
+	public boolean getDetailInfo_ISX01307(String tAppntNo, String tCalCode)
+	{
+		System.out.println("===================== getDetailInfo_ISX01307(String tAppntNo, String tCalCode) Start ！========================");
+		int tListNo = 1;
+		String tSQL_D2 = "";
+		//tSQL_D2 = (new StringBuilder("SELECT DISTINCT A.CONTNO FROM LCCONT A,LJTEMPFEE B WHERE A.CONTNO = B.OTHERNO AND B.PAYINTV = '0' AND A.SALECHNL <> '01' AND B.CONFDATE = TO_DATE('")).append(mMakedate).append("','YYYY-MM-DD') AND A.APPNTNO = '").append(tAppntNo).append("' ").append("UNION ALL ").append("SELECT DISTINCT A.GRPCONTNO ").append("FROM LCGRPCONT A,LJTEMPFEE B ").append("WHERE A.GRPCONTNO = B.OTHERNO ").append("AND B.PAYINTV = '0' ").append("AND A.SALECHNL = '01' ").append("AND B.CONFDATE = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') AND A.APPNTNO = '").append(tAppntNo).append("' ").toString();
+		tSQL_D2 = " select distinct a.contno from ljapayperson a "
+			  + " where exists(select 1 from lcpol where payintv='0' and polno=a.polno)  "
+			  + " and a.enteraccdate =date'"+mMakedate+"' and a.appntno='"+tAppntNo+"' "
+			  + " group by a.appntno,a.contno,a.enteraccdate having sum(a.sumactupaymoney)>=2000000 ";
+		SSRS mSSRS_D2 = new SSRS();
+		mSSRS_D2 = mExeSQL.execSQL(tSQL_D2);
+		for (int i = 1; i <= mSSRS_D2.getMaxRow(); i++)
+		{
+			String tContNo = mSSRS_D2.GetText(i, 1);
+			getDetailInfo(tAppntNo, tContNo, tCalCode);
+			tListNo++;
+		}
+
+		if (tListNo <= 1)
+			delCusInfo(tAppntNo, tCalCode);
+		System.out.println("===================== getDetailInfo_ISX01307(String tAppntNo, String tCalCode) Done ！========================");
+		return true;
+	}
+
+	public boolean getDetailInfo_ISX01308(String tAppntNo, String tCalCode)
+	{
+		System.out.println("===================== getDetailInfo_ISX01308(String tAppntNo, String tCalCode) Start ！========================");
+		int tListNo = 1;
+		SSRS mSSRS_D = new SSRS();
+		//String tS_GD = (new StringBuilder("SELECT DISTINCT A.CONTNO,A.APPNTNO,B.EDORACCEPTNO,B.EDORTYPE FROM LCCONT A,LJAGETENDORSE B,LJAGET C,LPEDORITEM D WHERE A.CONTNO = B.CONTNO AND B.ACTUGETNO = C.ACTUGETNO AND B.CONTNO = D.CONTNO AND A.APPNTNO = '")).append(tAppntNo).append("' ").append("AND A.SALECHNL <> '01' ").append("AND D.EDORTYPE IN('AC','AE','IP','OP','PT','DB','HI','IC',").append("'IO','LG','LN','NS','PU','WT','CT','XT','IT') ").append("AND D.EDORVALIDATE <= A.CVALIDATE ").append("AND D.EDORVALIDATE >= A.CVALIDATE - 15 ").append("AND A.BANKACCNO <> C.BANKACCNO ").append("AND C.CONFDATE = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') ").append("UNION ALL ").append("SELECT DISTINCT A.GRPCONTNO,A.APPNTNO,B.EDORACCEPTNO,B.EDORTYPE ").append("FROM LCGRPCONT A,LJAGETENDORSE B,LJAGET C,LPEDORITEM D ").append("WHERE A.GRPCONTNO = B.GRPCONTNO ").append("AND B.ACTUGETNO = C.ACTUGETNO ").append("AND A.APPNTNO = '").append(tAppntNo).append("' ").append("AND B.GRPCONTNO = D.GRPCONTNO ").append("AND A.SALECHNL = '01' ").append("AND D.EDORTYPE IN('AC','IC','BB','LN','NP','PT','AC','CT','XT','CB') ").append("AND D.EDORVALIDATE <= A.CVALIDATE ").append("AND D.EDORVALIDATE >= A.CVALIDATE - 15 ").append("AND A.BANKACCNO <> C.BANKACCNO ").append("AND C.CONFDATE = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') ").toString();
+		String tS_GD = " select distinct c.contno,c.appntno,a.EDORACCEPTNO,f.edortype from lpedorapp a,lccont c ,lpedoritem f where c.newbankaccno<>a.bankaccno and c.conttype='1' and  c.contno=a.otherno "
+			  + " and  f.edortype in('WT','WP') and f.contno = c.contno and f.edoracceptno=a.edoracceptno and c.appntno='"+tAppntNo+"' "
+			  + " and -a.getmoney>=1000000 and a.confdate=date'"+mMakedate+"' ";
+		mSSRS_D = new SSRS();
+		mSSRS_D = mExeSQL.execSQL(tS_GD);
+		for (int n = 1; n <= mSSRS_D.getMaxRow(); n++)
+		{
+			String tContNo = mSSRS_D.GetText(n, 1);
+			String tEdorAcceptNo = mSSRS_D.GetText(n, 3);
+			String tedortype = mSSRS_D.GetText(n, 4);
+			getDetailInfo_LP(tAppntNo, tEdorAcceptNo, tContNo, tCalCode, tedortype);
+			tListNo++;
+		}
+
+		if (tListNo <= 1)
+			delCusInfo(tAppntNo, tCalCode);
+		System.out.println("===================== getDetailInfo_ISX01308(String tAppntNo, String tCalCode) Done ！========================");
+		return true;
+	}
+
+	public boolean getDetailInfo_ISX01309(String tAppntNo, String tCalCode)
+	{
+		System.out.println("===================== getDetailInfo_ISX01309(String tAppntNo, String tCalCode) Start ！========================");
+		int tListNo = 1;
+		SSRS mSSRS_D2 = new SSRS();
+		//String tSQL_D2 = (new StringBuilder("SELECT DISTINCT E.CONTNO FROM (SELECT DISTINCT A.APPNTNO APPNTNO,SUM(SUMACTUPAYMONEY) MONEY,A.CONTNO CONTNO FROM LCCONT A,LJAPAY B WHERE A.CONTNO = B.INCOMENO AND A.SALECHNL <> '01' GROUP BY A.APPNTNO,A.CONTNO) E,(SELECT DISTINCT B.APPNTNO APPNTNO,SUM(SUMACTUPAYMONEY) MONEY,C.CONTNO CONTNO FROM LCCONT A,LJAPAY B,LJAGETENDORSE C WHERE A.CONTNO = C.CONTNO AND A.SALECHNL <> '01' AND C.ENDORSEMENTNO = B.INCOMENO GROUP BY B.APPNTNO,C.CONTNO) F,(SELECT DISTINCT A.APPNTNO APPNTNO,SUM(C.SUMGETMONEY) MONEY,A.CONTNO CONTNO FROM LCCONT A,LJAGETENDORSE B,LJAGET C,LPEDORITEM D WHERE A.CONTNO = B.CONTNO AND A.SALECHNL <> '01' AND B.ACTUGETNO = C.ACTUGETNO AND D.EDORTYPE IN('WT','CT','XT','IT') AND D.CONTNO = B.CONTNO AND C.CONFDATE = TO_DATE('")).append(mMakedate).append("','YYYY-MM-DD') ").append("GROUP BY A.APPNTNO,A.CONTNO) G ").append("WHERE E.APPNTNO = F.APPNTNO AND E.APPNTNO = G.APPNTNO ").append("AND E.CONTNO = F.CONTNO AND E.CONTNO = G.CONTNO AND E.APPNTNO = '").append(tAppntNo).append("' ").append("AND ABS(E.MONEY + F.MONEY - G.MONEY) >= 30000 ").append("GROUP BY E.APPNTNO,E.CONTNO ").toString();
+		String tSQL_D2 = " select distinct ContNo,EdoracceptNo, EdorType from ( "//个险
+	            + " select  distinct c.contno ContNo,a.edoracceptno EdoracceptNo,f.edortype "
+	            + "from lpedorapp a,lccont c,lpedoritem f where  c.conttype='1' and  c.contno=a.otherno "
+	            + " and f.edortype ='CT' and f.edoracceptno=a.edoracceptno "
+	            
+	            + " and (select sum(sumactupaymoney) from ljapayperson where contno=a.otherno and confdate<=a.CONFDATE)+ "
+	            + " (select sum(f.getmoney) from lpedoritem f where f.edortype in ('WP', 'WT','CT','OP','SF','LN','RN','FG','LG') and f.CONTNO=c.CONTNO  "
+	            + " and f.EDORAPPDATE<=a.CONFDATE)>=100000 "
+	            
+	            + "  and c.appntno='"+tAppntNo+"' and a.confdate=date'"+mMakedate+"' "
+	            + " union   "//团险
+	            + " select distinct c.grpcontno ContNo,a.edoracceptno EdoracceptNo,f.edortype "
+	            + "from lpedorapp a,lcgrpcont c,lpedoritem f where  c.grpcontno=a.otherno "
+	            + " and f.edortype in ('WP', 'WT','CT','OP','SF','LN','RN','FG','LG') and f.edoracceptno=a.edoracceptno "
+	            + " and (select  sum(sumactupaymoney) from ljapayperson where grpcontno=a.otherno)+a.getmoney>=500000 "
+	            + " and c.appntno='"+tAppntNo+"' and a.confdate=date'"+mMakedate+"') ";
+				
+//				" select distinct ContNo,EdoracceptNo, EdorType from ( "//个险
+//            + " select  distinct c.contno ContNo,a.edoracceptno EdoracceptNo,'CT' EdorType from lpedorapp a,lccont c where  c.conttype='1' and  c.contno=a.otherno "
+//            + " and exists(select 1 from lpedoritem f where f.edortype in ('WP', 'WT','CT','OP','SF','LN','RN','FG','LG') and f.edoracceptno=a.edoracceptno ) "
+//            + " and (select sum(sumactupaymoney) from ljapayperson where contno=a.otherno)+a.getmoney>=100000 "
+//            + "  and c.appntno='"+tAppntNo+"' and a.confdate=date'"+mMakedate+"' "
+//            + " union   "//团险
+//            + " select distinct c.grpcontno ContNo,a.edoracceptno EdoracceptNo,'AT' EdorType from lpedorapp a,lcgrpcont c where  c.grpcontno=a.otherno "
+//            + " and exists(select 1 from lpedoritem f where f.edortype in ('WP', 'WT','CT','OP','SF','LN','RN','FG','LG') and f.edoracceptno=a.edoracceptno ) "
+//            + " and (select  sum(sumactupaymoney) from ljapayperson where grpcontno=a.otherno)+a.getmoney>=500000 "
+//            + " and c.appntno='"+tAppntNo+"' and a.confdate=date'"+mMakedate+"') ";
+		
+		mSSRS_D2 = mExeSQL.execSQL(tSQL_D2);
+		for (int t = 1; t <= mSSRS_D2.getMaxRow(); t++)
+		{
+			String tContNo = mSSRS_D2.GetText(t, 1);
+			String tEdorAcceptNo = mSSRS_D2.GetText(t, 2);
+			String tedortype = mSSRS_D2.GetText(t, 3);
+			getDetailInfo_LP(tAppntNo, tEdorAcceptNo, tContNo, tCalCode, tedortype);
+			tListNo++;
+			
+//			tListNo++;
+		}
+
+		if (tListNo <= 1)
+			delCusInfo(tAppntNo, tCalCode);
+		System.out.println("===================== getDetailInfo_ISX01309(String tAppntNo, String tCalCode) Done ！========================");
+		return true;
+	}
+
+	public boolean getDetailInfo_ISX01310(String tAppntNo, String tCalCode)
+	{
+		System.out.println("===================== getDetailInfo_ISX01310(String tAppntNo, String tCalCode) Start ！========================");
+		SSRS mSSRS = new SSRS();
+		int tListNo = 1;
+		String tSQL_G = (new StringBuilder("SELECT DISTINCT A.APPNTNO FROM LCCONT A WHERE A.SIGNDATE = TO_DATE('")).append(mMakedate).append("','YYYY-MM-DD') AND A.SALECHNL <> '01' AND A.APPNTNO = '").append(tAppntNo).append("' AND ABS(A.DIF) >= 100000 UNION ALL ").append("SELECT DISTINCT A.APPNTNO FROM LCGRPCONT A ").append("WHERE A.SIGNDATE = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') AND A.SALECHNL = '01' AND A.APPNTNO = '").append(tAppntNo).append("' AND ABS(A.DIF) >= 500000 ").toString();
+		mSSRS = mExeSQL.execSQL(tSQL_G);
+		for (int t = 1; t <= mSSRS.getMaxRow(); t++)
+		{
+			String tContNo = mSSRS.GetText(t, 1);
+			String sql = (new StringBuilder("SELECT NVL(EDORTYPE,'@N'),NVL(EDORACCEPTNO,'@N') FROM LPEDORITEM WHERE CONTNO = '")).append(tContNo).append("' ").toString();
+			tSSRS = mExeSQL.execSQL(sql);
+			String tEdorType = tSSRS.GetText(1, 1);
+			String tedoracceptno = tSSRS.GetText(1, 2);
+			getDetailInfo_LP(tAppntNo, tedoracceptno, tContNo, tCalCode, tEdorType);
+			tListNo++;
+		}
+
+		if (tListNo <= 1)
+			delCusInfo(tAppntNo, tCalCode);
+		System.out.println("===================== getDetailInfo_ISX01310(String tAppntNo, String tCalCode) Done ！========================");
+		return true;
+	}
+
+	public boolean getDetailInfo_ISX01311(String tAppntNo, String tCalCode)
+	{
+		System.out.println("===================== getDetailInfo_ISX01311(String tAppntNo, String tCalCode) Start ！========================");
+		int tListNo = 1;
+		String tSQL_D2 = (new StringBuilder("SELECT DISTINCT A.CONTNO FROM LCCONT A,LJAPAY B WHERE A.APPNTNO = B.APPNTNO AND A.BANKACCNO <> B.BANKACCNO AND A.SALECHNL <> '01' AND A.APPNTNO = '")).append(tAppntNo).append("' ").append("AND A.ACCNAME <> B.ACCNAME AND B.CONFDATE = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') UNION ALL ").append("SELECT DISTINCT A.GRPCONTNO FROM LCGRPCONT A,LJAPAY B ").append("WHERE A.APPNTNO = B.APPNTNO AND A.SALECHNL = '01' ").append("AND A.BANKACCNO <> B.BANKACCNO AND A.APPNTNO = '").append(tAppntNo).append("' ").append("AND A.ACCNAME <> B.ACCNAME AND B.CONFDATE = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') ").toString();
+		SSRS mSSRS_D2 = new SSRS();
+		mSSRS_D2 = mExeSQL.execSQL(tSQL_D2);
+		for (int i = 1; i <= mSSRS_D2.getMaxRow(); i++)
+		{
+			String tContNo = mSSRS_D2.GetText(i, 1);
+			getDetailInfo(tAppntNo, tContNo, tCalCode);
+			tListNo++;
+		}
+
+		if (tListNo <= 1)
+			delCusInfo(tAppntNo, tCalCode);
+		System.out.println("===================== getDetailInfo_ISX01311(String tAppntNo, String tCalCode) Done ！========================");
+		return true;
+	}
+
+	public boolean getDetailInfo_ISX01312(String tAppntNo, String tCalCode)
+	{
+		System.out.println("===================== getDetailInfo_ISX01312(String tAppntNo, String tCalCode) Start ！========================");
+		SSRS mSSRS = new SSRS();
+		int tListNo = 1;
+		//String tSQL_G = (new StringBuilder("SELECT DISTINCT A.GRPCONTNO FROM LCGRPCONT A,LJAGET B,LPEDORITEM C WHERE A.APPNTNO = B.APPNTNO AND A.SALECHNL = '01' AND C.EDORTYPE IN('AT','CT','XT','CB') AND C.GRPCONTNO = A.GRPCONTNO AND A.APPNTNO = '")).append(tAppntNo).append("' ").append("AND (A.PAYMODE = '1' OR (A.BANKACCNO <> B.BANKACCNO AND B.ACCNAME <> A.ACCNAME)) ").append("AND B.CONFDATE = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') ").toString();
+		String tSQL_G = " select distinct c.grpcontno,a.edoracceptno from lpedorapp a,lcgrpcont c where c.bankaccno<>a.bankaccno  and  c.grpcontno=a.otherno "
+            + " and exists(select 1 from lpedoritem f where f.edortype ='AT' and f.edoracceptno=a.edoracceptno ) "
+            + " and c.appntno='"+tAppntNo+"' and -a.getmoney>=2000000 and a.confdate=date'"+mMakedate+"' ";
+		
+		mSSRS = mExeSQL.execSQL(tSQL_G);
+		for (int t = 1; t <= mSSRS.getMaxRow(); t++)
+		{
+			String tContNo = mSSRS.GetText(t, 1);
+			//String tEdorType = tSSRS.GetText(1, 1);
+			String tedoracceptno = tSSRS.GetText(1, 2);
+			getDetailInfo_LP(tAppntNo, tedoracceptno, tContNo, tCalCode, "AT");
+			tListNo++;
+		}
+
+		if (tListNo <= 1)
+			delCusInfo(tAppntNo, tCalCode);
+		System.out.println("===================== getDetailInfo_ISX01312(String tAppntNo, String tCalCode) Done ！========================");
+		return true;
+	}
+
+	public boolean getDetailInfo_ISX01313(String tAppntNo, String tCalCode)
+	{
+		System.out.println("===================== getDetailInfo_ISX01313(String tAppntNo, String tCalCode) Start ！========================");
+		int tListNo = 1;
+		SSRS mSSRS = new SSRS();
+		//String tSQL_M = (new StringBuilder("SELECT DISTINCT A.GRPCONTNO FROM LCGRPCONT A,LJTEMPFEE B,LJAPAY C WHERE A.GRPCONTNO = B.OTHERNO AND A.SALECHNL = '01' AND A.APPNTNO = C.APPNTNO AND A.BANKACCNO <> C.BANKACCNO A.APPNTNO = '")).append(tAppntNo).append("' ").append("AND A.ACCNAME <> C.ACCNAME ").append("AND ((B.TEMPFEETYPE = '1' AND B.TEMPFEENO IS NOT NULL) OR A.PAYINTV = 0) ").append("AND C.CONFDATE = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') ").toString();
+		String tSQL_M = " select distinct c.otherno from ljtempfeeclass a,lcgrpcont c where (c.bankaccno<>a.bankaccno or c.grpname<>a.accname and c.accname<>a.bankaccno) "  
+            + " and exists(select 1 from ljtempfee  where tempfeeno=a.tempfeeno and otherno=c.grpcontno) "
+            + " and c.appntno='"+tAppntNo+"'  and a.paymoney>=2000000 and a.enteraccdate=date'"+mMakedate+"' ";
+		mSSRS = mExeSQL.execSQL(tSQL_M);
+		for (int m = 1; m <= mSSRS.getMaxRow(); m++)
+		{
+			String sContNo = mSSRS.GetText(m, 1);
+			getDetailInfo(tAppntNo, sContNo, tCalCode);
+			tListNo++;
+		}
+
+		if (tListNo <= 1)
+			delCusInfo(tAppntNo, tCalCode);
+		System.out.println("===================== getDetailInfo_ISX01313(String tAppntNo, String tCalCode) Done ！========================");
+		return true;
+	}
+
+	public boolean getDetailInfo_ISX01314(String tAppntNo, String tCalCode)
+	{
+		System.out.println("===================== getDetailInfo_ISX01314(String tAppntNo, String tCalCode) Start ！========================");
+		int tListNo = 1;
+		SSRS mSSRS = new SSRS();
+		String tSQL_M = (new StringBuilder("SELECT DISTINCT A.CONTNO FROM LCCONT A,LJAPAY B,LCBNF C WHERE A.APPNTNO = B.APPNTNO AND A.SALECHNL <> '01' AND A.CONTNO = C.CONTNO AND B.ACCNAME <> A.APPNTNAME AND B.ACCNAME <> A.INSUREDNAME AND A.APPNTNO = '")).append(tAppntNo).append("' AND B.ACCNAME <> C.NAME AND B.CONFDATE = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') ").toString();
+		mSSRS = mExeSQL.execSQL(tSQL_M);
+		for (int m = 1; m <= mSSRS.getMaxRow(); m++)
+		{
+			String sContNo = mSSRS.GetText(m, 1);
+			getDetailInfo(tAppntNo, sContNo, tCalCode);
+			tListNo++;
+		}
+
+		if (tListNo <= 1)
+			delCusInfo(tAppntNo, tCalCode);
+		System.out.println("===================== getDetailInfo_ISX01314(String tAppntNo, String tCalCode) Done ！========================");
+		return true;
+	}
+
+	public boolean getDetailInfo_ISX01315(String tAppntNo, String tCalCode)
+	{
+		System.out.println("===================== getDetailInfo_ISX01315(String tAppntNo, String tCalCode) Start ！========================");
+		int tListNo = 1;
+		SSRS mSSRS = new SSRS();
+		//String tSQL_M = (new StringBuilder("SELECT DISTINCT A.CONTNO FROM LCCONT A,LCAPPNT B,LCINSURED C WHERE A.SALECHNL <> '01' AND A.SIGNDATE = TO_DATE('")).append(mMakedate).append("','YYYY-MM-DD') ").append("AND A.APPNTNO = B.APPNTNO AND A.CONTNO = B.CONTNO ").append("AND A.INSUREDNO = C.INSUREDNO AND A.CONTNO = C.CONTNO ").append("AND A.APPNTNO = C.APPNTNO AND A.APPNTNO = '").append(tAppntNo).append("' ").append("UNION ALL ").append("SELECT DISTINCT A.GRPCONTNO ").append("FROM LCGRPCONT A,LCPOL B,LCINSURED C ").append("WHERE A.SALECHNL = '01' ").append("AND A.SIGNDATE = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') ").append("AND A.APPNTNO = B.APPNTNO ").append("AND A.GRPCONTNO = B.GRPCONTNO ").append("AND B.INSUREDNO = C.INSUREDNO ").append("AND A.GRPCONTNO = C.GRPCONTNO ").append("AND A.APPNTNO = C.APPNTNO AND A.APPNTNO = '").append(tAppntNo).append("' ").toString();
+		String tSQL_M = " select distinct ContNo from ( "//个险&团险，投保时，投保人被列入黑名单
+				  + " select decode(a.conttype,'2',a.grpcontno,contno) ContNo from lccont a  "
+				  + " where a.appntno='"+tAppntNo+"' "
+				  + " and a.signdate=date'"+mMakedate+"' "
+				  + " union all "//个险&团险，投被保人国籍是高风险国籍
+				  + " select decode(a.conttype,'2',a.grpcontno,contno) ContNo from lccont a ,ldperson b where b.customerno in(a.insuredno,a.appntno) "
+				  + " and b.customerno='"+tAppntNo+"' "
+				  + " and a.signdate=date'"+mMakedate+"' "
+				  + " union all "//个险&团险，保全时，投保人被列入黑名单
+				  + " select e.otherno ContNo from lpedorapp e, lccont a  "
+				  + " where a.appntno='"+tAppntNo+"' "
+				  + " and exists(select 1 from lpedoritem where edortype in('AE','CM','IC')  and edoracceptno=e.edoracceptno ) "
+				  + " and e.confdate=date'"+mMakedate+"' )";
+				
+				
+//				" select distinct ContNo from ( "//个险&团险，投保时，投保人被列入黑名单
+//			  + " select decode(a.conttype,'2',a.grpcontno,contno) ContNo from lccont a  "
+//			  + " where exists(select 1 from LXBLACKLIST where namecn=a.appntname and idno=a.appntidno and idtype=a.appntidtype ) "
+//			  + " and a.signdate=date'"+mMakedate+"' "
+//			  + " union all "//个险&团险，投保时，被保人被列入黑名单
+//			  + " select a.contno ContNo from lccont a  "
+//			  + " where exists(select 1 from LXBLACKLIST where namecn=a.insuredname and idno=a.insuredidno and idtype=a.insuredidtype ) "
+//			  + " and a.signdate=date'"+mMakedate+"' "
+//			  + " union all "//个险&团险，投被保人国籍是高风险国籍
+//			  + " select decode(a.conttype,'2',a.grpcontno,contno) ContNo from lccont a ,ldperson b where b.customerno in(a.insuredno,a.appntno) "
+//			  + " and exists(select 1 from LXHIGHRISKAREAS where areaflag=b.nativeplace) "
+//			  + " and a.signdate=date'"+mMakedate+"' "
+//			  + " union all "//个险&团险，保全时，投保人被列入黑名单
+//			  + " select e.otherno ContNo from lpedorapp e, lccont a  "
+//			  + " where exists(select 1 from LXBLACKLIST where namecn=a.appntname and idno=a.appntidno and idtype=a.appntidtype ) "
+//			  + " and exists(select 1 from lpedoritem where edortype in('AE','CM','IC')  and edoracceptno=e.edoracceptno ) "
+//			  + " and e.confdate=date'"+mMakedate+"' "
+//			  + " union all "//个险&团险，保全时，被保人被列入黑名单
+//			  + " select e.otherno ContNo from lpedorapp e, lccont a  "
+//			  + " where exists(select 1 from LXBLACKLIST where namecn=a.insuredname and idno=a.insuredidno and idtype=a.insuredidtype ) "
+//			  + " and exists(select 1 from lpedoritem where edortype in('CM','IC')  and edoracceptno=e.edoracceptno ) "
+//			  + " and e.confdate=date'"+mMakedate+"' ) ";
+		
+		mSSRS = mExeSQL.execSQL(tSQL_M);
+		for (int m = 1; m <= mSSRS.getMaxRow(); m++)
+		{
+			String sContNo = mSSRS.GetText(m, 1);
+			getDetailInfo(tAppntNo, sContNo, tCalCode);
+			tListNo++;
+		}
+
+		if (tListNo <= 1)
+			delCusInfo(tAppntNo, tCalCode);
+		System.out.println("===================== getDetailInfo_ISX01315(String tAppntNo, String tCalCode) Done ！========================");
+		return true;
+	}
+
+	public boolean getDetailInfo_ISX01316(String tAppntNo, String tCalCode)
+	{
+		System.out.println("===================== getDetailInfo_ISX01316(String tAppntNo, String tCalCode) Start ！========================");
+		SSRS mSSRS = new SSRS();
+		String tSQL_M = " ";
+		int tListNo = 1;
+		tSQL_M = (new StringBuilder("SELECT DISTINCT A.CONTNO FROM LCCONT A,LJTEMPFEE B WHERE A.CONTNO = B.OTHERNO AND A.SALECHNL <> '01' AND A.PAYMODE = '1' AND B.CONFDATE = TO_DATE('")).append(mMakedate).append("','YYYY-MM-DD') AND A.APPNTNO = '").append(tAppntNo).append("' ").append("UNION ALL SELECT DISTINCT A.GRPCONTNO ").append("FROM LCGRPCONT A,LJTEMPFEE B ").append("WHERE A.GRPCONTNO = B.OTHERNO ").append("AND A.SALECHNL = '01' ").append("AND A.PAYMODE = '1' ").append("AND B.CONFDATE = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') AND A.APPNTNO = '").append(tAppntNo).append("' ").toString();
+		mSSRS = mExeSQL.execSQL(tSQL_M);
+		String sContNo = "";
+		for (int m = 1; m <= mSSRS.getMaxRow(); m++)
+		{
+			sContNo = mSSRS.GetText(m, 1);
+			getDetailInfo(tAppntNo, sContNo, tCalCode);
+			tListNo++;
+		}
+
+		mSSRS = new SSRS();
+		tSQL_M = (new StringBuilder("SELECT DISTINCT A.CONTNO FROM LCCONT A,LJAGETENDORSE B,LJAGET C WHERE A.APPNTNO = C.APPNTNO AND A.CONTNO = B.CONTNO AND B.ACTUGETNO = C.ACTUGETNO AND A.SALECHNL <> '01' AND A.PAYMODE = '1' AND C.CONFDATE = TO_DATE('")).append(mMakedate).append("','YYYY-MM-DD') AND A.APPNTNO = '").append(tAppntNo).append("' ").append("UNION ALL ").append("SELECT DISTINCT A.GRPCONTNO ").append("FROM LCGRPCONT A,LJAGETENDORSE B,LJAGET C ").append("WHERE A.GRPCONTNO = B.GRPCONTNO ").append("AND B.ACTUGETNO = C.ACTUGETNO ").append("AND A.SALECHNL = '01' ").append("AND A.PAYMODE = '1' ").append("AND C.CONFDATE = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') AND A.APPNTNO = '").append(tAppntNo).append("' ").toString();
+		mSSRS = mExeSQL.execSQL(tSQL_M);
+		for (int m = 1; m <= mSSRS.getMaxRow(); m++)
+		{
+			sContNo = mSSRS.GetText(m, 1);
+			String sql = (new StringBuilder("SELECT NVL(EDORTYPE,'@N'),NVL(EDORACCEPTNO,'@N') FROM LPEDORITEM WHERE CONTNO = '")).append(sContNo).append("' ").toString();
+			tSSRS = mExeSQL.execSQL(sql);
+			String tEdorType = tSSRS.GetText(1, 1);
+			String tedoracceptno = tSSRS.GetText(1, 2);
+			getDetailInfo_LP(tAppntNo, tedoracceptno, sContNo, tCalCode, tEdorType);
+			tListNo++;
+		}
+
+		if (tListNo <= 1)
+			delCusInfo(tAppntNo, tCalCode);
+		System.out.println("===================== getDetailInfo_ISX01316(String tAppntNo, String tCalCode) Done ！========================");
+		return true;
+	}
+
+	public boolean getDetailInfo_ISX01317(String tAppntNo, String tCalCode)
+	{
+		System.out.println("===================== getDetailInfo_ISX01317(String tAppntNo, String tCalCode) Start ！========================");
+		SSRS mSSRS = new SSRS();
+		int tListNo = 1;
+		String sContNo = "";
+		String tSQL_M = (new StringBuilder("SELECT DISTINCT A.CONTNO FROM LCCONT A,LJAGETCLAIM B,LJAGET C WHERE A.CONTNO = B.CONTNO AND B.ACTUGETNO = C.ACTUGETNO AND A.SALECHNL <> '01' AND EXISTS(SELECT 1 FROM LCBNF BF WHERE BF.CONTNO = A.CONTNO AND (BF.NAME <> C.DRAWER OR (BF.BANKACCNO IS NOT NULL AND BF.BANKACCNO <> C.BANKACCNO))) AND EXISTS(SELECT 1 FROM LCINSURED CI WHERE CI.INSUREDNO = A.INSUREDNO AND (CI.NAME <> C.DRAWER OR (CI.BANKACCNO IS NOT NULL AND CI.BANKACCNO <> C.BANKACCNO))) AND C.CONFDATE = TO_DATE('")).append(mMakedate).append("','YYYY-MM-DD') AND A.APPNTNO = '").append(tAppntNo).append("' ").append("UNION ALL ").append("SELECT DISTINCT A.CONTNO ").append("FROM LCCONT A,LJAGETENDORSE B,LPEDORITEM C,LJAGET D ").append("WHERE A.CONTNO = B.CONTNO ").append("AND B.ENDORSEMENTNO = C.EDORNO ").append("AND B.ACTUGETNO = D.ACTUGETNO ").append("AND C.EDORTYPE IN('WT','CT','XT','IT','PT') ").append("AND A.APPNTNAME <> D.DRAWER ").append("AND D.CONFDATE = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') AND A.APPNTNO = '").append(tAppntNo).append("' ").append("UNION ALL ").append("SELECT DISTINCT A.GRPCONTNO ").append("FROM LCGRPCONT A,LJAGETCLAIM B,LJAGET C ").append("WHERE A.GRPCONTNO = B.GRPCONTNO ").append("AND B.ACTUGETNO = C.ACTUGETNO ").append("AND A.SALECHNL = '01' ").append("AND EXISTS(SELECT 1 FROM LCBNF BF,LCCONT LC WHERE LC.GRPCONTNO = A.GRPCONTNO ").append("AND BF.CONTNO = LC.CONTNO ").append("AND (BF.NAME <> C.DRAWER OR (BF.BANKACCNO IS NOT NULL AND BF.BANKACCNO <> C.BANKACCNO))) ").append("AND EXISTS(SELECT 1 FROM LCINSURED CI,LCCONT LC WHERE LC.GRPCONTNO = A.GRPCONTNO ").append("AND CI.CONTNO = LC.CONTNO ").append("AND (CI.NAME <> C.DRAWER OR (CI.BANKACCNO IS NOT NULL AND CI.BANKACCNO <> C.BANKACCNO))) ").append("AND C.CONFDATE = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') AND A.APPNTNO = '").append(tAppntNo).append("' ").append("UNION ALL ").append("SELECT DISTINCT A.GRPCONTNO ").append("FROM LCGRPCONT A,LJAGETENDORSE B,LPEDORITEM C,LJAGET D ").append("WHERE A.GRPCONTNO = B.GRPCONTNO ").append("AND B.ENDORSEMENTNO = C.EDORNO ").append("AND B.ACTUGETNO = D.ACTUGETNO ").append("AND C.EDORTYPE IN('AT','CT','XT','CB','PT') ").append("AND A.GRPNAME <> D.DRAWER ").append("AND D.CONFDATE = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') AND A.APPNTNO = '").append(tAppntNo).append("' ").toString();
+		mSSRS = mExeSQL.execSQL(tSQL_M);
+		for (int m = 1; m <= mSSRS.getMaxRow(); m++)
+		{
+			sContNo = mSSRS.GetText(m, 1);
+			String sql = (new StringBuilder("SELECT NVL(EDORTYPE,'@N'),NVL(EDORACCEPTNO,'@N') FROM LPEDORITEM WHERE CONTNO = '")).append(sContNo).append("' ").toString();
+			tSSRS = mExeSQL.execSQL(sql);
+			String tEdorType = tSSRS.GetText(1, 1);
+			String tedoracceptno = tSSRS.GetText(1, 2);
+			getDetailInfo_LP(tAppntNo, tedoracceptno, sContNo, tCalCode, tEdorType);
+			tListNo++;
+		}
+
+		if (tListNo <= 1)
+			delCusInfo(tAppntNo, tCalCode);
+		System.out.println("===================== getDetailInfo_ISX01317(String tAppntNo, String tCalCode) Done ！========================");
+		return true;
+	}
+
+	public boolean getDetailInfo_ISX01318(String tAppntNo, String tCalCode)
+	{
+		System.out.println("===================== getDetailInfo_ISX01318(String tAppntNo, String tCalCode) Start ！========================");
+		SSRS mSSRS = new SSRS();
+		int tListNo = 1;
+		String tSQL_M = (new StringBuilder("SELECT DISTINCT A.CONTNO FROM LCCONT A WHERE A.SALECHNL <> '01' AND A.SIGNDATE = TO_DATE('")).append(mMakedate).append("','YYYY-MM-DD') AND A.APPNTNO = '").append(tAppntNo).append("' UNION ALL ").append("SELECT DISTINCT A.GRPCONTNO FROM LCGRPCONT A ").append("WHERE A.SALECHNL = '01' ").append("AND A.SIGNDATE = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') AND A.APPNTNO = '").append(tAppntNo).append("' ").toString();
+		mSSRS = mExeSQL.execSQL(tSQL_M);
+		String sContNo = "";
+		for (int m = 1; m <= mSSRS.getMaxRow(); m++)
+		{
+			sContNo = mSSRS.GetText(m, 1);
+			getDetailInfo(tAppntNo, sContNo, tCalCode);
+			tListNo++;
+		}
+
+		if (tListNo <= 1)
+			delCusInfo(tAppntNo, tCalCode);
+		System.out.println("===================== getDetailInfo_ISX01318(String tAppntNo, String tCalCode) Done ！========================");
+		return true;
+	}
+
+	public boolean getDetailInfo_ISX01319(String tAppntNo, String tCalCode)
+	{
+		return true;
+	}
+
+	public boolean getDetailInfo_ISX01320(String tAppntNo, String tCalCode)
+	{
+		System.out.println("===================== getDetailInfo_ISX01320(String tAppntNo, String tCalCode) Start ！========================");
+		SSRS mSSRS = new SSRS();
+		int tListNo = 1;
+		String tSQL_M = (new StringBuilder("SELECT DISTINCT A.CONTNO FROM LCCONT A WHERE A.SALECHNL <> '01' AND A.SIGNDATE = TO_DATE('")).append(mMakedate).append("','YYYY-MM-DD') AND A.APPNTNO = '").append(tAppntNo).append("' ").append("AND (A.APPNTIDNO IS NULL OR TRIM(A.APPNTIDNO) = '') ").append("UNION ALL SELECT DISTINCT A.GRPCONTNO ").append("FROM LCGRPCONT A WHERE A.SALECHNL = '01' ").append("AND A.SIGNDATE = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') AND A.APPNTNO = '").append(tAppntNo).append("' AND TRIM(A.GRPNAME) = '' ").toString();
+		mSSRS = mExeSQL.execSQL(tSQL_M);
+		String sContNo = "";
+		for (int m = 1; m <= mSSRS.getMaxRow(); m++)
+		{
+			sContNo = mSSRS.GetText(m, 1);
+			getDetailInfo(tAppntNo, sContNo, tCalCode);
+			tListNo++;
+		}
+
+		if (tListNo <= 1)
+			delCusInfo(tAppntNo, tCalCode);
+		System.out.println("===================== getDetailInfo_ISX01320(String tAppntNo, String tCalCode) Done ！========================");
+		return true;
+	}
+
+	public boolean getDetailInfo_ISX01321(String tAppntNo, String tCalCode)
+	{
+		System.out.println("===================== getDetailInfo_ISX01321(String tAppntNo, String tCalCode) Start ！========================");
+		SSRS mSSRS = new SSRS();
+		int tListNo = 1;
+		String tSQL_M = (new StringBuilder("SELECT DISTINCT A.CONTNO FROM LCCONT A,LJAPAY B WHERE A.APPNTNO = B.APPNTNO AND A.SALECHNL <> '01' AND A.APPNTNO = '")).append(tAppntNo).append("' ").append("AND A.SIGNDATE = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') ").append("AND ((B.BANKACCNO IS NULL AND B.ACCNAME IS NOT NULL) OR (B.BANKACCNO IS NOT NULL AND B.ACCNAME IS NULL)) ").append("UNION ALL ").append("SELECT DISTINCT A.GRPCONTNO ").append("FROM LCGRPCONT A,LJAPAY B ").append("WHERE A.APPNTNO = B.APPNTNO ").append("AND A.SALECHNL = '01' ").append("AND A.APPNTNO = '").append(tAppntNo).append("' ").append("AND A.SIGNDATE = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') ").append("AND ((B.BANKACCNO IS NULL AND B.ACCNAME IS NOT NULL) ").append("OR (B.BANKACCNO IS NOT NULL AND B.ACCNAME IS NULL)) ").append("UNION ALL ").append("SELECT DISTINCT A.CONTNO ").append("FROM LCCONT A,LCADDRESS B ").append("WHERE A.SALECHNL <> '01' ").append("AND A.APPNTNO = '").append(tAppntNo).append("' ").append("AND A.SIGNDATE = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') ").append("AND A.APPNTNO = B.CUSTOMERNO ").append("AND (B.POSTALADDRESS IS NULL OR TRIM(B.POSTALADDRESS) = '') ").append("UNION ALL ").append("SELECT DISTINCT A.GRPCONTNO ").append("FROM LCGRPCONT A,LCADDRESS B ").append("WHERE A.SALECHNL = '01' ").append("AND A.SIGNDATE = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') ").append("AND A.APPNTNO = B.CUSTOMERNO ").append("AND A.APPNTNO = '").append(tAppntNo).append("' ").append("AND A.ADDRESSNO = B.ADDRESSNO ").append("AND (B.POSTALADDRESS IS NULL OR TRIM(B.POSTALADDRESS) = '') ").toString();
+		mSSRS = mExeSQL.execSQL(tSQL_M);
+		String sContNo = "";
+		for (int m = 1; m <= mSSRS.getMaxRow(); m++)
+		{
+			sContNo = mSSRS.GetText(m, 1);
+			getDetailInfo(tAppntNo, sContNo, tCalCode);
+			tListNo++;
+		}
+
+		if (tListNo <= 1)
+			delCusInfo(tAppntNo, tCalCode);
+		System.out.println("===================== getDetailInfo_ISX01321(String tAppntNo, String tCalCode) Done ！========================");
+		return true;
+	}
+
+	public boolean getDetailInfo_ISX01322(String tAppntNo, String tCalCode)
+	{
+		return true;
+	}
+
+	public boolean getDetailInfo_ISX01323(String tAppntNo, String tCalCode)
+	{
+		return true;
+	}
+
+	public boolean getContSavd(String tAppntNo, String tContNo, String tCalCode)
+	{
+		String tSQL = (new StringBuilder("SELECT COUNT(1) FROM LXCALRESULT T WHERE T.CALCODE = '")).append(tCalCode).append("' AND T.HTDT = TO_DATE('").append(mMakedate).append("','YYYY-MM-DD') AND T.CSNM = '").append(tAppntNo).append("' AND EXISTS(SELECT 'X' FROM LXISTRADECONT C WHERE C.DEALNO = T.DEALNO ").append("AND C.CSNM = '").append(tContNo).append("') ").toString();
+		String tCount = mELocal.getOneValue(tSQL);
+		if (mELocal.mErrors.needDealError())
+			tCount = "0";
+		return Integer.parseInt(tCount) > 0;
+	}
+
+	public boolean getContNoWillSavd(String tContNo)
+	{
+		int t = mLXISTradeContSet.size();
+		for (int n = 1; n <= t; n++)
+		{
+			String tCSNM = mLXISTradeContSet.get(n).getCSNM().trim();
+			if (tContNo.trim().equals(tCSNM))
+				return true;
+		}
+
+		return false;
+	}
+
+	public boolean delCusInfo(String tAppntNo, String tCalCode)
+	{
+		String tD_LXCalRes = (new StringBuilder("DELETE LXCALRESULT T WHERE T.CALCODE = '")).append(tCalCode).append("' AND T.CSNM = '").append(tAppntNo).append("' AND T.HTDT = '").append(mMakedate).append("' AND T.APPID = '").append(mAppId).append("' AND T.MNGCOM = '").append(mMngCom).append("' ").toString();
+		mMap.put(tD_LXCalRes, "DELETE");
+		System.out.println((new StringBuilder("====tD_LXCalRes====")).append(tD_LXCalRes).toString());
+		String tD_LXISTCPartner = (new StringBuilder("DELETE LXISTRADECUSPARTNER T WHERE T.DEALNO = '")).append(mDealNo).append("' ").toString();
+		mMap.put(tD_LXISTCPartner, "DELETE");
+		String tD_LWM = (new StringBuilder("DELETE LWMISSION W WHERE W.MISSIONPROP3 = '")).append(mDealNo).append("' ").toString();
+		mMap.put(tD_LWM, "DELETE");
+		String tD_LXISM = (new StringBuilder("DELETE LXISTRADEMAIN M WHERE M.DEALNO = '")).append(mDealNo).append("' ").toString();
+		mMap.put(tD_LXISM, "DELETE");
+		return true;
+	}
+
+	public boolean setLXISTradeCont(String tAppntNo, String tContNo)
+	{
+		System.out.println("===================== 通用的合同信息整理方法 Start ！========================");
+		String tIN_ContNo = tContNo;
+		String tContInfo = "";
+		tContInfo = (new StringBuilder("SELECT DISTINCT G.RISKCODE,(SELECT K.RISKNAME FROM LFRISK K WHERE K.RISKCODE = G.RISKCODE),G.GRPCONTNO FROM LCGRPPOL G WHERE G.CUSTOMERNO = '")).append(tAppntNo).append("' AND G.GRPCONTNO = '").append(tContNo).append("' ").toString();
+		System.out.println("=========== tContInfo ===========");
+		System.out.println(tContInfo);
+		SSRS cSSRS = new SSRS();
+		cSSRS = mExeSQL.execSQL(tContInfo);
+		if (cSSRS.getMaxRow() <= 0)
+		{
+			tContInfo = (new StringBuilder("SELECT DISTINCT L.RISKCODE,NVL((SELECT DISTINCT K.RISKNAME FROM LFRISK K WHERE K.RISKCODE = L.RISKCODE),'@N'),L.CONTNO FROM LCPOL L WHERE L.APPNTNO = '")).append(tAppntNo).append("' AND L.CONTNO = '").append(tContNo).append("' ").toString();
+			if (cSSRS != null)
+				cSSRS.Clear();
+			cSSRS = mExeSQL.execSQL(tContInfo);
+		}
+		for (int t = 1; t <= cSSRS.getMaxRow(); t++)
+		{
+			String tRiskCode = "";
+			String tRiskName = "";
+			String tEndDate = "";
+			String tGetStartDate = "";
+			String tPeoples = "";
+			String tAmnt = "";
+			String tPrem = "";
+			String tPayIntv = "";
+			String tInsuredNo = "";
+			String tInsuredName = "";
+			String tPolNo = "";
+			String tRiskType="";
+			tRiskCode = cSSRS.GetText(t, 1);
+			tRiskName = cSSRS.GetText(t, 2);
+			if (tRiskName == null || tRiskName == "" || "".equals(tRiskName))
+				tRiskName = "@N";
+			tContNo = cSSRS.GetText(t, 3);
+			
+			tRiskType=mExeSQL.getOneValue("select risktype3 from lmriskapp where riskcode='"+tRiskCode+"'");
+			
+			String tCont_Mid = "";
+			tCont_Mid = (new StringBuilder("SELECT '',L.CVALIDATE,L.ENDDATE,L.POLNO,NVL(L.AMNT,0),NVL(L.SUMPREM,0),(CASE L.PAYINTV WHEN 0 THEN '02' ELSE '01' END ),L.INSUREDNO,L.INSUREDNAME FROM LCPOL L WHERE L.APPNTNO = '")).append(tAppntNo).append("' AND L.CONTNO = '").append(tContNo).append("' ").append(" AND L.RISKCODE = '").append(tRiskCode).append("' AND L.CVALIDATE ").append("IN (SELECT MAX(M.CVALIDATE) FROM LCPOL M WHERE M.APPNTNO = '").append(tAppntNo).append("' ").append("AND M.CONTNO = '").append(tContNo).append("' AND M.RISKCODE = '").append(tRiskCode).append("') ").toString();
+			System.out.println("=========== tCont_Mid ===========");
+			System.out.println(tCont_Mid);
+			SSRS oSSRS = new SSRS();
+			oSSRS = mExeSQL.execSQL(tCont_Mid);
+			if (oSSRS.getMaxRow() <= 0)
+			{
+				tCont_Mid = (new StringBuilder("SELECT '',G.CVALIDATE,(SELECT LL.ENDDATE FROM LCPOL LL WHERE LL.GRPCONTNO = '")).append(tContNo).append("' AND LL.APPNTNO = '").append(tAppntNo).append("' ").append("AND LL.RISKCODE = '").append(tRiskCode).append("' AND ROWNUM=1),").append("G.GRPPOLNO,(SELECT NVL(SUM(M.AMNT),0) FROM LCPOL M WHERE M.GRPPOLNO=G.GRPPOLNO),").append("(SELECT NVL(SUM(M.PREM),0) FROM LCPOL M WHERE M.GRPPOLNO=G.GRPPOLNO),").append("(CASE G.PAYINTV WHEN 0 THEN '02' ELSE '01' END ),").append("(SELECT DISTINCT INSUREDNO FROM LCINSURED WHERE GRPCONTNO='").append(tContNo).append("' AND ROWNUM=1),").append("'@N' FROM LCGRPPOL G WHERE G.CUSTOMERNO = '").append(tAppntNo).append("' ").append("AND G.GRPCONTNO = '").append(tContNo).append("' AND G.RISKCODE = '").append(tRiskCode).append("' ").toString();
+				if (oSSRS != null)
+					oSSRS.Clear();
+				oSSRS = mExeSQL.execSQL(tCont_Mid);
+			}
+			String tP_SQL = "";
+			tP_SQL = (new StringBuilder("SELECT (SELECT COUNT(1) FROM LCCONT T WHERE T.CONTTYPE = '2' AND T.GRPCONTNO <> '00000000000000000000' AND T.CONTNO = '")).append(tContNo).append("') FROM DUAL ").toString();
+			tPeoples = mExeSQL.getOneValue(tP_SQL);
+			if (Integer.parseInt(tPeoples) <= 0)
+			{
+				tP_SQL = (new StringBuilder("SELECT (SELECT COUNT(1) FROM LCCONT T WHERE T.CONTTYPE = '1' and T.GRPCONTNO = '00000000000000000000' AND T.CONTNO = '")).append(tContNo).append("') FROM DUAL ").toString();
+				tPeoples = mExeSQL.getOneValue(tP_SQL);
+				if (Integer.parseInt(tPeoples) <= 0)
+				{
+					tP_SQL = (new StringBuilder("SELECT COUNT(1) FROM LCINSURED D WHERE D.GRPCONTNO = '")).append(tContNo).append("' AND D.APPNTNO = '").append(tAppntNo).append("' ").toString();
+					tPeoples = mExeSQL.getOneValue(tP_SQL);
+				}
+			}
+			if (Integer.parseInt(tPeoples) <= 0)
+				tPeoples = "1";
+			tGetStartDate = oSSRS.GetText(1, 2).replaceAll("-", "");
+			tEndDate = oSSRS.GetText(1, 3).replaceAll("-", "");
+			tPolNo = oSSRS.GetText(1, 4);
+			tAmnt = oSSRS.GetText(1, 5);
+			tPrem = oSSRS.GetText(1, 6);
+			tPayIntv = oSSRS.GetText(1, 7);
+			tInsuredNo = oSSRS.GetText(1, 8);
+			tInsuredName = oSSRS.GetText(1, 9);
+			if ("".equals(tEndDate) || tEndDate == null)
+				tEndDate = "22221111";
+			if (tInsuredName.equals("@N"))
+			{
+				String tSql = (new StringBuilder("SELECT NAME FROM LCINSURED WHERE GRPCONTNO = '")).append(tContNo).append("' AND INSUREDNO = '").append(tInsuredNo).append("' AND ROWNUM=1 ").toString();
+				tInsuredName = mExeSQL.getOneValue(tSql);
+				if (mExeSQL.mErrors.needDealError() || "".equals(tInsuredName))
+					tInsuredName = "@N";
+			}
+			String prtNoSQL = (new StringBuilder("SELECT PRTNO FROM LCCONT WHERE CONTNO = '")).append(tContNo).append("' ").append("UNION ALL ").append("SELECT PRTNO FROM LCGRPCONT WHERE GRPCONTNO = '").append(tContNo).append("' ").toString();
+			String tPrtNo = mExeSQL.getOneValue(prtNoSQL);
+			LXISTradeContSchema tLXISTradeContSchema = new LXISTradeContSchema();
+			tLXISTradeContSchema.setDealNo(mDealNo);
+			tLXISTradeContSchema.setCSNM(tIN_ContNo);
+			tLXISTradeContSchema.setISTP("01");
+			tLXISTradeContSchema.setISNM(tRiskName);
+			tLXISTradeContSchema.setRiskCode(tRiskCode);
+			tLXISTradeContSchema.setISPS((new StringBuilder(String.valueOf(tGetStartDate))).append(tEndDate).toString());
+			tLXISTradeContSchema.setITNM(tPeoples);
+			tLXISTradeContSchema.setISOG("@N");
+			tLXISTradeContSchema.setISAT(tAmnt);
+			tLXISTradeContSchema.setISFE(tPrem);
+			tLXISTradeContSchema.setISPT(tPayIntv);
+			tLXISTradeContSchema.setCTES("@N");
+			tLXISTradeContSchema.setPrtNo(tPrtNo);
+			tLXISTradeContSchema.setRiskType(tRiskType);
+			int tCNum = mLXISTradeContSet.size();
+			boolean tRe = false;
+			for (int c = 1; c <= tCNum; c++)
+			{
+				LXISTradeContSchema tLXISTContSchema = new LXISTradeContSchema();
+				tLXISTContSchema = mLXISTradeContSet.get(c);
+				String ttContNo = tLXISTContSchema.getCSNM();
+				String ttRiskCode = tLXISTContSchema.getRiskCode();
+				if (!ttContNo.equals(tContNo) || !ttRiskCode.equals(tRiskCode))
+					continue;
+				tRe = true;
+				break;
+			}
+
+			if (tRe)
+				break;
+			mLXISTradeContSet.add(tLXISTradeContSchema);
+			System.out.println("===================== 通用的合同信息整理方法 END ！========================");
+			if (!setLXISTradeInsured(tIN_ContNo, tInsuredNo, tRiskCode, tRiskName))
+			{
+				mErrors.addOneError("在准备LXISTradeInsured表中数据时出错！");
+				return false;
+			}
+			if (!setLXISTradeBnf(tPolNo, tInsuredNo, tIN_ContNo, tRiskCode))
+			{
+				mErrors.addOneError("在准备LXISTradeBnf表中数据时出错！");
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	public boolean setLXISTradeCusPartner()
+	{
+		LXISTradeCusPartnerSchema tLXISTradeCusPartnerSchema = new LXISTradeCusPartnerSchema();
+		String tIorN = "@N";
+		String tSQL = (new StringBuilder("SELECT COUNT(GRPCONTNO) FROM LCGRPCONT WHERE APPNTNO = '")).append(mCsnm).append("' ").toString();
+		SSRS tSSRS = new SSRS();
+		tSSRS = mExeSQL.execSQL(tSQL);
+		if (tSSRS.getMaxRow() > 0 && !"0".equals(tSSRS.GetText(1, 1)))
+			tIorN = "@I";
+		tLXISTradeCusPartnerSchema.setDealNo(mDealNo);
+		tLXISTradeCusPartnerSchema.setHDKey("1");
+		tLXISTradeCusPartnerSchema.setHDNM(tIorN);
+		tLXISTradeCusPartnerSchema.setHITP(tIorN);
+		tLXISTradeCusPartnerSchema.setHDID(tIorN);
+		tLXISTradeCusPartnerSchema.setHDVC(tIorN);
+		tLXISTradeCusPartnerSchema.setHDRT(tIorN);
+		tLXISTradeCusPartnerSchema.setHEIF(tIorN);
+		mMap.put(tLXISTradeCusPartnerSchema, "INSERT");
+		return true;
+	}
+
+	public boolean setLXISTradeInsured(String tContNo, String tInsuredNo, String tRiskCode, String tRiskName)
+	{
+		System.out.println("===================== 合同险种保险人信息 START ！========================");
+		String tInsured_SQL = (new StringBuilder("SELECT DISTINCT S.NAME,S.IDTYPE,NVL(S.IDNO,'@N'),NVL(S.RELATIONTOAPPNT,'@N'),S.BIRTHDAY,TO_CHAR(S.BIRTHDAY,'YYYYMMDD'),S.NATIVEPLACE FROM LCINSURED S WHERE S.INSUREDNO = '")).append(tInsuredNo).append("' AND S.CONTNO = '").append(tContNo).append("' ").append("UNION ALL ").append("SELECT DISTINCT S.NAME,S.IDTYPE,NVL(S.IDNO,'@N'),NVL(S.RELATIONTOAPPNT,'@N'),").append("S.BIRTHDAY,TO_CHAR(S.BIRTHDAY,'YYYYMMDD'),S.NATIVEPLACE FROM LCINSURED S ").append("WHERE S.INSUREDNO = '").append(tInsuredNo).append("' AND S.GRPCONTNO = '").append(tContNo).append("' ").append("UNION ALL ").append("SELECT DISTINCT S.NAME,S.IDTYPE,NVL(S.IDNO,'@N'),NVL(S.RELATIONTOAPPNT,'@N'),").append("S.BIRTHDAY,TO_CHAR(S.BIRTHDAY,'YYYYMMDD'),S.NATIVEPLACE FROM LCINSURED S ").append("WHERE S.INSUREDNO = '").append(tInsuredNo).append("' AND S.PRTNO = '").append(tContNo).append("' ").toString();
+		System.out.println("=========== tInsured_SQL ===========");
+		System.out.println(tInsured_SQL);
+		String tInsuredName = "";
+		String tIDType = "";
+		String tIDNo = "";
+		String tRelaToAppnt = "";
+		String tNCLIDType = "";
+		String tBirthDay = "";
+		String tBirthDay_ch = "";
+		String tNative = "";
+		SSRS sSSRS = new SSRS();
+		sSSRS = mExeSQL.execSQL(tInsured_SQL);
+		if (sSSRS.getMaxRow() <= 0)
+			return true;
+		tInsuredName = sSSRS.GetText(1, 1);
+		tNCLIDType = sSSRS.GetText(1, 2);
+		tIDNo = sSSRS.GetText(1, 3);
+		tRelaToAppnt = sSSRS.GetText(1, 4);
+		tBirthDay = sSSRS.GetText(1, 5);
+		tBirthDay_ch = sSSRS.GetText(1, 6);
+		tNative = sSSRS.GetText(1, 7);
+		if (tNCLIDType.trim().equals("0"))
+			tIDType = "11";
+		if (tNCLIDType.trim().equals("1"))
+			if (tNative.trim().equals("CHN"))
+			{
+				tIDType = "19";
+				tIDNo = (new StringBuilder("护照")).append(tIDNo).toString();
+			} else
+			{
+				tIDType = "14";
+			}
+		if (tNCLIDType.trim().equals("2"))
+			tIDType = "12";
+		if (tNCLIDType.trim().equals("3"))
+		{
+			tIDType = "19";
+			tIDNo = (new StringBuilder("驾照")).append(tIDNo).toString();
+		}
+		if (tNCLIDType.trim().equals("4") || tNCLIDType.trim().equals("5"))
+			if (PubFun.calInterval(tBirthDay, PubFun.getCurrentDate(), "Y") <= 18)
+			{
+				tIDType = "19";
+				tIDNo = (new StringBuilder("户口本")).append(tBirthDay_ch).toString();
+			} else
+			{
+				tIDType = "19";
+				tIDNo = "户口本****";
+			}
+		if (tNCLIDType.trim().equals("8") || tNCLIDType.trim().equals("9") || tNCLIDType.trim().equals(""))
+		{
+			tIDType = "19";
+			if (tIDNo.trim().equals(""))
+				tIDNo = "@N";
+		}
+		if (tIDType.equals(""))
+		{
+			tIDType = "19";
+			tIDNo = "@N";
+		}
+		tRelaToAppnt = getRelationToAppntFromLisToAml(tRelaToAppnt);
+		LXISTradeInsuredSchema tLXISTradeInsuredSchema = new LXISTradeInsuredSchema();
+		tLXISTradeInsuredSchema.setDealNo(mDealNo);
+		tLXISTradeInsuredSchema.setCSNM(tContNo);
+		tLXISTradeInsuredSchema.setISNM(tRiskName);
+		tLXISTradeInsuredSchema.setRiskCode(tRiskCode);
+		tLXISTradeInsuredSchema.setInsuredNo(tInsuredNo);
+		tLXISTradeInsuredSchema.setISTN(tInsuredName);
+		tLXISTradeInsuredSchema.setIITP(tIDType);
+		tLXISTradeInsuredSchema.setISID(tIDNo);
+		tLXISTradeInsuredSchema.setRLTP(tRelaToAppnt);
+		int tINum = mLXISTInsuredSet.size();
+		boolean tRe = false;
+		for (int c = 1; c <= tINum; c++)
+		{
+			LXISTradeInsuredSchema tLXISTISchema = new LXISTradeInsuredSchema();
+			tLXISTISchema = mLXISTInsuredSet.get(c);
+			String ttContNo = tLXISTISchema.getCSNM();
+			String ttRiskCode = tLXISTISchema.getRiskCode();
+			String ttInsuredNo = tLXISTISchema.getInsuredNo();
+			if (!ttContNo.equals(tContNo) || !ttRiskCode.equals(tRiskCode) || !ttInsuredNo.equals(tInsuredNo))
+				continue;
+			tRe = true;
+			break;
+		}
+
+		if (!tRe)
+			mLXISTInsuredSet.add(tLXISTradeInsuredSchema);
+		System.out.println("===================== 合同险种保险人信息 end ！========================");
+		return true;
+	}
+
+	public boolean setLXISTradeBnf(String tPolNo, String tInsuredNo, String tContNo, String tRiskCode)
+	{
+		System.out.println("===================== 插入可疑交易合同收益人信息 start ！========================");
+		String tBnfInfo_SQL = "";
+		tBnfInfo_SQL = (new StringBuilder("SELECT DISTINCT F.NAME,F.BNFNO,F.IDTYPE,NVL(F.IDNO,'@N'),TO_CHAR(F.BIRTHDAY,'YYYYMMDD') FROM LCBNF F WHERE F.POLNO = '")).append(tPolNo).append("' AND F.INSUREDNO = '").append(tInsuredNo).append("' AND F.BNFGRADE = '1' ").toString();
+		System.out.println("=========== tBnfInfo_SQL ===========");
+		System.out.println(tBnfInfo_SQL);
+		SSRS fSSRS = new SSRS();
+		fSSRS = mExeSQL.execSQL(tBnfInfo_SQL);
+		if (fSSRS.getMaxRow() == 0)
+		{
+			LXISTradeBnfSchema tLXISTradeBnfSchema = new LXISTradeBnfSchema();
+			tLXISTradeBnfSchema.setDealNo(mDealNo);
+			tLXISTradeBnfSchema.setCSNM(tContNo);
+			tLXISTradeBnfSchema.setRiskCode(tRiskCode);
+			tLXISTradeBnfSchema.setInsuredNo(tInsuredNo);
+			tLXISTradeBnfSchema.setBnfNo("@I");
+			tLXISTradeBnfSchema.setBNNM("@I");
+			tLXISTradeBnfSchema.setBITP("@I");
+			tLXISTradeBnfSchema.setBNID("@I");
+			mLXISTradeBnfSet.add(tLXISTradeBnfSchema);
+		}
+		if (fSSRS.getMaxRow() != 0)
+		{
+			for (int f = 1; f <= fSSRS.getMaxRow(); f++)
+			{
+				String tBnfNo = "";
+				String tName = "";
+				String tIDType = "";
+				String tIDNo = "";
+				String tBirthday = "";
+				String tNCLIDType = "";
+				tName = fSSRS.GetText(f, 1);
+				tBnfNo = fSSRS.GetText(f, 2);
+				tNCLIDType = fSSRS.GetText(f, 3);
+				tIDNo = fSSRS.GetText(f, 4);
+				tBirthday = fSSRS.GetText(f, 5);
+				if (!tName.trim().equals("法定") && !tName.trim().equals("法定继承人") && !tName.trim().equals("法定受益人"))
+				{
+					if (tNCLIDType.trim().equals("0"))
+						tIDType = "11";
+					if (tNCLIDType.trim().equals("1"))
+						tIDType = "14";
+					if (tNCLIDType.trim().equals("2"))
+						tIDType = "12";
+					if (tNCLIDType.trim().equals("3"))
+					{
+						tIDType = "19";
+						tIDNo = (new StringBuilder("驾照")).append(tIDNo).toString();
+					}
+					if (tNCLIDType.trim().equals("4") || tNCLIDType.trim().equals("5"))
+					{
+						tIDType = "19";
+						tIDNo = (new StringBuilder("户口本")).append(tBirthday).toString();
+					}
+					if (tNCLIDType.trim().equals("8") || tNCLIDType.trim().equals("9") || tNCLIDType.trim().equals(""))
+					{
+						tIDType = "19";
+						if (tIDNo.trim().equals(""))
+							tIDNo = "@N";
+					}
+					if (tIDType.equals(""))
+					{
+						tIDType = "19";
+						tIDNo = "@N";
+					}
+					int tBnfC = mLXISTradeBnfSet.size();
+					int tHad = 0;
+					for (int a = 1; a <= tBnfC; a++)
+					{
+						LXISTradeBnfSchema tLXISTBnfSchema = mLXISTradeBnfSet.get(a).getSchema();
+						String ttContNo = tLXISTBnfSchema.getCSNM();
+						String ttRiskCode = tLXISTBnfSchema.getRiskCode();
+						String ttInsuredNo = tLXISTBnfSchema.getInsuredNo();
+						String ttBnfNo = tLXISTBnfSchema.getBnfNo();
+						if (ttContNo.equals(tContNo) && ttRiskCode.equals(tRiskCode) && ttInsuredNo.equals(tInsuredNo) && ttBnfNo.equals(tBnfNo))
+							tHad++;
+					}
+
+					if (tHad > 0)
+						tBnfNo = String.valueOf(Integer.parseInt(tBnfNo) + tHad);
+					LXISTradeBnfSchema tLXISTradeBnfSchema = new LXISTradeBnfSchema();
+					tLXISTradeBnfSchema.setDealNo(mDealNo);
+					tLXISTradeBnfSchema.setCSNM(tContNo);
+					tLXISTradeBnfSchema.setRiskCode(tRiskCode);
+					tLXISTradeBnfSchema.setInsuredNo(tInsuredNo);
+					tLXISTradeBnfSchema.setBnfNo(tBnfNo);
+					tLXISTradeBnfSchema.setBNNM(tName);
+					tLXISTradeBnfSchema.setBITP(tIDType);
+					tLXISTradeBnfSchema.setBNID(tIDNo);
+					mLXISTradeBnfSet.add(tLXISTradeBnfSchema);
+				}
+			}
+
+		}
+		mMap.put(mLXISTradeBnfSet, "INSERT");
+		System.out.println("===================== 插入可疑交易合同收益人信息 end ！========================");
+		return true;
+	}
+
+	public String getDate(String tDate, String tDay)
+	{
+		String tGetDate = "";
+		ExeSQL dExeSQL = new ExeSQL();
+		String tS1Date_SQL = "";
+		if (tDate.trim().length() > 10)
+			tDate = tDate.substring(0, 10);
+		tS1Date_SQL = (new StringBuilder("SELECT TO_DATE('")).append(tDate).append("','YYYY-MM-DD')").append(tDay).append(" FROM DUAL ").toString();
+		tGetDate = dExeSQL.getOneValue(tS1Date_SQL);
+		if (dExeSQL.mErrors.needDealError())
+			return " ";
+		if (tGetDate.trim().length() > 10)
+			tGetDate = tGetDate.substring(0, 10);
+		return tGetDate;
+	}
+
+	public boolean getInputData(String dealno, String csnm, String appId, String calCode, String crcd, String uri, String makedate, 
+			String operator, String mngcom)
+	{
+		mDealNo = dealno;
+		mCsnm = csnm;
+		mAppId = appId;
+		mCalCode = calCode;
+		mCrcd = crcd;
+		mUri = uri;
+		mMakedate = makedate;
+		mOperator = operator;
+		mMngCom = mngcom;
+		mConn = DBConnPool.getConnection(uri);
+		mExeSQL = new ExeSQL();
+		return true;
+	}
+
+	public String getRelationToAppntFromLisToAml(String relationToAppnt)
+	{
+		String relation = "";
+		if (relationToAppnt.equals("00"))
+			relation = "00";
+		else
+		if (relationToAppnt.equals("01"))
+			relation = "03";
+		else
+		if (relationToAppnt.equals("02"))
+			relation = "03";
+		else
+		if (relationToAppnt.equals("03"))
+			relation = "04";
+		else
+		if (relationToAppnt.equals("04"))
+			relation = "04";
+		else
+		if (relationToAppnt.equals("05"))
+			relation = "07";
+		else
+		if (relationToAppnt.equals("07"))
+			relation = "01";
+		else
+		if (relationToAppnt.equals("08"))
+			relation = "15";
+		else
+		if (relationToAppnt.equals("09"))
+			relation = "15";
+		else
+		if (relationToAppnt.equals("10"))
+			relation = "16";
+		else
+		if (relationToAppnt.equals("11"))
+			relation = "16";
+		else
+		if (relationToAppnt.equals("12"))
+			relation = "25";
+		else
+		if (relationToAppnt.equals("13"))
+			relation = "25";
+		else
+		if (relationToAppnt.equals("14"))
+			relation = "25";
+		else
+		if (relationToAppnt.equals("15"))
+			relation = "23";
+		else
+		if (relationToAppnt.equals("16"))
+			relation = "24";
+		else
+		if (relationToAppnt.equals("17"))
+			relation = "16";
+		else
+		if (relationToAppnt.equals("18"))
+			relation = "27";
+		else
+		if (relationToAppnt.equals("19"))
+			relation = "26";
+		else
+		if (relationToAppnt.equals("20"))
+			relation = "30";
+		else
+		if (relationToAppnt.equals("21"))
+			relation = "28";
+		else
+		if (relationToAppnt.equals("22"))
+			relation = "30";
+		else
+		if (relationToAppnt.equals("23"))
+			relation = "30";
+		else
+			relation = "30";
+		return relation;
+	}
+
+	public MMap getResult()
+	{
+		return mMap;
+	}
+
+	public void buildError(String szFunc, String szErrMsg)
+	{
+		CError cError = new CError();
+		cError.moduleName = className;
+		cError.functionName = szFunc;
+		cError.errorMessage = szErrMsg;
+		mErrors.addOneError(cError);
+	}
+}

@@ -1,0 +1,47 @@
+<CONFIG>
+  <Sheet1>           
+    <COL0>DealID</COL0>
+    <COL1>CSNM</COL1>        
+    <COL2>CTNM</COL2>
+    <COL3>CITP</COL3>
+    <COL4>CTID</COL4>
+    <COL5>CTNT</COL5>
+    <COL6>HTDT</COL6>
+    <COL7>DealNo</COL7>    
+  </Sheet1>
+  <Sheet2>           
+    <COL0>DealID</COL0>
+    <COL1>CRCD</COL1>        
+    <COL2>FINN</COL2>
+    <COL3>FIRC</COL3>
+    <COL4>RLTP</COL4>
+    <COL5>FICT</COL5>
+    <COL6>FINC</COL6>
+    <COL7>CATP</COL7>
+    <COL8>CTAC</COL8>
+    <COL9>TBNM</COL9>
+    <COL10>TBIT</COL10>
+    <COL11>TBID</COL11>
+    <COL12>TBNT</COL12>
+    <COL13>TSTM</COL13>
+    <COL14>TSTP</COL14>
+    <COL15>TSCT</COL15>
+    <COL16>TSDR</COL16>
+    <COL17>TDRC</COL17>
+    <COL18>TRCD</COL18>
+    <COL19>CRPP</COL19>
+    <COL20>CRTP</COL20>
+    <COL21>CRAT</COL21>
+    <COL22>CFIN</COL22>
+    <COL23>CFCT</COL23>
+    <COL24>CFIC</COL24>
+    <COL25>TCNM</COL25>
+    <COL26>TCIT</COL26>
+    <COL27>TCID</COL27>
+    <COL28>TCAT</COL28>
+    <COL29>TCAC</COL29>
+    <COL30>DealNo</COL30>
+  </Sheet2>
+</CONFIG>         
+                  
+        

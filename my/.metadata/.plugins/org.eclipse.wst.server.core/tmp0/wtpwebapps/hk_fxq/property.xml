@@ -1,0 +1,966 @@
+<?xml version="1.0" encoding="GB2312"?>
+<segItems>
+
+<segItem code="8880" flag="1" name="银行存款-总公司" value_def="02">
+<sourceItem>bankkind</sourceItem>
+<transValues>
+<transValue value_detail="02" value_sour="86"/>
+</transValues>
+</segItem>
+<segItem code="8881" flag="1" name="银行存款-总公司-人民币" value_def="020">
+<sourceItem>bankkind</sourceItem>
+<transValues>
+<transValue value_detail="020" value_sour="86RMB"/>
+</transValues>
+</segItem>
+<segItem code="8882" flag="1" name="银行存款-总公司-人民币-中国银行" value_def="02000">
+<sourceItem>bankkind</sourceItem>
+<transValues>
+<transValue value_detail="02000" value_sour="86RMB02"/>
+</transValues>
+</segItem>
+<segItem code="8883" flag="1" name="银行存款-总公司-人民币-上海银行" value_def="02001">
+<sourceItem>bankkind</sourceItem>
+<transValues>
+<transValue value_detail="02001" value_sour="86RMB09"/>
+</transValues>
+</segItem>
+<segItem code="8884" flag="1" name="银行存款-上海分公司" value_def="12">
+<sourceItem>bankkind</sourceItem>
+<transValues>
+<transValue value_detail="12" value_sour="8644"/>
+</transValues>
+</segItem>
+<segItem code="8885" flag="1" name="银行存款-上海分公司-人民币" value_def="120">
+<sourceItem>bankkind</sourceItem>
+<transValues>
+<transValue value_detail="120" value_sour="8644RMB"/>
+</transValues>
+</segItem>
+<segItem code="8886" flag="1" name="银行存款-上海分公司-人民币-中国银行" value_def="12000">
+<sourceItem>bankkind</sourceItem>
+<transValues>
+<transValue value_detail="12000" value_sour="8644RMB02"/>
+</transValues>
+</segItem>
+<segItem code="8887" flag="1" name="银行存款-上海分公司-人民币-上海银行" value_def="12001">
+<sourceItem>bankkind</sourceItem>
+<transValues>
+<transValue value_detail="12001" value_sour="8644RMB09"/>
+</transValues>
+</segItem>
+<segItem code="8888" flag="1" name="银行存款-北京分公司" value_def="22">
+<sourceItem>bankkind</sourceItem>
+<transValues>
+<transValue value_detail="22" value_sour="8611"/>
+</transValues>
+</segItem>
+<segItem code="8889" flag="1" name="银行存款-北京分公司-人民币" value_def="220">
+<sourceItem>bankkind</sourceItem>
+<transValues>
+<transValue value_detail="220" value_sour="8611RMB"/>
+</transValues>
+</segItem>
+<segItem code="8890" flag="1" name="银行存款-北京分公司-人民币-中国银行" value_def="22000">
+<sourceItem>bankkind</sourceItem>
+<transValues>
+<transValue value_detail="22000" value_sour="8611RMB02"/>
+</transValues>
+</segItem>
+<segItem code="8891" flag="1" name="银行存款-北京分公司-人民币-上海银行" value_def="22001">
+<sourceItem>bankkind</sourceItem>
+<transValues>
+<transValue value_detail="22001" value_sour="8611RMB09"/>
+</transValues>
+</segItem>
+
+
+<segItem code="9880" flag="1" name="银行支票-总公司" value_def="02">
+<sourceItem>bankkind</sourceItem>
+<transValues>
+<transValue value_detail="02" value_sour="86"/>
+</transValues>
+</segItem>
+<segItem code="9881" flag="1" name="银行支票-总公司-人民币" value_def="020">
+<sourceItem>bankkind</sourceItem>
+<transValues>
+<transValue value_detail="020" value_sour="86RMB"/>
+</transValues>
+</segItem>
+<segItem code="9882" flag="1" name="银行支票-总公司-人民币-中国银行" value_def="02000">
+<sourceItem>bankkind</sourceItem>
+<transValues>
+<transValue value_detail="02000" value_sour="86RMB02"/>
+</transValues>
+</segItem>
+<segItem code="9883" flag="1" name="银行支票-总公司-人民币-上海银行" value_def="02001">
+<sourceItem>bankkind</sourceItem>
+<transValues>
+<transValue value_detail="02001" value_sour="86RMB09"/>
+</transValues>
+</segItem>
+<segItem code="9884" flag="1" name="银行支票-上海分公司" value_def="12">
+<sourceItem>bankkind</sourceItem>
+<transValues>
+<transValue value_detail="12" value_sour="8644"/>
+</transValues>
+</segItem>
+<segItem code="9885" flag="1" name="银行支票-上海分公司-人民币" value_def="120">
+<sourceItem>bankkind</sourceItem>
+<transValues>
+<transValue value_detail="120" value_sour="8644RMB"/>
+</transValues>
+</segItem>
+<segItem code="9886" flag="1" name="银行支票-上海分公司-人民币-中国银行" value_def="12000">
+<sourceItem>bankkind</sourceItem>
+<transValues>
+<transValue value_detail="12000" value_sour="8644RMB02"/>
+</transValues>
+</segItem>
+<segItem code="9887" flag="1" name="银行支票-上海分公司-人民币-上海银行" value_def="12001">
+<sourceItem>bankkind</sourceItem>
+<transValues>
+<transValue value_detail="12001" value_sour="8644RMB09"/>
+</transValues>
+</segItem>
+<segItem code="9888" flag="1" name="银行支票-北京分公司" value_def="22">
+<sourceItem>bankkind</sourceItem>
+<transValues>
+<transValue value_detail="22" value_sour="8611"/>
+</transValues>
+</segItem>
+<segItem code="9889" flag="1" name="银行支票-北京分公司-人民币" value_def="220">
+<sourceItem>bankkind</sourceItem>
+<transValues>
+<transValue value_detail="220" value_sour="8611RMB"/>
+</transValues>
+</segItem>
+<segItem code="9890" flag="1" name="银行支票-北京分公司-人民币-中国银行" value_def="22000">
+<sourceItem>bankkind</sourceItem>
+<transValues>
+<transValue value_detail="22000" value_sour="8611RMB02"/>
+</transValues>
+</segItem>
+<segItem code="9891" flag="1" name="银行支票-北京分公司-人民币-上海银行" value_def="22001">
+<sourceItem>bankkind</sourceItem>
+<transValues>
+<transValue value_detail="22001" value_sour="8611RMB09"/>
+</transValues>
+</segItem>
+
+<segItem code="9001" flag="1" name="中英附加团体意外伤害医疗保险" value_def="0101">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0101" value_sour="221670"/>
+</transValues>
+</segItem>
+<segItem code="9002" flag="1" name="中英团体一年定期寿险" value_def="0102">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0102" value_sour="211370"/>
+</transValues>
+</segItem>
+<segItem code="9003" flag="1" name="中英附加团体意外伤害保险" value_def="0103">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0103" value_sour="221672"/>
+</transValues>
+</segItem>
+<segItem code="9004" flag="1" name="中英附加团体意外伤害住院收入保障保险" value_def="0104">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0104" value_sour="221671"/>
+</transValues>
+</segItem>
+<segItem code="9005" flag="1" name="中英人寿团体重大疾病住院津贴保险" value_def="0105">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0105" value_sour="221570"/>
+</transValues>
+</segItem>
+<segItem code="9006" flag="1" name="中英团体意外伤害保险" value_def="0106">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0106" value_sour="211672"/>
+</transValues>
+</segItem>
+<segItem code="9007" flag="1" name="中英附加团体疾病住院收入保障保险" value_def="0107">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0107" value_sour="221770"/>
+</transValues>
+</segItem>
+<segItem code="9008" flag="1" name="中英人寿团体年金保险" value_def="0108">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0108" value_sour="211401"/>
+</transValues>
+</segItem>
+<segItem code="9009" flag="1" name="中英人寿团体转换年金保险" value_def="0109">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0109" value_sour="211402"/>
+</transValues>
+</segItem>
+<segItem code="9010" flag="1" name="中英团体分红型养老保险" value_def="0110">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0110" value_sour="212403"/>
+</transValues>
+</segItem>
+<segItem code="9011" flag="1" name="中英团体重大疾病保险" value_def="0111">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0111" value_sour="211501"/>
+</transValues>
+</segItem>
+<segItem code="9012" flag="1" name="中英附加团体住院医疗保险" value_def="0112">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0112" value_sour="221701"/>
+</transValues>
+</segItem>
+<segItem code="9013" flag="1" name="中英交通团体意外伤害保险" value_def="0113">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0113" value_sour="211601"/>
+</transValues>
+</segItem>
+<segItem code="9014" flag="1" name="中英附加交通团体意外伤害医疗保险" value_def="0114">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0114" value_sour="221601"/>
+</transValues>
+</segItem>
+
+
+
+<segItem code="0001" flag="1" name="佣金支出-趸缴" value_def="1000">
+<sourceItem>趸期交</sourceItem>
+<transValues>
+<transValue value_detail="1000" value_sour="0401"/>
+</transValues>
+</segItem>
+
+
+<segItem code="0002" flag="1" name="佣金支出-首期" value_def="2100">
+<sourceItem>首续期</sourceItem>
+<transValues>
+<transValue value_detail="2100" value_sour="0301"/>
+</transValues>
+</segItem>
+
+<segItem code="0003" flag="1" name="佣金支出-续期" value_def="3100">
+<sourceItem>首续期</sourceItem>
+<transValues>
+<transValue value_detail="3100" value_sour="0302"/>
+</transValues>
+</segItem>
+
+
+<segItem code="0005" flag="1" name="保费收入-趸缴" value_def="100000">
+<sourceItem>趸期交</sourceItem>
+<transValues>
+<transValue value_detail="100000" value_sour="0401"/>
+</transValues>
+</segItem>
+
+
+<segItem code="0006" flag="1" name="保费收入-首期" value_def="201000">
+<sourceItem>首续期</sourceItem>
+<transValues>
+<transValue value_detail="201000" value_sour="0301"/>
+</transValues>
+</segItem>
+
+<segItem code="0007" flag="1" name="保费收入-续期" value_def="301000">
+<sourceItem>首续期</sourceItem>
+<transValues>
+<transValue value_detail="301000" value_sour="0302"/>
+</transValues>
+</segItem>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<segItem code="0102" flag="1" name="民生长宁终身保险（分红型）" value_def="0102">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0102" value_sour="112101"/>
+</transValues>
+</segItem>
+
+<segItem code="0201" flag="1" name="民生金玉满堂两全保险（分红型）" value_def="0201">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0201" value_sour="312201"/>
+</transValues>
+</segItem>
+
+<segItem code="0202" flag="1" name="民生金榜题名两全保险（分红型）" value_def="0202">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0202" value_sour="112201"/>
+</transValues>
+</segItem>
+
+<segItem code="0203" flag="1" name="民生长裕两全保险（分红型）" value_def="0203">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0203" value_sour="112203"/>
+</transValues>
+</segItem>
+
+<segItem code="0204" flag="1" name="民生长顺两全保险（分红型）" value_def="0204">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0204" value_sour="112202"/>
+</transValues>
+</segItem>
+
+<segItem code="0205" flag="1" name="民生长乐两全保险（分红型）" value_def="0205">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0205" value_sour="112204"/>
+</transValues>
+</segItem>
+
+<segItem code="0301" flag="1" name="民生安康定期保险" value_def="0301">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0301" value_sour="111301"/>
+</transValues>
+</segItem>
+
+<segItem code="0302" flag="1" name="民生关爱特种疾病定期寿险保险" value_def="0302">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0302" value_sour="111302"/>
+</transValues>
+</segItem>
+
+
+<segItem code="0401" flag="1" name="民生众悦团体年金保险" value_def="0401">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0401" value_sour="212401"/>
+</transValues>
+</segItem>
+
+<segItem code="0402" flag="1" name="民生团体年金保险" value_def="0402">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0402" value_sour="211402"/>
+</transValues>
+</segItem>
+
+<segItem code="0501" flag="1" name="民生康吉重大疾病保险" value_def="0501">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0501" value_sour="111501"/>
+</transValues>
+</segItem>
+
+<segItem code="0502" flag="1" name="民生康泰重大疾病两全保险" value_def="0502">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0502" value_sour="111502"/>
+</transValues>
+</segItem>
+
+<segItem code="0503" flag="1" name="团体重大疾病保险" value_def="0503">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0503" value_sour="211501"/>
+</transValues>
+</segItem>
+
+<segItem code="0506" flag="1" name="民生康泰重大疾病保险(少儿计划)" value_def="0506">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0506" value_sour="111503"/>
+</transValues>
+</segItem>
+
+<segItem code="0601" flag="1" name="民生康顺个人意外伤害保险" value_def="0601">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0601" value_sour="111601"/>
+</transValues>
+</segItem>
+
+<segItem code="0602" flag="1" name="民生康顺个人意外伤害保险（老年计划）" value_def="0602">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0602" value_sour="111602"/>
+</transValues>
+</segItem>
+
+<segItem code="0603" flag="1" name="航空旅客人身意外伤害保险" value_def="0603">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0603" value_sour="141801"/>
+</transValues>
+</segItem>
+
+<segItem code="0604" flag="1" name="高倍给付特约保险" value_def="0604">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0604" value_sour="131602"/>
+</transValues>
+</segItem>
+
+<segItem code="0605" flag="1" name="团体意外伤害保险" value_def="0605">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0605" value_sour="211601"/>
+</transValues>
+</segItem>
+
+<segItem code="0606" flag="1" name="旅游意外伤害保险" value_def="0606">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0606" value_sour="211603"/>
+</transValues>
+</segItem>
+
+
+<segItem code="0701" flag="1" name="附加每日住院给付保险" value_def="0701">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0701" value_sour="121701"/>
+</transValues>
+</segItem>
+
+<segItem code="0702" flag="1" name="附加意外伤害医疗保险" value_def="0702">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0702" value_sour="121801"/>
+</transValues>
+</segItem>
+
+<segItem code="0703" flag="1" name="附加住院医疗保险" value_def="0703">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0703" value_sour="121702"/>
+</transValues>
+</segItem>
+
+<segItem code="0704" flag="1" name="附加团体住院医疗保险" value_def="0704">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0704" value_sour="221701"/>
+</transValues>
+</segItem>
+
+<segItem code="0705" flag="1" name="附加团体每日住院给付保险" value_def="0705">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0705" value_sour="221702"/>
+</transValues>
+</segItem>
+
+<segItem code="0706" flag="1" name="附加团体意外伤害医疗保险" value_def="0706">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0706" value_sour="221801"/>
+</transValues>
+</segItem>
+
+<segItem code="0707" flag="1" name="附加特种疾病每日住院给付保险" value_def="0707">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0707" value_sour="121703"/>
+</transValues>
+</segItem>
+
+
+<segItem code="0801" flag="1" name="提前给付特约保险" value_def="0801">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0801" value_sour="131601"/>
+</transValues>
+</segItem>
+
+<segItem code="0607" flag="1" name="民生阳光旅游交通工具意外伤害保险" value_def="0607">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0607" value_sour="311603"/>
+</transValues>
+</segItem>
+
+<segItem code="0608" flag="1" name="民生康顺个人意外伤害保险(学生计划)" value_def="0608">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0608" value_sour="111603"/>
+</transValues>
+</segItem>
+
+<segItem code="0609" flag="1" name="民生康顺A意外伤害保险" value_def="0609">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0609" value_sour="141601"/>
+</transValues>
+</segItem>
+
+<segItem code="0610" flag="1" name="民生阳光旅程交通工具意外伤害保险(折式)" value_def="0610">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0610" value_sour="141802"/>
+</transValues>
+</segItem>
+
+<segItem code="0611" flag="1" name="民生老年康顺意外伤害保险(折式)" value_def="0611">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0611" value_sour="141803"/>
+</transValues>
+</segItem>
+
+<segItem code="0612" flag="1" name="民生康顺B意外伤害综合保险" value_def="0612">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0612" value_sour="141804"/>
+</transValues>
+</segItem>
+
+<segItem code="0613" flag="1" name="民生康顺C人身安康综合保险" value_def="0613">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0613" value_sour="141805"/>
+</transValues>
+</segItem>
+
+<segItem code="0614" flag="1" name="民生康顺D人身安康综合保险" value_def="0614">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0614" value_sour="141806"/>
+</transValues>
+</segItem>
+
+<segItem code="0615" flag="1" name="团体建筑工地施工人员意外伤害保险" value_def="0615">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0615" value_sour="211604"/>
+</transValues>
+</segItem>
+
+<segItem code="0206" flag="1" name="民生金喜年年两全保险" value_def="0206">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0206" value_sour="112205"/>
+</transValues>
+</segItem>
+
+<segItem code="0708" flag="1" name="团体商业补充医疗保险" value_def="0708">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0708" value_sour="211801"/>
+</transValues>
+</segItem>
+
+<segItem code="0616" flag="1" name="团体公共交通工具意外伤害保险" value_def="0616">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0616" value_sour="211605"/>
+</transValues>
+</segItem>
+
+<segItem code="0617" flag="1" name="附加民生康顺个人意外伤害保险" value_def="0617">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0617" value_sour="321601"/>
+</transValues>
+</segItem>
+
+<segItem code="0504" flag="1" name="民生康吉重大疾病保险(中介)" value_def="0504">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0504" value_sour="311501"/>
+</transValues>
+</segItem>
+
+<segItem code="0207" flag="1" name="民生金玉满堂两全保险(中介)" value_def="0207">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0207" value_sour="312202"/>
+</transValues>
+</segItem>
+
+<segItem code="0303" flag="1" name="附加豁免保险费定期寿险" value_def="0303">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0303" value_sour="121301"/>
+</transValues>
+</segItem>
+
+<segItem code="0403" flag="1" name="民生长瑞年金保险（分红型）" value_def="0403">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0403" value_sour="112401"/>
+</transValues>
+</segItem>
+
+<segItem code="0304" flag="1" name="团体一年定期保险" value_def="0304">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0304" value_sour="211301"/>
+</transValues>
+</segItem>
+
+<segItem code="0618" flag="1" name="民生旅客综合意外伤害保险" value_def="0618">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0618" value_sour="211606"/>
+</transValues>
+</segItem>
+
+<segItem code="0619" flag="1" name="民生团体观光景点意外伤害保险" value_def="0619">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0619" value_sour="211607"/>
+</transValues>
+</segItem>
+
+<segItem code="0901" flag="1" name="民生无忧行综合意外伤害保险" value_def="0901">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0901" value_sour="241801"/>
+</transValues>
+</segItem>
+
+<segItem code="0902" flag="1" name="民生合家欢综合意外伤害保险" value_def="0902">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0902" value_sour="241802"/>
+</transValues>
+</segItem>
+
+<segItem code="0903" flag="1" name="民生公共交通工具意外伤害保险" value_def="0903">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0903" value_sour="141807"/>
+</transValues>
+</segItem>
+
+<segItem code="0904" flag="1" name="航空旅客意外伤害保险(天勤)" value_def="0904">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0904" value_sour="141808"/>
+</transValues>
+</segItem>
+
+<segItem code="0905" flag="1" name="综合交通意外伤害保险(天勤)" value_def="0905">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="0905" value_sour="141809"/>
+</transValues>
+</segItem>
+
+<segItem code="2003" flag="1" name="普通险" value_def="03">
+<sourceItem>risk_sort</sourceItem>
+<transValues>
+<transValue value_detail="03" value_sour="1"/>
+</transValues>
+</segItem>
+
+<segItem code="2001" flag="1" name="分红险" value_def="01">
+<sourceItem>risk_sort</sourceItem>
+<transValues>
+<transValue value_detail="01" value_sour="2"/>
+</transValues>
+</segItem>
+
+<segItem code="2002" flag="1" name="投连险" value_def="02">
+<sourceItem>risk_sort</sourceItem>
+<transValues>
+<transValue value_detail="02" value_sour="3"/>
+</transValues>
+</segItem>
+
+
+
+
+<segItem code="3019" flag="1" name="创业扶持金" value_def="19">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="4432020119" value_sour="001"/>
+</transValues>
+</segItem>
+<segItem code="3001" flag="1" name="创业金" value_def="01">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="4432020101" value_sour="002"/>
+</transValues>
+</segItem>
+<segItem code="3002" flag="1" name="转正奖" value_def="02">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="4432020102" value_sour="003"/>
+</transValues>
+</segItem>
+<segItem code="3004" flag="1" name="伯乐奖金" value_def="04">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="4432020104" value_sour="004"/>
+</transValues>
+</segItem>
+<segItem code="3003" flag="1" name="个人年终奖" value_def="03">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="4432020103" value_sour="005"/>
+</transValues>
+</segItem>
+<segItem code="3005" flag="1" name="增员奖金" value_def="05">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="4432020126" value_sour="006"/>
+</transValues>
+</segItem>
+<segItem code="3006" flag="1" name="增员年终奖" value_def="06">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="4432020106" value_sour="007"/>
+</transValues>
+</segItem>
+<segItem code="3007" flag="1" name="高级理财服务主任特别津贴" value_def="07">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="4432020127" value_sour="008"/>
+</transValues>
+</segItem>
+<segItem code="3008" flag="1" name="职务津贴" value_def="08">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="4432020108" value_sour="009"/>
+</transValues>
+</segItem>
+<segItem code="3009" flag="1" name="直辖组管理津贴" value_def="09">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="4432020109" value_sour="010"/>
+</transValues>
+</segItem>
+<segItem code="3010" flag="1" name="组育成津贴" value_def="10">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="4432020110" value_sour="011"/>
+</transValues>
+</segItem>
+<segItem code="3011" flag="1" name="组年终奖金" value_def="11">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="4432020111" value_sour="012"/>
+</transValues>
+</segItem>
+<segItem code="3012" flag="1" name="部直辖管理津贴" value_def="12">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="4432020112" value_sour="013"/>
+</transValues>
+</segItem>
+<segItem code="3013" flag="1" name="增部津贴" value_def="13">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="4432020113" value_sour="014"/>
+</transValues>
+</segItem>
+<segItem code="3014" flag="1" name="营销部年终奖金" value_def="14">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="4432020114" value_sour="015"/>
+</transValues>
+</segItem>
+<segItem code="3015" flag="1" name="总监职务底薪" value_def="15">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="4432020129" value_sour="016"/>
+</transValues>
+</segItem>
+<segItem code="3016" flag="1" name="总监育成津贴" value_def="16">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="4432020130" value_sour="017"/>
+</transValues>
+</segItem>
+<segItem code="3017" flag="1" name="资深总监职务底薪" value_def="17">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="4432020131" value_sour="018"/>
+</transValues>
+</segItem>
+<segItem code="3018" flag="1" name="补发初年度佣金" value_def="18">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="4432020118" value_sour="019"/>
+</transValues>
+</segItem>
+<segItem code="3020" flag="1" name="差勤扣款" value_def="20">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="214928" value_sour="021"/>
+</transValues>
+</segItem>
+
+<segItem code="3021" flag="1" name="加扣款" value_def="21">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="4432020121" value_sour="020"/>
+</transValues>
+</segItem>
+
+<segItem code="3022" flag="1" name="支助薪资" value_def="22">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="443202012201" value_sour="023"/>
+</transValues>
+</segItem>
+
+<segItem code="3023" flag="1" name="招募资金" value_def="23">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="443202012202" value_sour="024"/>
+</transValues>
+</segItem>
+
+<segItem code="3024" flag="1" name="创业奖" value_def="24">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="443202012203" value_sour="025"/>
+</transValues>
+</segItem>
+
+<segItem code="3025" flag="1" name="奖惩款项" value_def="25">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="4432020123" value_sour="026"/>
+</transValues>
+</segItem>
+
+<segItem code="3026" flag="1" name="衔接资金加扣款" value_def="26">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="443202012204" value_sour="027"/>
+</transValues>
+</segItem>
+
+
+<segItem code="3099" flag="1" name="上期余额" value_def="99">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="4432020199" value_sour="022"/>
+</transValues>
+</segItem>
+
+<segItem code="3027" flag="1" name="底薪" value_def="28">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="443202012501" value_sour="028"/>
+</transValues>
+</segItem>
+
+<segItem code="3028" flag="1" name="社保费用支持金" value_def="29">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="443202012502" value_sour="029"/>
+</transValues>
+</segItem>
+
+<segItem code="3029" flag="1" name="费用补贴" value_def="30">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="443202012503" value_sour="030"/>
+</transValues>
+</segItem>
+
+<segItem code="3030" flag="1" name="养老保险" value_def="31">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="443202012504" value_sour="031"/>
+</transValues>
+</segItem>
+
+<segItem code="3031" flag="1" name="失业保险" value_def="32">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="443202012505" value_sour="032"/>
+</transValues>
+</segItem>
+
+<segItem code="3032" flag="1" name="医疗保险" value_def="33">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="443202012506" value_sour="033"/>
+</transValues>
+</segItem>
+
+<segItem code="3033" flag="1" name="工伤保险" value_def="34">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="443202012507" value_sour="034"/>
+</transValues>
+</segItem>
+
+<segItem code="3034" flag="1" name="住房公积金" value_def="35">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="443202012508" value_sour="035"/>
+</transValues>
+</segItem>
+
+<segItem code="3035" flag="1" name="加扣款3" value_def="36">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="443202012509" value_sour="036"/>
+</transValues>
+</segItem>
+
+<segItem code="3036" flag="1" name="总监的业务拓展津贴" value_def="37">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="4432020128" value_sour="037"/>
+</transValues>
+</segItem>
+
+
+<segItem code="4001" flag="1" name="应交营业税" value_def="01">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="01" value_sour="101"/>
+</transValues>
+</segItem>
+<segItem code="4004" flag="1" name="应交个人所得税" value_def="04">
+<sourceItem>risk_info</sourceItem>
+<transValues>
+<transValue value_detail="04" value_sour="102"/>
+</transValues>
+</segItem>
+
+</segItems>

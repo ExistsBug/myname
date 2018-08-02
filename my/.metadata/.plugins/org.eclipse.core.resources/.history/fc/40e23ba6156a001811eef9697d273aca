@@ -1,0 +1,138 @@
+//<!-- JavaScript Document BGN -->
+
+
+/*============================================================================*/
+
+var showInfo;                                           //全局变量, 弹出提示窗口, 必须有
+var turnPage = new turnPageClass();                     //全局变量, 查询结果翻页, 必须有
+var turnPageCustomerGrid = new turnPageClass();    //全局变量, 可选上报报文查询结果翻页
+var turnPageTasksGrid = new turnPageClass();    //全局变量, 可选上报报文查询结果翻页
+
+/*=============================================================================*/
+
+/*============================================================================*/
+
+//显示frmSubmit框架，用来调试
+function showSubmitFrame(cDebug)
+{
+  if(cDebug=="1")
+  {
+			parent.fraMain.rows = "0,0,50,82,*";
+  }
+ 	else {
+  		parent.fraMain.rows = "0,0,0,82,*";
+ 	}
+}
+
+function beforeSubmit()
+{  
+   if (fm.all('StartDate').value > fm.all('EndDate').value )
+   {
+   	alert("计算起期必须小于等于计算止期！");
+        fm.all('StartDate').value = '';
+        fm.all('EndDate').value = '';
+   	return false;
+   }
+   return true;
+}
+
+//根据分数计算出等级
+function calLevel()
+{
+	var score = fm.all('reviewScore').value;
+	var poltype = fm.all('poltype').value;
+	//alert(poltype);
+	if(score!=""&&score!=null)
+	{ 
+	  var level = getLevel(score,poltype); 
+	  fm.all('reviewLevel').value = level;
+	}
+}
+
+function getLevel(score,poltype)
+{
+  var riskType = "";
+  if (poltype=="1")
+  {
+    riskType = "PT";
+  }else {
+	riskType = "GT";
+  }
+  	var sql1="select sysvarvalue from ldsysvar where sysvar='lowValue"+riskType+"' and sysvartype = '"+riskType+"'";
+	var sql2="select sysvarvalue from ldsysvar where sysvar='midValue"+riskType+"' and sysvartype = '"+riskType+"'";
+	var sql3="select sysvarvalue from ldsysvar where sysvar='highValue"+riskType+"' and sysvartype = '"+riskType+"'";
+	var value1= parseFloat(easyExecSql(sql1));
+	var value2= parseFloat(easyExecSql(sql2));
+	var value3= parseFloat(easyExecSql(sql3));
+	
+	score = parseFloat(score);
+	var level = "";
+	if(score<=value1)
+	{
+	  level = "低风险";
+	}
+	else if(score<=value2)
+	{
+	  level = "中风险";
+	}
+	else if(score<=value3)
+	{
+	  level = "高风险";
+	}
+	else if(score>value3)
+	{
+	  level = "超高风险";
+	}
+	return level;
+}
+
+//审核确认
+function reviewSure()
+{
+  //var reviewRemark= fm.all('reviewRemark').value;
+  //alert("reviewRemark.length=="+reviewRemark.length);
+  if(verifyInput2())
+  {
+    fm.all('Operation').value = "one";
+    fm.all('record2').value = "02"
+  	fm.submit();
+  }
+  //var reviewScore= fm.all('reviewScore').value;
+  
+  // if(reviewRemark.length>200){
+  //  alert("输入的长度不能超过200个");
+  //  return;
+  //}
+  
+  //if(reviewScore!=""&&reviewScore!=null)
+ // {
+  //   fm.all('Operation').value = "one";
+  //  fm.all('record2').value = "02"
+  //	fm.submit();
+  //}
+  //else
+ // {
+  //  alert("请输入复评风险得分!");
+  //}
+}
+
+//提交后操作,服务器数据返回后执行的操作
+function afterSubmit( FlagStr, content) {
+	if (FlagStr == "Fail" ) {             
+    	var urlStr="../common/jsp/MessagePage.jsp?picture=C&content=" + content ;  
+    	showModalDialog(urlStr,window,"status:no;help:0;close:0;dialogWidth:550px;dialogHeight:350px");   
+  	} else { 
+    	var urlStr="../common/jsp/MessagePage.jsp?picture=S&content=" + content; 
+    	showModalDialog(urlStr,window,"status:no;help:0;close:0;dialogWidth:550px;dialogHeight:350px");
+    	goParent();
+    	top.opener.queryCustomerGrid();
+  	} 
+  	
+  	  		
+}
+
+//取消
+function goParent()
+{
+  top.close();
+}

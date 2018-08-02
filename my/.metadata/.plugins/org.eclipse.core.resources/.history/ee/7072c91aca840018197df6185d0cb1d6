@@ -1,0 +1,1641 @@
+// Decompiled by Jad v1.5.8e2. Copyright 2001 Pavel Kouznetsov.
+// Jad home page: http://kpdus.tripod.com/jad.html
+// Decompiler options: packimports(3) fieldsfirst ansi space 
+// Source File Name:   CalMode_IC_CustomerInfo.java
+
+package com.sinosoft.lis.calfactor;
+
+import com.sinosoft.lis.aml.CalculatorInterface;
+import com.sinosoft.lis.pubfun.*;
+import com.sinosoft.lis.schema.LXCalLogSchema;
+import com.sinosoft.lis.schema.LXCustomRiskInfoTempSchema;
+import com.sinosoft.lis.vschema.LXCustomRiskInfoTempSet;
+import com.sinosoft.utility.*;
+
+import java.io.PrintStream;
+import java.sql.Connection;
+
+public class CalTemp_IC_CustomerInfo
+	implements CalculatorInterface
+{
+
+	public String className;
+	public CErrors mErrors;
+	MMap mMap;
+	public VData mInputData;
+	SSRS mSSRS;
+	SSRS tSSRS;
+	Connection conn;
+	ExeSQL mExeSQL;
+	ExeSQL mExeAML;
+	GlobalInput mG;
+	LXCalLogSchema mLXCalLogSchema;
+	LXCustomRiskInfoTempSchema mLXCalResultSchema;
+	LXCustomRiskInfoTempSet mLXCalResultSet;
+	LXCustomRiskInfoTempSet rLXCalResultSet;
+	LXCustomRiskInfoTempSet QLXCalResultSet;
+	private String mCurrentDate;
+	private String mCurrentTime;
+	String mAppId;
+	String mCalCode;
+	String mCrcd;
+	String mUri;
+	String mMakedate;
+	String mOperator;
+	String mMngCom;
+
+	public CalTemp_IC_CustomerInfo()
+	{
+		className = super.getClass().getName().substring(super.getClass().getName().lastIndexOf(".") + 1);
+		mErrors = new CErrors();
+		mMap = new MMap();
+		mInputData = new VData();
+		mSSRS = new SSRS();
+		tSSRS = new SSRS();
+		conn = DBConnPool.getConnection("lis");
+		mExeSQL = new ExeSQL(conn);
+		mExeAML = new ExeSQL();
+		mG = new GlobalInput();
+		mLXCalLogSchema = new LXCalLogSchema();
+		mLXCalResultSchema = new LXCustomRiskInfoTempSchema();
+		mLXCalResultSet = new LXCustomRiskInfoTempSet();
+		rLXCalResultSet = new LXCustomRiskInfoTempSet();
+		QLXCalResultSet = new LXCustomRiskInfoTempSet();
+		mCurrentDate = PubFun.getCurrentDate();
+		mCurrentTime = PubFun.getCurrentTime();
+		mAppId = "";
+		mCalCode = "";
+		mCrcd = "";
+		mUri = "";
+		mMakedate = "";
+		mOperator = "";
+		mMngCom = "";
+	}
+
+	public boolean submitData(String dealno, String csnm, String appId, String calCode, String crcd, String uri, String makedate, 
+			String operator, String mngcom)
+	{
+		if (!getInputData(appId, calCode, uri, makedate, operator, mngcom))
+			return false;
+		return dealData();
+	}
+
+	public boolean dealData()
+	{
+		mMap = new MMap();
+		System.out.println(" ====================== Start CalMode_IC_CustomerInfo dealData! ======================== ");
+		if (mCalCode == null && mCalCode.equals(""))
+		{
+			mErrors.addOneError("CalMode_IH_CusInfo类中获取算法mCalCode为空！");
+			return false;
+		}
+		int tCount = 0;
+		if (mAppId != null && mAppId.equals("LIS"))
+		{
+			mLXCalResultSet = new LXCustomRiskInfoTempSet();
+			mLXCalResultSet = getCalCode_Result(mCalCode);
+			System.out.println("从CalMode_IH_CusInfo.dealdata.getCalCode_Result中返回");
+			System.out.println((new StringBuilder("this.mLXCalResultSet.size()=")).append(mLXCalResultSet.size()).toString());
+			if (mLXCalResultSet != null)
+			{
+				tCount = mLXCalResultSet.size();
+				System.out.println((new StringBuilder("==================== getResult_")).append(mCalCode).append("(String tCalCode) 方法共提取出 ").append(tCount).append(" 条数据。 ====================").toString());
+				for (int i = 1; i <= tCount; i++)
+				{
+					LXCustomRiskInfoTempSchema mLXCalResult2Schema = new LXCustomRiskInfoTempSchema();
+					mLXCalResult2Schema = mLXCalResultSet.get(i);
+					QLXCalResultSet.add(mLXCalResult2Schema);
+					if (QLXCalResultSet.size() == 1000)
+					{
+						mMap.put(QLXCalResultSet, "INSERT");
+						try
+						{
+							mInputData = new VData();
+							mInputData.add(mMap);
+						}
+						catch (Exception ex)
+						{
+							buildError("prepareData", "在准备往后层处理所需要的数据时出错。");
+							return false;
+						}
+						PubSubmit tPubSubmit = new PubSubmit();
+						if (!tPubSubmit.submitData(mInputData, ""))
+						{
+							mErrors.copyAllErrors(tPubSubmit.mErrors);
+							buildError("submitData", "数据提交失败!");
+							return false;
+						}
+						QLXCalResultSet.clear();
+					}
+					System.out.println((new StringBuilder("AAAAAAAAAAAAAAAAAAAAAAaa==========")).append(tCount).toString());
+				}
+				
+				mMap.put(QLXCalResultSet, "INSERT");
+				try
+				{
+					mInputData = new VData();
+					mInputData.add(mMap);
+				}
+				catch (Exception ex)
+				{
+					buildError("prepareData", "在准备往后层处理所需要的数据时出错。");
+					return false;
+				}
+				PubSubmit tPubSubmit = new PubSubmit();
+				if (!tPubSubmit.submitData(mInputData, ""))
+				{
+					mErrors.copyAllErrors(tPubSubmit.mErrors);
+					buildError("submitData", "数据提交失败!");
+					return false;
+				}
+//				QLXCalResultSet.clear();
+//			}
+			
+//				mMap.put(QLXCalResultSet, "INSERT");
+			}
+		}
+//		mLXCalLogSchema = new LXCalLogSchema();
+//		mLXCalLogSchema.setAppId(mAppId);
+//		mLXCalLogSchema.setCalCode(mCalCode);
+//		mLXCalLogSchema.setHTDT(mMakedate);
+//		mLXCalLogSchema.setCSNMCount(tCount);
+//		mLXCalLogSchema.setOperator(mOperator);
+//		mLXCalLogSchema.setMngCom(mMngCom);
+//		mLXCalLogSchema.setMakeDate(PubFun.getCurrentDate());
+//		mLXCalLogSchema.setMakeTime(PubFun.getCurrentTime());
+//		mMap.put(mLXCalLogSchema, "INSERT");
+		System.out.println("============ CalMode_IH_CusInfo.dealdata End ==============");
+		return true;
+	}
+
+	public boolean getInputData(String appId, String calCode, String uri, String makedate, String operator, String mngcom)
+	{
+		mAppId = appId;
+		mCalCode = calCode;
+		mUri = uri;
+		mMakedate = makedate;
+		mOperator = operator;
+		mMngCom = mngcom;
+		mExeSQL = new ExeSQL(conn);
+		return true;
+	}
+
+	public LXCustomRiskInfoTempSet getCalCode_Result(String tCalCode)
+	{
+		LXCustomRiskInfoTempSet tLXCalResultSet = null;
+		if (tCalCode == null || tCalCode.equals(""))
+			return tLXCalResultSet;
+		if (tCalCode.equals("IRX01001"))
+			tLXCalResultSet = getResult_IRX01001(tCalCode);
+		else
+			return tLXCalResultSet;
+		return tLXCalResultSet;
+	}
+
+	public LXCustomRiskInfoTempSet getLXCalTempSet(String tsql, String tCalMode)
+	{
+		System.out.println((new StringBuilder("====== 在getLIS_CalModeSQL(String tCalMode)方法中处理")).append(tCalMode).append("算法，返回算法字符串如下： ======").toString());
+		System.out.println(tsql);
+		mSSRS.Clear();
+		mSSRS = mExeSQL.execSQL(tsql);
+		if (mExeSQL.mErrors.needDealError())
+			mErrors.addOneError((new StringBuilder("执行")).append(mCalCode).append("算法出错！").toString());
+		int tCount = 0;
+		tCount = mSSRS.getMaxRow();
+		System.out.println((new StringBuilder("============== tCount 数量：==========")).append(tCount).toString());
+		String id = "";
+		for (int n = 1; n <= tCount; n++)
+		{
+			System.out.println("============== 开始循环方法插入数据：============================");
+			mLXCalResultSchema = new LXCustomRiskInfoTempSchema();
+			//id = PubFun1.CreateMaxNo("CustomerRiskID", 20);
+			mLXCalResultSchema.setriskid(mSSRS.GetText(n, 1));
+			mLXCalResultSchema.setbak1(mSSRS.GetText(n, 2));
+			mLXCalResultSchema.setbak2(mSSRS.GetText(n, 3));
+			mLXCalResultSchema.setappntno(mSSRS.GetText(n, 4));
+			mLXCalResultSchema.setinsuredno(mSSRS.GetText(n, 5));
+			mLXCalResultSchema.setappntname(mSSRS.GetText(n, 6));
+			mLXCalResultSchema.setinsuredname(mSSRS.GetText(n, 7));
+			mLXCalResultSchema.setriskcode(mSSRS.GetText(n, 8));
+			mLXCalResultSchema.setarea(mSSRS.GetText(n, 9));
+			mLXCalResultSchema.settradetype(mSSRS.GetText(n, 10));
+			mLXCalResultSchema.setpoltype(mSSRS.GetText(n, 11));
+			mLXCalResultSchema.setoperator(mSSRS.GetText(n, 12));
+			mLXCalResultSchema.setmakedate(mSSRS.GetText(n, 13));
+			mLXCalResultSchema.setmaketime(mSSRS.GetText(n, 14));
+			mLXCalResultSchema.setmodifydate(mSSRS.GetText(n, 15));
+			mLXCalResultSchema.setmodifytime(mSSRS.GetText(n, 16));
+			mLXCalResultSchema.setdealdate(mSSRS.GetText(n, 17));
+			mLXCalResultSet.add(mLXCalResultSchema);
+			mMakedate=mSSRS.GetText(n, 17);
+		}
+
+		String detemp="delete from  LXCustomRiskInfoTemp ";
+		if(!mExeSQL.execUpdateSQL(detemp)){
+			System.out.println("LXCustomRiskInfoTemp delete false");
+			
+		}
+		
+		System.out.println((new StringBuilder("this.mLXCalResultSet.size()=")).append(mLXCalResultSet.size()).toString());
+		System.out.println("进入setstore");
+		rLXCalResultSet = setScore(mLXCalResultSet);
+		return rLXCalResultSet;
+	}
+
+	public LXCustomRiskInfoTempSet setScore(LXCustomRiskInfoTempSet set)
+	{
+		System.out.println("已进入setStore中");
+		LXCustomRiskInfoTempSet tempset = new LXCustomRiskInfoTempSet();
+		System.out.println((new StringBuilder("Set.size()=")).append(set.size()).toString());
+		for (int i = 1; i <= set.size(); i++)
+		{
+			LXCustomRiskInfoTempSchema schema = new LXCustomRiskInfoTempSchema();
+			schema = set.get(i).getSchema();
+			setCustomTypeScore(schema);
+			setAreaTypeScore(schema);
+			setTradeTypeScoreNew(schema);
+			setWorkTypeScoreNew(schema);
+			double appntscore = schema.getappntscore();
+			double score1 = schema.getscore1();
+			double score2 = schema.getscore2();
+			double score3 = schema.getscore3();
+			double score4 = schema.getscore4();
+			schema.setappntscore(appntscore + score1 + score2 + score3 + score4);
+			tempset.add(schema);
+			System.out.println((new StringBuilder("=========tempset当前数量==================")).append(tempset.size()).toString());
+			if (tempset != null && tempset.size() == 1000)
+			{
+				mMap.put(tempset, "INSERT");
+				try
+				{
+					mInputData = new VData();
+					mInputData.add(mMap);
+				}
+				catch (Exception ex)
+				{
+					buildError("prepareData", "在准备往后层处理所需要的数据时出错。");
+				}
+				PubSubmit tPubSubmit = new PubSubmit();
+				if (!tPubSubmit.submitData(mInputData, ""))
+				{
+					mErrors.copyAllErrors(tPubSubmit.mErrors);
+					buildError("submitData", "数据提交失败!");
+				}
+				tempset.clear();
+			}
+		}
+
+		return tempset;
+	}
+
+	private void setCustomTypeScore(LXCustomRiskInfoTempSchema schema)
+	{
+		System.out.println("==============setcustomtypescore=============");
+		String appntno = schema.getappntno();
+		String insuredno = schema.getinsuredno();
+		String grpcontno = schema.getbak1();
+		String contno = schema.getbak2();
+		String poltype = schema.getpoltype();
+		String sql = "";
+		String hangye = "";
+		String idtype = "";
+		String idexpdate = "";
+		String sAge = "";
+		String yIncome = "";
+		System.out.println((new StringBuilder("poltype=")).append(poltype).toString());
+		String GrpNature = "";
+		String flag = "";
+		if ("1".equals(poltype))
+		{
+			sql = (new StringBuilder("select idtype,to_char(idexpdate,'yyyy-mm-dd'),floor(MONTHS_BETWEEN(to_date('")).append(mMakedate).append("','yyyy-mm-dd'),appntbirthday)/12)").append(",salary*12 from lcappnt where appntno = '").append(appntno).append("' and contno = '").append(contno).append("'").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeSQL.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+			{
+				idtype = mSSRS.GetText(1, 1);
+				idexpdate = mSSRS.GetText(1, 2);
+				sAge = mSSRS.GetText(1, 3);
+				yIncome = mSSRS.GetText(1, 4);
+				if ("0".equals(idtype.trim()))
+					flag = "000000000000000001";
+				else
+					flag = "000000000000000002";
+				sql = (new StringBuilder("select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and trim(risktype)='客户特征' and identype='PT' and trim(riskno) ='")).append(flag).append("'").toString();
+				mSSRS.Clear();
+				mSSRS = mExeAML.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+					schema.setscore1(schema.getscore1() + Double.valueOf(mSSRS.GetText(1, 1)).doubleValue());
+				String tDate = PubFun.getBeforeDate(idexpdate, mMakedate);
+				if (idexpdate.equals(tDate))
+					flag = "000000000000000004";
+				else
+					flag = "000000000000000003";
+				sql = (new StringBuilder("select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and trim(risktype)='客户特征' and identype='PT' and trim(riskno) ='")).append(flag).append("'").toString();
+				mSSRS.Clear();
+				mSSRS = mExeAML.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+					schema.setscore1(schema.getscore1() + Double.valueOf(mSSRS.GetText(1, 1)).doubleValue());
+				int age = Integer.valueOf(sAge).intValue();
+				if (age >= 60)
+					flag = "000000000000000007";
+				else
+				if (age < 60 && age >= 25)
+					flag = "000000000000000009";
+				else
+					flag = "000000000000000008";
+				sql = (new StringBuilder("select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and trim(risktype)='客户特征' and identype='PT' and trim(riskno) ='")).append(flag).append("'").toString();
+				mSSRS.Clear();
+				mSSRS = mExeAML.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+					schema.setscore1(schema.getscore1() + Double.valueOf(mSSRS.GetText(1, 1)).doubleValue());
+				double yPrem = 0.0D;
+				sql = (new StringBuilder("select prem from lccont where contno='")).append(contno).append("'").toString();
+				if (mSSRS != null)
+					mSSRS.Clear();
+				mSSRS = mExeSQL.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+					yPrem = Double.valueOf(mSSRS.GetText(1, 1).trim()).doubleValue();
+				if (yPrem / Double.parseDouble(yIncome) <= 0.20000000000000001D)
+					flag = "000000000000000010";
+				else
+				if (yPrem / Double.parseDouble(yIncome) <= 0.5D && yPrem / Double.parseDouble(yIncome) > 0.20000000000000001D)
+					flag = "000000000000000011";
+				else
+				if (yPrem / Double.parseDouble(yIncome) <= 1.0D && yPrem / Double.parseDouble(yIncome) > 0.5D)
+					flag = "000000000000000012";
+				else
+					flag = "000000000000000013";
+				sql = (new StringBuilder("select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and trim(risktype)='客户特征' and identype='PT' and trim(riskno) ='")).append(flag).append("'").toString();
+				mSSRS.Clear();
+				mSSRS = mExeAML.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+					schema.setscore1(schema.getscore1() + Double.valueOf(mSSRS.GetText(1, 1)).doubleValue());
+			}
+		} else
+		{
+			sql = (new StringBuilder("select GrpNature from lcgrpcont where grpcontno = '")).append(grpcontno).append("'").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeSQL.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+			{
+				GrpNature = mSSRS.GetText(1, 1).trim();
+				if ("09".equals(GrpNature) || "11".equals(GrpNature) || "12".equals(GrpNature) || "13".equals(GrpNature) || "14".equals(GrpNature))
+					flag = "000000000000000051";
+				else
+				if ("01".equals(GrpNature))
+					flag = "000000000000000052";
+				else
+					flag = "000000000000000053";
+				sql = (new StringBuilder("select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and trim(risktype)='客户特征' and identype='GT' and trim(riskno) ='")).append(flag).append("'").toString();
+				mSSRS.Clear();
+				mSSRS = mExeAML.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+					schema.setappntscore(schema.getappntscore() + Double.valueOf(mSSRS.GetText(1, 1)).doubleValue());
+			}
+		}
+	}
+
+	private void setAreaTypeScore(LXCustomRiskInfoTempSchema schema)
+	{
+		System.out.println("===============setareatypescore================");
+		String grpcontno = schema.getbak1();
+		String contno = schema.getbak2();
+		String area = "";
+		String poltype = schema.getpoltype();
+		String sql = "";
+		String nativeplace = "";
+		String flag = "";
+		String tFlag = "";
+		if ("1".equals(poltype))
+		{
+			sql = (new StringBuilder("select nativeplace from lcappnt where contno = '")).append(contno).append("'  ").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeSQL.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+			{
+				nativeplace = mSSRS.GetText(1, 1).trim();
+				if ("CHN".equals(nativeplace))
+				{
+					flag = "000000000000000016";
+				} else
+				{
+					sql = (new StringBuilder("select trim(codename) from ldcode where codetype='nativeplace' and code='")).append(nativeplace).append("'").toString();
+					mSSRS.Clear();
+					mSSRS = mExeAML.execSQL(sql);
+					if (mSSRS != null && mSSRS.MaxRow >= 1)
+					{
+						String countrys = "伊朗、朝鲜、厄瓜多尔、埃塞俄比亚、印度尼西亚、肯尼亚、缅甸、尼日利亚、巴基斯坦、圣多美和普林西比、叙利亚、坦桑尼亚、土耳其、越南、也门";
+						if (countrys.contains(mSSRS.GetText(1, 1).trim()))
+						{
+							flag = "000000000000000014";
+							tFlag = "NCHN";
+						} else
+						{
+							flag = "000000000000000015";
+						}
+					} else
+					{
+						flag = "000000000000000015";
+					}
+				}
+				sql = (new StringBuilder("select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and trim(risktype)='地域特征' and identype='PT' and trim(riskno) ='")).append(flag).append("'").toString();
+				mSSRS.Clear();
+				mSSRS = mExeAML.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+					schema.setscore2(schema.getscore2() + Double.valueOf(mSSRS.GetText(1, 1).trim()).doubleValue());
+			}
+			if ("NCHN".equals(nativeplace))
+			{
+				flag = "000000000000000017";
+			} else
+			{
+				sql = (new StringBuilder("select substr(managecom,0,4) from lcpol where salechnl !='04' and polno=mainpolno and contno = '")).append(contno).append("'  ").toString();
+				mSSRS.Clear();
+				mSSRS = mExeSQL.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+				{
+					sql = (new StringBuilder("select codename from ldcode where codetype='regionmanagecom' and code='")).append(mSSRS.GetText(1, 1).trim()).append("'").toString();
+					String provinces = "广东、福建、云南、浙江、新疆、甘肃、山东、江苏、湖北等";
+					mSSRS.Clear();
+					mSSRS = mExeAML.execSQL(sql);
+					if (mSSRS != null && mSSRS.MaxRow >= 1)
+					{
+						if (provinces.contains(mSSRS.GetText(1, 1).trim()))
+							flag = "000000000000000018";
+						else
+							flag = "000000000000000019";
+					} else
+					{
+						flag = "000000000000000019";
+					}
+				}
+			}
+			sql = (new StringBuilder("select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and trim(risktype)='地域特征' and identype='PT' and trim(riskno) ='")).append(flag).append("'").toString();
+			mSSRS.Clear();
+			mSSRS = mExeAML.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+				schema.setscore2(schema.getscore2() + Double.valueOf(mSSRS.GetText(1, 1).trim()).doubleValue());
+		}
+	}
+
+	private void setWorkTypeScoreNew(LXCustomRiskInfoTempSchema schema)
+	{
+		String appntno = schema.getappntno();
+		String grpcontno = schema.getbak1();
+		String contno = schema.getbak2();
+		String worktype = schema.gettradetype();
+		String poltype = schema.getpoltype();
+		String riskcode = schema.getriskcode();
+		String hangye = "";
+		String sql = "";
+		String flag = "";
+		String flags = "";
+		String occupationcode = "";
+		if ("1".equals(poltype))
+		{
+			System.out.println("ok================");
+			sql = (new StringBuilder("select distinct occupationcode from lcappnt where appntno = '")).append(appntno).append("' ").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeSQL.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+			{
+				occupationcode = mSSRS.GetText(1, 1).trim();
+				System.out.println((new StringBuilder("ok================")).append(occupationcode).toString());
+				schema.setcustomtype(occupationcode);
+				if (occupationcode.startsWith("0002") || occupationcode.startsWith("0003") || occupationcode.startsWith("0004") || occupationcode.startsWith("0005") || occupationcode.startsWith("0006") || occupationcode.startsWith("0007") && !occupationcode.startsWith("00072") && !occupationcode.startsWith("00073") && !occupationcode.startsWith("00071") || occupationcode.startsWith("0008") || occupationcode.startsWith("0009") || occupationcode.startsWith("0010") || occupationcode.startsWith("0011") || occupationcode.startsWith("0012") && !occupationcode.startsWith("00129") || occupationcode.startsWith("0013") || occupationcode.startsWith("0014") || occupationcode.startsWith("0015") || occupationcode.startsWith("0017") && !occupationcode.startsWith("00171") && !occupationcode.startsWith("00172") || occupationcode.startsWith("0019") || occupationcode.startsWith("0020") || occupationcode.startsWith("0021") || occupationcode.startsWith("0022"))
+					flags = "000000000000000045";
+				else
+				if (occupationcode.startsWith("0001") || occupationcode.startsWith("00072") || occupationcode.startsWith("00171"))
+					flags = "000000000000000044";
+				else
+				if (occupationcode.startsWith("00172") || occupationcode.startsWith("00161") || occupationcode.startsWith("00129") || occupationcode.startsWith("00073") || occupationcode.startsWith("00071"))
+					flags = "000000000000000043";
+				sql = (new StringBuilder("select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and trim(risktype)='行业特性' and identype='PT' and trim(riskno) ='")).append(flags).append("'").toString();
+				if (mSSRS == null)
+					mSSRS.Clear();
+				mSSRS.Clear();
+				mSSRS = mExeAML.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+					schema.setscore4(schema.getscore4() + Double.valueOf(mSSRS.GetText(1, 1).trim()).doubleValue());
+				if ("0017201".equals(occupationcode) || "0017203".equals(occupationcode) || "0017204".equals(occupationcode) || "0017205".equals(occupationcode))
+					flag = "000000000000000046";
+				else
+				if ("0013201".equals(occupationcode) || "0013202".equals(occupationcode) || "0013203".equals(occupationcode) || "0013204".equals(occupationcode) || "0013205".equals(occupationcode) || "0013206".equals(occupationcode) || "0013207".equals(occupationcode) || "0017301".equals(occupationcode) || "0017302".equals(occupationcode) || "0017303".equals(occupationcode) || "0017304".equals(occupationcode) || "0017305".equals(occupationcode) || "0017306".equals(occupationcode) || "0017307".equals(occupationcode) || "0017309".equals(occupationcode) || "0017310".equals(occupationcode) || "0017311".equals(occupationcode) || "0017312".equals(occupationcode) || "0017313".equals(occupationcode) || "0017314".equals(occupationcode) || "0017315".equals(occupationcode) || "0017316".equals(occupationcode) || "0017317".equals(occupationcode) || "0017318".equals(occupationcode) || "0017319".equals(occupationcode) || "0017320".equals(occupationcode) || "0017321".equals(occupationcode) || "0017322".equals(occupationcode) || "0017323".equals(occupationcode))
+					flag = "000000000000000047";
+				else
+				if ("0020001".equals(occupationcode) || "0020002".equals(occupationcode) || "0020003".equals(occupationcode) || "0020004".equals(occupationcode))
+					flag = "000000000000000049";
+				else
+				if ("0022094".equals(occupationcode) || "0013102".equals(occupationcode))
+					flag = "000000000000000050";
+				String foreignName = "";
+				sql = (new StringBuilder("select distinct appntname from lcappnt where appntno = '")).append(appntno).append("'").toString();
+				if (mSSRS == null)
+					mSSRS.Clear();
+				mSSRS.Clear();
+				mSSRS = mExeSQL.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+					foreignName = mSSRS.GetText(1, 1).trim();
+				sql = (new StringBuilder("select name from lxblacklist where persontype = '01' and country <> 'CHN' and country <> '中国' and name = '")).append(foreignName).append("' ").toString();
+				if (mSSRS == null)
+					mSSRS.Clear();
+				mSSRS.Clear();
+				mSSRS = mExeAML.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+					flag = "000000000000000048";
+				sql = (new StringBuilder("select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and trim(risktype)='行业特性' and identype='PT' and trim(riskno) ='")).append(flag).append("'").toString();
+				if (mSSRS == null)
+					mSSRS.Clear();
+				mSSRS.Clear();
+				mSSRS = mExeAML.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+					schema.setscore4(schema.getscore4() + Double.valueOf(mSSRS.GetText(1, 1).trim()).doubleValue());
+			}
+		} else
+		{
+			sql = (new StringBuilder("select businesstype from lcgrpcont where grpcontno = '")).append(grpcontno).append("' ").append("union all select businesstype from lbgrpcont where grpcontno = '").append(grpcontno).append("' ").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeSQL.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+			{
+				hangye = mSSRS.GetText(1, 1);
+				schema.setcustomtype(hangye);
+				if ("61".equals(hangye) || "74".equals(hangye) || "88".equals(hangye) || "89".equals(hangye) || "92".equals(hangye))
+					flag = "000000000000000092";
+				else
+				if ("72".equals(hangye) || "73".equals(hangye) || "13".equals(hangye) || "14".equals(hangye))
+					flag = "000000000000000093";
+				else
+					flag = "000000000000000094";
+				sql = (new StringBuilder("select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and trim(risktype)='行业特性' and identype='GT' and trim(riskno) ='")).append(flag).append("'").toString();
+				if (mSSRS == null)
+					mSSRS.Clear();
+				mSSRS.Clear();
+				mSSRS = mExeAML.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+					schema.setscore4(schema.getscore4() + Double.valueOf(mSSRS.GetText(1, 1).trim()).doubleValue());
+			}
+		}
+	}
+
+	private void setWorkTypeScore(LXCustomRiskInfoTempSchema schema)
+	{
+		String lifetype = "";
+		String riskcode = schema.getriskcode();
+		String sql = "";
+		sql = (new StringBuilder("select lifetype from LFRISK where riskcode = '")).append(riskcode).append("'  ").toString();
+		if (mSSRS != null)
+			mSSRS.Clear();
+		mSSRS = mExeSQL.execSQL(sql);
+		if (mSSRS != null && mSSRS.MaxRow >= 1)
+		{
+			lifetype = mSSRS.GetText(1, 1);
+			schema.setworktype(lifetype);
+			sql = (new StringBuilder("select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = '")).append(lifetype).append("'").toString();
+			mSSRS.Clear();
+			mSSRS = mExeAML.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+			{
+				schema.setappntscore(schema.getappntscore() + Double.valueOf(mSSRS.GetText(1, 1)).doubleValue());
+				schema.setinsurescore(schema.getinsurescore() + Double.valueOf(mSSRS.GetText(1, 1)).doubleValue());
+			}
+		}
+	}
+
+	private void setPayTypeScore(LXCustomRiskInfoTempSchema schema)
+	{
+		System.out.println("================setDenfTypeScore=============");
+		String appntno = schema.getappntno();
+		String grpcontno = schema.getbak1();
+		String contno = schema.getbak2();
+		String worktype = schema.gettradetype();
+		String poltype = schema.getpoltype();
+		String riskcode = schema.getriskcode();
+		String sql = "";
+		if ("1".equals(poltype))
+		{
+			sql = (new StringBuilder("select 1 from lcpol a,ljapayperson b where a.contno = b.contno and a.managecom=b.managecom and a.grpcontno=b.grpcontno and b.confdate>to_date(substr('")).append(mMakedate).append("',0,4)||'-01-01') ").append("and b.confdate<to_date('").append(mMakedate).append("') and a.appntno = '").append(appntno).append("' and b.appntno = '").append(appntno).append("' and a.appflag = '1' and a.conttype = '1' ").append("group by a.appntno having sum(b.SumActuPayMoney)>1000000 ").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeSQL.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+			{
+				sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'B100'";
+				mSSRS.Clear();
+				mSSRS = mExeAML.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+				{
+					schema.setappntscore(schema.getappntscore() + Double.valueOf(mSSRS.GetText(1, 1)).doubleValue());
+					schema.setinsurescore(schema.getinsurescore() + Double.valueOf(mSSRS.GetText(1, 1)).doubleValue());
+				}
+			}
+			sql = (new StringBuilder("select a.prem + b.getmoney from lcpol a,ljagetendorse b where a.riskcode = '")).append(riskcode).append("' and a.contno = '").append(contno).append("' and a.conttype = '1' ").append("and a.riskcode = '").append(riskcode).append("' and a.contno = b.contno and a.conttype = '1' and b.FeeOperationType='SA' and a.payintv = '0' ").toString();
+			mSSRS.Clear();
+			mSSRS = mExeSQL.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+			{
+				double money = Double.parseDouble(mSSRS.GetText(1, 1));
+				if (money >= 2000000D)
+				{
+					sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'B200'";
+					mSSRS.Clear();
+					mSSRS = mExeAML.execSQL(sql);
+					if (mSSRS != null && mSSRS.MaxRow >= 1)
+					{
+						schema.setappntscore(schema.getappntscore() + Double.valueOf(mSSRS.GetText(1, 1)).doubleValue());
+						schema.setinsurescore(schema.getinsurescore() + Double.valueOf(mSSRS.GetText(1, 1)).doubleValue());
+					}
+				}
+			}
+		}
+	}
+
+	private void setDenfTypeScore(LXCustomRiskInfoTempSchema schema)
+	{
+		System.out.println("================setDenfTypeScore=============");
+		String appntno = schema.getappntno();
+		String insuredno = schema.getinsuredno();
+		String appntname = schema.getappntname();
+		String insuredname = schema.getinsuredname();
+		String sql = "";
+		String sql1 = (new StringBuilder("select 1 from lxblacklist where name = '")).append(appntname).append("' and persontype='01'").toString();
+		String sql2 = (new StringBuilder("select 1 from lxblacklist where name = '")).append(insuredname).append("' and persontype='01'").toString();
+		String sql3 = (new StringBuilder("select 1 from lxblacklist where name = '")).append(appntname).append("' and persontype='00'").toString();
+		String sql4 = (new StringBuilder("select 1 from lxblacklist where name = '")).append(insuredname).append("' and persontype='00'").toString();
+		if (mSSRS != null)
+			mSSRS.Clear();
+		mSSRS = mExeAML.execSQL(sql1);
+		if (mSSRS != null && mSSRS.MaxRow >= 1)
+		{
+			schema.setdenftype("01");
+			sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'D001'";
+			mSSRS.Clear();
+			mSSRS = mExeAML.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+			{
+				double score1 = schema.getappntscore() + Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+				schema.setappntscore(score1);
+			}
+		}
+		if (mSSRS != null)
+			mSSRS.Clear();
+		mSSRS = mExeAML.execSQL(sql2);
+		if (mSSRS != null && mSSRS.MaxRow >= 1)
+		{
+			schema.setdenftype("01");
+			sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'D001'";
+			mSSRS.Clear();
+			mSSRS = mExeAML.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+			{
+				double score2 = schema.getinsurescore() + Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+				schema.setinsurescore(score2);
+			}
+		}
+		if (mSSRS != null)
+			mSSRS.Clear();
+		mSSRS = mExeAML.execSQL(sql3);
+		if (mSSRS != null && mSSRS.MaxRow >= 1)
+		{
+			schema.setdenftype("00");
+			sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'D002'";
+			mSSRS.Clear();
+			mSSRS = mExeAML.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+			{
+				double score2 = schema.getappntscore() + Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+				schema.setappntscore(score2);
+			}
+		}
+		if (mSSRS != null)
+			mSSRS.Clear();
+		mSSRS = mExeAML.execSQL(sql4);
+		if (mSSRS != null && mSSRS.MaxRow >= 1)
+		{
+			schema.setdenftype("00");
+			sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'D002'";
+			mSSRS.Clear();
+			mSSRS = mExeAML.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+			{
+				double score2 = schema.getinsurescore() + Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+				schema.setinsurescore(score2);
+			}
+		}
+		sql = (new StringBuilder("select 1 from lcappnt where appntno = '")).append(appntno).append("' and NativePlace <> 'CHN'").toString();
+		if (mSSRS != null)
+			mSSRS.Clear();
+		mSSRS = mExeSQL.execSQL(sql);
+		if (mSSRS != null && mSSRS.MaxRow >= 1)
+		{
+			schema.setdenftype("09");
+			sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'D003'";
+			mSSRS.Clear();
+			mSSRS = mExeAML.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+			{
+				double score2 = schema.getappntscore() + Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+				schema.setappntscore(score2);
+			}
+		}
+		sql = (new StringBuilder("select 1 from lcinsured where insuredno = '")).append(insuredno).append("' and NativePlace <> 'CHN'").toString();
+		mSSRS.Clear();
+		mSSRS = mExeSQL.execSQL(sql);
+		if (mSSRS != null && mSSRS.MaxRow >= 1)
+		{
+			schema.setdenftype("09");
+			sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'D003'";
+			mSSRS.Clear();
+			mSSRS = mExeAML.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+			{
+				double score2 = schema.getinsurescore() + Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+				schema.setinsurescore(score2);
+			}
+		}
+	}
+
+	private void setTradeTypeScoreNew(LXCustomRiskInfoTempSchema schema)
+	{
+		String appntno = schema.getappntno();
+		String grpcontno = schema.getbak1();
+		String contno = schema.getbak2();
+		String poltype = schema.getpoltype();
+		String worktype = schema.gettradetype();
+		String riskcode = schema.getriskcode();
+		String insuredno = schema.getinsuredno();
+		String appntname = schema.getappntname();
+		String insuredname = schema.getinsuredname();
+		String sql = "";
+		String salechnl = "";
+		String flag = "";
+		if ("1".equals(poltype))
+		{
+			sql = (new StringBuilder("select salechnl from lcpol where polno=mainpolno and contno='")).append(contno).append("'").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeSQL.execSQL(sql);
+			if (mSSRS != null && mSSRS.getMaxRow() >= 1)
+			{
+				salechnl = mSSRS.GetText(1, 1).trim();
+				if ("05".equals(salechnl))
+					flag = "000000000000000022";
+				else
+				if ("03".equals(salechnl))
+					flag = "000000000000000023";
+				else
+				if ("08".equals(salechnl))
+					flag = "000000000000000024";
+				else
+				if ("04".equals(salechnl))
+					flag = "000000000000000026";
+				sql = (new StringBuilder("select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and trim(risktype)='业务特性' and identype='PT' and trim(riskno) ='")).append(flag).append("'").toString();
+				mSSRS.Clear();
+				mSSRS = mExeAML.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+					schema.setscore3(schema.getscore3() + Double.valueOf(mSSRS.GetText(1, 1).trim()).doubleValue());
+			}
+			String paymode = "";
+			int payyears = 0;
+			String payintv = "";
+			sql = (new StringBuilder("select paymode,payyears,payintv from lcpol where polno=mainpolno and contno='")).append(contno).append("'").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeSQL.execSQL(sql);
+			if (mSSRS != null && mSSRS.getMaxRow() >= 1)
+			{
+				paymode = mSSRS.GetText(1, 1).trim();
+				payyears = Integer.valueOf(mSSRS.GetText(1, 2).trim()).intValue();
+				payintv = mSSRS.GetText(1, 3).trim();
+				if ("1".equals(paymode) || "2".equals(paymode) || "8".equals(paymode))
+					flag = "000000000000000031";
+				else
+					flag = "000000000000000032";
+				sql = (new StringBuilder("select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and trim(risktype)='业务特性' and identype='PT' and trim(riskno) ='")).append(flag).append("'").toString();
+				if (mSSRS != null)
+					mSSRS.Clear();
+				mSSRS = mExeAML.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+					schema.setscore3(schema.getscore3() + Double.valueOf(mSSRS.GetText(1, 1).trim()).doubleValue());
+				if ("0".equals(payintv))
+					flag = "000000000000000033";
+				else
+				if (payyears > 10)
+					flag = "000000000000000035";
+				else
+					flag = "000000000000000034";
+				sql = (new StringBuilder("select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and trim(risktype)='业务特性' and identype='PT' and trim(riskno) ='")).append(flag).append("'").toString();
+				if (mSSRS != null)
+					mSSRS.Clear();
+				mSSRS = mExeAML.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+					schema.setscore3(schema.getscore3() + Double.valueOf(mSSRS.GetText(1, 1).trim()).doubleValue());
+			}
+			int count = 0;
+			int countFlag1 = 0;
+			int countFlag2 = 0;
+			sql = (new StringBuilder("select count(contno) from lcpol where appntno='")).append(appntno).append("' and polno=mainpolno and signdate=to_date('").append(mMakedate).append("','yyyy-mm-dd') ").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeSQL.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+				count = Integer.valueOf(mSSRS.GetText(1, 1).trim()).intValue();
+			sql = (new StringBuilder("select 1 from lcpol where appntno='")).append(appntno).append("' and polno=mainpolno and signdate=(to_date('").append(mMakedate).append("','yyyy-mm-dd')-1)").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeSQL.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+				countFlag1 = 1;
+			sql = (new StringBuilder("select 1 from lcpol where appntno='")).append(appntno).append("' and polno=mainpolno and signdate=(to_date('").append(mMakedate).append("','yyyy-mm-dd')-2)").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeSQL.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+				countFlag2 = 1;
+			if (count >= 3 || countFlag1 + countFlag2 >= 3)
+				flag = "000000000000000036";
+			else
+				flag = "000000000000000037";
+			sql = (new StringBuilder("select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and trim(risktype)='业务特性' and identype='PT' and trim(riskno) ='")).append(flag).append("'").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeAML.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+				schema.setscore3(schema.getscore3() + Double.valueOf(mSSRS.GetText(1, 1).trim()).doubleValue());
+			String salechnl1 = "";
+			double prem1 = 0.0D;
+			sql = (new StringBuilder("select prem,salechnl from lcpol where contno='")).append(contno).append("' and polno=mainpolno ").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeSQL.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+			{
+				prem1 = Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+				salechnl1 = mSSRS.GetText(1, 2);
+				if ("04".equals(salechnl1))
+				{
+					if (prem1 >= 200000D)
+						flag = "000000000000000038";
+					else
+					if (prem1 < 200000D && prem1 >= 150000D)
+						flag = "000000000000000039";
+					else
+					if (prem1 < 150000D && prem1 >= 100000D)
+						flag = "000000000000000040";
+					else
+					if (prem1 < 100000D && prem1 >= 50000D)
+						flag = "000000000000000041";
+					else
+						flag = "000000000000000042";
+				} else
+				if (prem1 >= 10000000D)
+					flag = "000000000000000038";
+				else
+				if (prem1 < 10000000D && prem1 >= 5000000D)
+					flag = "000000000000000039";
+				else
+				if (prem1 < 5000000D && prem1 >= 1000000D)
+					flag = "000000000000000040";
+				else
+				if (prem1 < 1000000D && prem1 >= 200000D)
+					flag = "000000000000000041";
+				else
+					flag = "000000000000000042";
+			}
+			sql = (new StringBuilder("select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and trim(risktype)='业务特性' and identype='PT' and trim(riskno) ='")).append(flag).append("'").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeAML.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+				schema.setscore3(schema.getscore3() + Double.valueOf(mSSRS.GetText(1, 1).trim()).doubleValue());
+		} else
+		{
+			String gPaymode = "";
+			String gSalechnl = "";
+			String gPayintv = "";
+			double gPrem = 0.0D;
+			int gPeoples2 = 0;
+			int gPeoples = 0;
+			sql = (new StringBuilder("select paymode,salechnl,payintv,prem,peoples2,peoples from lcgrpcont where grpcontno='")).append(grpcontno).append("'").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeSQL.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+			{
+				if (mSSRS.GetText(1, 1) != null && mSSRS.GetText(1, 1) != "")
+					gPaymode = mSSRS.GetText(1, 1).trim();
+				if (mSSRS.GetText(1, 2) != null && mSSRS.GetText(1, 2) != "")
+					gSalechnl = mSSRS.GetText(1, 2).trim();
+				if (mSSRS.GetText(1, 3) != null && mSSRS.GetText(1, 3) != "")
+					gPayintv = mSSRS.GetText(1, 3).trim();
+				if (mSSRS.GetText(1, 4) != null && mSSRS.GetText(1, 4) != "")
+					gPrem = Double.valueOf(mSSRS.GetText(1, 4).trim()).doubleValue();
+				if (mSSRS.GetText(1, 5) != null && mSSRS.GetText(1, 5) != "")
+					gPeoples2 = Integer.valueOf(mSSRS.GetText(1, 5).trim()).intValue();
+				if (mSSRS.GetText(1, 6) != null && mSSRS.GetText(1, 6) != "")
+					gPeoples = Integer.valueOf(mSSRS.GetText(1, 6).trim()).intValue();
+				if ("1".equals(gPaymode) || "2".equals(gPaymode) || "8".equals(gPaymode))
+					flag = "000000000000000073";
+				else
+					flag = "000000000000000074";
+				sql = (new StringBuilder("select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and trim(risktype)='业务特性' and identype='GT' and trim(riskno) ='")).append(flag).append("'").toString();
+				if (mSSRS != null)
+					mSSRS.Clear();
+				mSSRS = mExeAML.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+					schema.setscore3(schema.getscore3() + Double.valueOf(mSSRS.GetText(1, 1).trim()).doubleValue());
+				if ("01".equals(gSalechnl))
+					flag = "000000000000000075";
+				else
+				if ("04".equals(gSalechnl))
+					flag = "000000000000000077";
+				else
+				if ("03".equals(gSalechnl) || "08".equals(gSalechnl))
+					flag = "000000000000000076";
+				sql = (new StringBuilder("select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and trim(risktype)='业务特性' and identype='GT' and trim(riskno) ='")).append(flag).append("'").toString();
+				if (mSSRS != null)
+					mSSRS.Clear();
+				mSSRS = mExeAML.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+					schema.setscore3(schema.getscore3() + Double.valueOf(mSSRS.GetText(1, 1).trim()).doubleValue());
+				if ("0".equals(gPayintv))
+					flag = "000000000000000078";
+				else
+					flag = "000000000000000079";
+				sql = (new StringBuilder("select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and trim(risktype)='业务特性' and identype='GT' and trim(riskno) ='")).append(flag).append("'").toString();
+				if (mSSRS != null)
+					mSSRS.Clear();
+				mSSRS = mExeAML.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+					schema.setscore3(schema.getscore3() + Double.valueOf(mSSRS.GetText(1, 1).trim()).doubleValue());
+				if (gPrem >= 200000000D)
+					flag = "000000000000000084";
+				else
+				if (gPrem < 200000000D && gPrem >= 100000000D)
+					flag = "000000000000000085";
+				else
+				if (gPrem < 100000000D && gPrem >= 50000000D)
+					flag = "000000000000000086";
+				else
+				if (gPrem < 50000000D && gPrem >= 10000000D)
+					flag = "000000000000000087";
+				else
+					flag = "000000000000000088";
+				sql = (new StringBuilder("select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and trim(risktype)='业务特性' and identype='GT' and trim(riskno) ='")).append(flag).append("'").toString();
+				if (mSSRS != null)
+					mSSRS.Clear();
+				mSSRS = mExeAML.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+					schema.setscore3(schema.getscore3() + Double.valueOf(mSSRS.GetText(1, 1).trim()).doubleValue());
+				if (gPeoples2 / gPeoples >= 1)
+					flag = "000000000000000089";
+				else
+				if (gPeoples2 / gPeoples < 1 && (double)(gPeoples2 / gPeoples) >= 0.5D)
+					flag = "000000000000000091";
+				else
+					flag = "000000000000000090";
+				sql = (new StringBuilder("select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and trim(risktype)='业务特性' and identype='GT' and trim(riskno) ='")).append(flag).append("'").toString();
+				if (mSSRS != null)
+					mSSRS.Clear();
+				mSSRS = mExeAML.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+					schema.setscore3(schema.getscore3() + Double.valueOf(mSSRS.GetText(1, 1).trim()).doubleValue());
+			}
+		}
+	}
+
+	private void setTradeTypeScore(LXCustomRiskInfoTempSchema schema)
+	{
+		String appntno = schema.getappntno();
+		String grpcontno = schema.getbak1();
+		String contno = schema.getbak2();
+		String poltype = schema.getpoltype();
+		String worktype = schema.gettradetype();
+		String riskcode = schema.getriskcode();
+		String insuredno = schema.getinsuredno();
+		String appntname = schema.getappntname();
+		String insuredname = schema.getinsuredname();
+		String sql = "";
+		sql = (new StringBuilder("select score1 from lxcustomriskinfotemp where appntno = '")).append(appntno).append("' and insuredno = '").append(insuredno).append("' order by score1 desc").toString();
+		if (mSSRS != null)
+			mSSRS.Clear();
+		mSSRS = mExeAML.execSQL(sql);
+		if (mSSRS != null && mSSRS.getMaxRow() >= 1)
+		{
+			if (Double.valueOf(mSSRS.GetText(1, 1)).doubleValue() > 0.0D)
+				schema.setscore1(mSSRS.GetText(1, 1));
+		} else
+		{
+			sql = (new StringBuilder("select 1 from lcinsured where appntno = '")).append(appntno).append("' and ").append("relationtoappnt in ('03','04','05','06','38','39') ").append("group by appntno having count(*)>=3").toString();
+			mSSRS = mExeSQL.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+			{
+				sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'T001'";
+				mSSRS.Clear();
+				mSSRS = mExeAML.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+				{
+					double score1 = Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+					schema.setscore1(score1);
+				}
+			}
+		}
+		if ("1".equals(poltype))
+		{
+			sql = (new StringBuilder("select score2 from lxcustomriskinfotemp where appntno = '")).append(appntno).append("' and poltype = '1' and insuredno = '").append(insuredno).append("' order by score2 desc").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeAML.execSQL(sql);
+			if (mSSRS != null && mSSRS.getMaxRow() >= 1)
+			{
+				if (Double.valueOf(mSSRS.GetText(1, 1)).doubleValue() > 0.0D)
+					schema.setscore2(mSSRS.GetText(1, 1));
+			} else
+			{
+				sql = (new StringBuilder("select 1 from lcappnt a where appntno = '")).append(appntno).append("' ").append("and (exists (select 1 from lccont b where b.appntno = a.appntno and b.conttype = '1' and b.signdate<=date'").append(mMakedate).append("' and b.signdate>=date'").append(mMakedate).append("'-10 group by b.appntno having count(*)>=3 )").append("or exists (select 1 from lbcont e where e.appntno = a.appntno and e.conttype = '1' and e.signdate<=date'").append(mMakedate).append("' and e.signdate>=date'").append(mMakedate).append("'-10 group by e.appntno having count(*)>=3 ) ").append("or exists (select 1 from lpedormain c,lbcont d where c.edorno=d.edorno and d.conttype = '1' and d.appntno = a.appntno and c.confdate<=date'").append(mMakedate).append("' and c.confdate>=date'").append(mMakedate).append("'-10 group by d.appntno having count(*)>=3 )) ").toString();
+				mSSRS = mExeSQL.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+				{
+					sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'T002'";
+					mSSRS.Clear();
+					mSSRS = mExeAML.execSQL(sql);
+					if (mSSRS != null && mSSRS.MaxRow >= 1)
+					{
+						double score1 = Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+						schema.setscore2(score1);
+					}
+				}
+			}
+		} else
+		{
+			sql = (new StringBuilder("select score2 from lxcustomriskinfotemp where appntno = '")).append(appntno).append("' and poltype = '2'  and insuredno = '").append(insuredno).append("' order by score2 desc").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeAML.execSQL(sql);
+			if (mSSRS != null && mSSRS.getMaxRow() >= 1)
+			{
+				if (Double.valueOf(mSSRS.GetText(1, 1)).doubleValue() > 0.0D)
+					schema.setscore2(mSSRS.GetText(1, 1));
+			} else
+			{
+				sql = (new StringBuilder("select 1 from lcappnt a where appntno = '")).append(appntno).append("' ").append("and (exists (select 1 from lcgrpcont b where b.appntno = a.appntno and b.signdate<=date'").append(mMakedate).append("' and b.signdate>=date'").append(mMakedate).append("'-10 group by b.appntno having count(*)>=3 )").append("or exists (select 1 from lbgrpcont e where e.appntno = a.appntno and e.signdate<=date'").append(mMakedate).append("' and e.signdate>=date'").append(mMakedate).append("'-10 group by e.appntno having count(*)>=3 ) ").append("or exists (select 1 from lpedormain c,lbgrpcont d where  c.edorno=d.edorno and d.appntno = a.appntno and c.confdate<=date'").append(mMakedate).append("' and c.confdate>=date'").append(mMakedate).append("'-10 group by d.appntno having count(*)>=3 )) ").toString();
+				mSSRS = mExeSQL.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+				{
+					sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'T002'";
+					mSSRS.Clear();
+					mSSRS = mExeAML.execSQL(sql);
+					if (mSSRS != null && mSSRS.MaxRow >= 1)
+					{
+						double score1 = Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+						schema.setscore2(score1);
+					}
+				}
+			}
+		}
+		if ("1".equals(poltype))
+		{
+			sql = (new StringBuilder("select score3 from lxcustomriskinfotemp where appntno = '")).append(appntno).append("' and poltype = '1' and insuredno = '").append(insuredno).append("' order by score3 desc").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeAML.execSQL(sql);
+			if (mSSRS != null && mSSRS.getMaxRow() >= 1)
+			{
+				if (Double.valueOf(mSSRS.GetText(1, 1)).doubleValue() > 0.0D)
+					schema.setscore3(mSSRS.GetText(1, 1));
+			} else
+			{
+				sql = (new StringBuilder("select 1 from lcappnt a where appntno = '")).append(appntno).append("' ").append("and ((select count(*) from lccont b where b.appntno = a.appntno and b.signdate<=date'").append(mMakedate).append("' and b.signdate>=date'").append(mMakedate).append("'-10 )").append("+ (select count(*) from lbcont e where e.appntno = a.appntno and e.signdate<=date'").append(mMakedate).append("' and e.signdate>=date'").append(mMakedate).append("'-10 )").append("+ (select count(*) from lpedormain c,lbcont d where c.edorno=d.edorno and d.appntno = a.appntno and c.confdate<=date'").append(mMakedate).append("' and c.confdate>=date'").append(mMakedate).append("'-10 ))>=3 ").toString();
+				mSSRS = mExeSQL.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+				{
+					sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'T003'";
+					mSSRS.Clear();
+					mSSRS = mExeAML.execSQL(sql);
+					if (mSSRS != null && mSSRS.MaxRow >= 1)
+					{
+						double score1 = Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+						schema.setscore3(score1);
+					}
+				}
+			}
+		} else
+		{
+			sql = (new StringBuilder("select score3 from lxcustomriskinfotemp where appntno = '")).append(appntno).append("' and insuredno = '").append(insuredno).append("' order by score3 desc").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeAML.execSQL(sql);
+			if (mSSRS != null && mSSRS.getMaxRow() >= 1)
+			{
+				if (Double.valueOf(mSSRS.GetText(1, 1)).doubleValue() > 0.0D)
+					schema.setscore3(mSSRS.GetText(1, 1));
+			} else
+			{
+				sql = (new StringBuilder("select 1 from lcappnt a where appntno = '")).append(appntno).append("' ").append("and ((select count(*) from lcgrpcont b where b.appntno = a.appntno and b.signdate<=date'").append(mMakedate).append("' and b.signdate>=date'").append(mMakedate).append("'-10 )").append("+ (select count(*) from lbgrpcont e where e.appntno = a.appntno and e.signdate<=date'").append(mMakedate).append("' and e.signdate>=date'").append(mMakedate).append("'-10 )").append("+ (select count(*) from lpedormain c,lbcont d where c.edorno=d.edorno and d.appntno = a.appntno and c.confdate<=date'").append(mMakedate).append("' and c.confdate>=date'").append(mMakedate).append("'-10 ))>=3 ").toString();
+				mSSRS = mExeSQL.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+				{
+					sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'T003'";
+					mSSRS.Clear();
+					mSSRS = mExeAML.execSQL(sql);
+					if (mSSRS != null && mSSRS.MaxRow >= 1)
+					{
+						double score1 = Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+						schema.setscore3(score1);
+					}
+				}
+			}
+		}
+		if ("1".equals(poltype))
+		{
+			sql = (new StringBuilder("select score4 from lxcustomriskinfotemp where appntno = '")).append(appntno).append("' and insuredno = '").append(insuredno).append("'order by score4 desc").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeAML.execSQL(sql);
+			if (mSSRS != null && mSSRS.getMaxRow() >= 1)
+			{
+				if (Double.valueOf(mSSRS.GetText(1, 1)).doubleValue() > 0.0D)
+					schema.setscore4(mSSRS.GetText(1, 1));
+			} else
+			{
+				sql = (new StringBuilder("select 1 from lpedoritem where contno = '")).append(contno).append("' and edortype='BC' group by contno having count(*)>2").toString();
+				mSSRS = mExeSQL.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+				{
+					sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'T004'";
+					mSSRS.Clear();
+					mSSRS = mExeAML.execSQL(sql);
+					if (mSSRS != null && mSSRS.MaxRow >= 1)
+					{
+						double score1 = Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+						schema.setscore4(score1);
+					}
+				}
+			}
+		} else
+		{
+			sql = (new StringBuilder("select score4 from lxcustomriskinfotemp where appntno = '")).append(appntno).append("' and insuredno = '").append(insuredno).append("'  order by score4 desc").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeAML.execSQL(sql);
+			if (mSSRS != null && mSSRS.getMaxRow() >= 1)
+			{
+				if (Double.valueOf(mSSRS.GetText(1, 1)).doubleValue() > 0.0D)
+					schema.setscore4(mSSRS.GetText(1, 1));
+			} else
+			{
+				sql = (new StringBuilder("select 1 from lpedoritem where grpcontno = '")).append(grpcontno).append("' and edortype='BC' group by contno having count(*)>2").toString();
+				mSSRS = mExeSQL.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+				{
+					sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'T004'";
+					mSSRS.Clear();
+					mSSRS = mExeAML.execSQL(sql);
+					if (mSSRS != null && mSSRS.MaxRow >= 1)
+					{
+						double score1 = Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+						schema.setscore4(score1);
+					}
+				}
+			}
+		}
+		if ("1".equals(poltype) && "4".equals(worktype))
+		{
+			sql = (new StringBuilder("select score5 from lxcustomriskinfotemp where appntno = '")).append(appntno).append("' and insuredno = '").append(insuredno).append("' order by score5 desc").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeAML.execSQL(sql);
+			if (mSSRS != null && mSSRS.getMaxRow() >= 1)
+			{
+				if (Double.valueOf(mSSRS.GetText(1, 1)).doubleValue() > 0.0D)
+					schema.setscore5(mSSRS.GetText(1, 1));
+			} else
+			{
+				sql = (new StringBuilder("select 1 from lbpol a where a.contno = '")).append(contno).append("' and a.riskcode = '").append(riskcode).append("' ").append("and ((select sum(b.getmoney)*(-1) from ljagetendorse b where b.contno = a.contno ").append("and b.riskcode = a.riskcode)/(select c.sumactupaymoney from ljapayperson c ").append("where c.contno = a.contno and c.riskcode = a.riskcode))>0.5  ").toString();
+				mSSRS = mExeSQL.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+				{
+					sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'T005'";
+					mSSRS.Clear();
+					mSSRS = mExeAML.execSQL(sql);
+					if (mSSRS != null && mSSRS.MaxRow >= 1)
+					{
+						double score1 = Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+						schema.setscore5(score1);
+					}
+				}
+			}
+		} else
+		if ("2".equals(poltype) && "4".equals(worktype))
+		{
+			sql = (new StringBuilder("select score5 from lxcustomriskinfotemp where appntno = '")).append(appntno).append("'and insuredno = '").append(insuredno).append("' order by score5 desc").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeAML.execSQL(sql);
+			if (mSSRS != null && mSSRS.getMaxRow() >= 1)
+			{
+				if (Double.valueOf(mSSRS.GetText(1, 1)).doubleValue() > 0.0D)
+					schema.setscore5(mSSRS.GetText(1, 1));
+			} else
+			{
+				sql = (new StringBuilder("select 1 from lbgrppol a where a.grpcontno = '")).append(grpcontno).append("' and a.riskcode = '").append(riskcode).append("' ").append("and ((select sum(b.getmoney)*(-1) from ljagetendorse b where b.grpcontno = a.grpcontno ").append("and b.riskcode = a.riskcode)/(select c.sumactupaymoney from ljapayperson c ").append("where c.grpcontno = a.grpcontno and c.riskcode = a.riskcode))>0.5  ").toString();
+				mSSRS = mExeSQL.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+				{
+					sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'T005'";
+					mSSRS.Clear();
+					mSSRS = mExeAML.execSQL(sql);
+					if (mSSRS != null && mSSRS.MaxRow >= 1)
+					{
+						double score1 = Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+						schema.setscore5(score1);
+					}
+				}
+			}
+		}
+		if ("1".equals(poltype))
+		{
+			sql = (new StringBuilder("select score6 from lxcustomriskinfotemp where appntno = '")).append(appntno).append("'and insuredno = '").append(insuredno).append("' order by score6 desc").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeAML.execSQL(sql);
+			if (mSSRS != null && mSSRS.getMaxRow() >= 1)
+			{
+				if (Double.valueOf(mSSRS.GetText(1, 1)).doubleValue() > 0.0D)
+					schema.setscore6(mSSRS.GetText(1, 1));
+			} else
+			{
+				sql = (new StringBuilder("select 1 from ljtempfeeclass a,ljagetendorse b where a.tempfeeno = b.otherno and b.contno = '")).append(contno).append("' and a.paymode = '4' ").toString();
+				mSSRS = mExeSQL.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+				{
+					sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'T006'";
+					mSSRS.Clear();
+					mSSRS = mExeAML.execSQL(sql);
+					if (mSSRS != null && mSSRS.MaxRow >= 1)
+					{
+						double score1 = Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+						schema.setscore6(score1);
+					}
+				}
+			}
+		} else
+		{
+			sql = (new StringBuilder("select score6 from lxcustomriskinfotemp where appntno = '")).append(appntno).append("'and insuredno = '").append(insuredno).append("' order by score6 desc").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeAML.execSQL(sql);
+			if (mSSRS != null && mSSRS.getMaxRow() >= 1)
+			{
+				if (Double.valueOf(mSSRS.GetText(1, 1)).doubleValue() > 0.0D)
+					schema.setscore6(mSSRS.GetText(1, 1));
+			} else
+			{
+				sql = (new StringBuilder("select 1 from ljtempfeeclass a,ljagetendorse b where a.tempfeeno = b.otherno and b.grpcontno = '")).append(grpcontno).append("' and a.paymode = '4' ").toString();
+				mSSRS = mExeSQL.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+				{
+					sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'T006'";
+					mSSRS.Clear();
+					mSSRS = mExeAML.execSQL(sql);
+					if (mSSRS != null && mSSRS.MaxRow >= 1)
+					{
+						double score1 = Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+						schema.setscore6(score1);
+					}
+				}
+			}
+		}
+		if ("1".equals(poltype))
+		{
+			sql = (new StringBuilder("select score7 from lxcustomriskinfotemp where appntno = '")).append(appntno).append("'and insuredno = '").append(insuredno).append("' order by score7 desc").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeAML.execSQL(sql);
+			if (mSSRS != null && mSSRS.getMaxRow() >= 1)
+			{
+				if (Double.valueOf(mSSRS.GetText(1, 1)).doubleValue() > 0.0D)
+					schema.setscore7(mSSRS.GetText(1, 1));
+			} else
+			{
+				sql = (new StringBuilder("select 1 from lccont where appntno='")).append(appntno).append("' and signdate<=date'").append(mMakedate).append("' and contno='").append(contno).append("' and prem>0 and dif>0 and (dif/prem)>1").toString();
+				if (mSSRS != null)
+					mSSRS.Clear();
+				mSSRS = mExeSQL.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+				{
+					sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'T007'";
+					mSSRS.Clear();
+					mSSRS = mExeAML.execSQL(sql);
+					if (mSSRS != null && mSSRS.MaxRow >= 1)
+					{
+						double score1 = Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+						schema.setscore7(score1);
+					}
+				}
+			}
+		} else
+		{
+			sql = (new StringBuilder("select score7 from lxcustomriskinfotemp where appntno = '")).append(appntno).append("'and insuredno = '").append(insuredno).append("' order by score7 desc").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeAML.execSQL(sql);
+			if (mSSRS != null && mSSRS.getMaxRow() >= 1)
+			{
+				if (Double.valueOf(mSSRS.GetText(1, 1)).doubleValue() > 0.0D)
+					schema.setscore7(mSSRS.GetText(1, 1));
+			} else
+			{
+				sql = (new StringBuilder("select 1 from lcgrpcont where appntno='")).append(appntno).append("' and prem>0 and (dif/prem)>1").toString();
+				mSSRS = mExeSQL.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+				{
+					sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'T007'";
+					mSSRS.Clear();
+					mSSRS = mExeAML.execSQL(sql);
+					if (mSSRS != null && mSSRS.MaxRow >= 1)
+					{
+						double score1 = Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+						schema.setscore7(score1);
+					}
+				}
+			}
+		}
+		if ("1".equals(poltype))
+		{
+			sql = (new StringBuilder("select score8 from lxcustomriskinfotemp where appntno = '")).append(appntno).append("'and insuredno = '").append(insuredno).append("' order by score8 desc").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeAML.execSQL(sql);
+			if (mSSRS != null && mSSRS.getMaxRow() >= 1)
+			{
+				if (Double.valueOf(mSSRS.GetText(1, 1)).doubleValue() > 0.0D)
+					schema.setscore8(mSSRS.GetText(1, 1));
+			} else
+			{
+				sql = (new StringBuilder("select 1 from ljagetendorse where feeoperationtype in ('XT','CT','GB','LD','LM') and getdate>=to_date(substr('")).append(mMakedate).append("',0,4)||'01-01') ").append("and getdate<=date'").append(mMakedate).append("' and grpcontno='00000000000000000000' and appntno = '").append(appntno).append("' ").append("group by appntno having -sum(GetMoney)>1500000").toString();
+				if (mSSRS != null)
+					mSSRS.Clear();
+				mSSRS = mExeSQL.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+				{
+					sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'T008'";
+					mSSRS.Clear();
+					mSSRS = mExeAML.execSQL(sql);
+					if (mSSRS != null && mSSRS.MaxRow >= 1)
+					{
+						double score1 = Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+						schema.setscore8(score1);
+					}
+				}
+			}
+		}
+		if ("2".equals(poltype))
+		{
+			sql = (new StringBuilder("select score9 from lxcustomriskinfotemp where appntno = '")).append(appntno).append("'and insuredno = '").append(insuredno).append("' order by score9 desc").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeAML.execSQL(sql);
+			if (mSSRS != null && mSSRS.getMaxRow() >= 1)
+			{
+				if (Double.valueOf(mSSRS.GetText(1, 1)).doubleValue() > 0.0D)
+					schema.setscore9(mSSRS.GetText(1, 1));
+			} else
+			{
+				sql = (new StringBuilder("select 1 from ljapayperson where grpcontno = '")).append(grpcontno).append("' ").append("and confdate>=to_date(substr('").append(mMakedate).append("',0,4)||'-01-01') ").append("and confdate<=to_date('").append(mMakedate).append("') group by grpcontno having sum(sumactupaymoney)>1500000").toString();
+				mSSRS = mExeSQL.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+				{
+					sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'T009'";
+					mSSRS.Clear();
+					mSSRS = mExeAML.execSQL(sql);
+					if (mSSRS != null && mSSRS.MaxRow >= 1)
+					{
+						double score1 = Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+						schema.setscore9(score1);
+					}
+				}
+			}
+		}
+	}
+
+	private void setPayYearTypeScore(LXCustomRiskInfoTempSchema schema)
+	{
+		String appntno = schema.getappntno();
+		String grpcontno = schema.getbak1();
+		String contno = schema.getbak2();
+		String poltype = schema.getpoltype();
+		String worktype = schema.gettradetype();
+		String riskcode = schema.getriskcode();
+		String insuredno = schema.getinsuredno();
+		String appntname = schema.getappntname();
+		String insuredname = schema.getinsuredname();
+		String sql = "";
+		if ("1".equals(poltype))
+		{
+			sql = (new StringBuilder("select 1 from lcpol where contno = '")).append(contno).append("' and riskcode = '").append(riskcode).append("' ").append("and ((months_between(payenddate,cvalidate)/12) < 3 or payintv = '0') ").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeSQL.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+			{
+				sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'P001'";
+				mSSRS.Clear();
+				mSSRS = mExeAML.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+				{
+					double score1 = schema.getappntscore() + Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+					schema.setappntscore(score1);
+				}
+			}
+			sql = (new StringBuilder("select 1 from lcpol where contno = '")).append(contno).append("' and riskcode = '").append(riskcode).append("' ").append("and (months_between(payenddate,cvalidate)/12) >= 3 and (months_between(payenddate,cvalidate)/12) <= 5 ").toString();
+			mSSRS.Clear();
+			mSSRS = mExeSQL.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+			{
+				sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'P002'";
+				mSSRS.Clear();
+				mSSRS = mExeAML.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+				{
+					double score1 = schema.getappntscore() + Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+					schema.setappntscore(score1);
+				}
+			}
+		} else
+		{
+			sql = (new StringBuilder("select 1 from lcgrppol where grpcontno = '")).append(grpcontno).append("' and riskcode = '").append(riskcode).append("' ").append("and ((months_between(payenddate,cvalidate)/12) < 3 or payintv = '0') ").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeSQL.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+			{
+				sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'P001'";
+				mSSRS.Clear();
+				mSSRS = mExeAML.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+				{
+					double score1 = schema.getappntscore() + Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+					schema.setappntscore(score1);
+				}
+			}
+			sql = (new StringBuilder("select 1 from lcgrppol where grpcontno = '")).append(grpcontno).append("' and riskcode = '").append(riskcode).append("' ").append("and (months_between(payenddate,cvalidate)/12) >= 3 and (months_between(payenddate,cvalidate)/12) <= 5 ").toString();
+			mSSRS.Clear();
+			mSSRS = mExeSQL.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+			{
+				sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'P002'";
+				mSSRS.Clear();
+				mSSRS = mExeAML.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+				{
+					double score1 = schema.getappntscore() + Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+					schema.setappntscore(score1);
+				}
+			}
+		}
+	}
+
+	private void setPassTypeScore(LXCustomRiskInfoTempSchema schema)
+	{
+		String appntno = schema.getappntno();
+		String contno = schema.getbak1();
+		String poltype = schema.getpoltype();
+		String sql = "";
+		if ("1".equals(poltype))
+		{
+			sql = (new StringBuilder("select 1 from lccustomerimpartparams where contno = '")).append(contno).append("' ").append("and impartver = '005' and impartparamno = '1' and impartcode = '020' ").append("and to_number(impartparam) > 20 ").toString();
+			if (mSSRS != null)
+				mSSRS.Clear();
+			mSSRS = mExeSQL.execSQL(sql);
+			if (mSSRS != null && mSSRS.MaxRow >= 1)
+			{
+				schema.setpassmoney("P20");
+				sql = "select riskvalue*riskweight from lxcustomerriskinfo where usestate = 'Y' and extend1 = 'P20'";
+				mSSRS.Clear();
+				mSSRS = mExeAML.execSQL(sql);
+				if (mSSRS != null && mSSRS.MaxRow >= 1)
+				{
+					double score1 = schema.getappntscore() + Double.valueOf(mSSRS.GetText(1, 1)).doubleValue();
+					schema.setappntscore(score1);
+				}
+			}
+		}
+	}
+
+	public MMap getResult()
+	{
+		return mMap;
+	}
+
+	public LXCustomRiskInfoTempSet getResult_IRX01001(String tCalMode)
+	{
+		LXCustomRiskInfoTempSet tLXCalResultSet = new LXCustomRiskInfoTempSet();
+		if (tCalMode == null || tCalMode.equals(""))
+		{
+			System.out.println("Lxcalmode没有执行编号calmode!");
+			return null;
+		}
+		String tSQL = "";
+		if (tCalMode.equals("IRX01001"))
+			tSQL = "select t.riskid,t.bak1,t.bak2,t.appntno,t.insuredno,t.appntname,t.insuredname,t.riskcode,t.area,t.tradetype,t.poltype,t.operator,t.makedate,t.maketime,t.modifydate,t.modifytime,t.dealdate from lxcustomriskinfotemp t ";
+		tLXCalResultSet = getLXCalTempSet(tSQL, tCalMode);
+		return tLXCalResultSet;
+	}
+
+	public LXCustomRiskInfoTempSet getResult_IRX01002(String tCalMode)
+	{
+		LXCustomRiskInfoTempSet tLXCalResultSet = new LXCustomRiskInfoTempSet();
+		if (tCalMode == null || tCalMode.equals(""))
+		{
+			System.out.println("Lxcalmode没有执行编号calmode!");
+			return null;
+		}
+		String tSQL = "";
+		if (tCalMode.equals("IRX01002"))
+			tSQL = (new StringBuilder("select a.grpcontno,a.contno,a.appntno,a.insuredno,a.appntname,a.insuredname,a.riskcode,substr(a.managecom,0,4),'2',a.conttype from lcpol a,ljapayperson b where b.paycount>=2 and b.confdate =date'")).append(mMakedate).append("' ").append(" and a.contno = b.contno and a.managecom like '").append(mMngCom).append("%' and a.conttype = '1' ").append("union select a.grpcontno,a.contno,a.appntno,a.insuredno,a.appntname,a.insuredname,a.riskcode,substr(a.managecom,0,4),'2',a.conttype ").append("from lcpol a,ljapayperson b where b.paycount>=2 and b.confdate =date'").append(mMakedate).append("' ").append(" and a.grpcontno = b.grpcontno and a.managecom like '").append(mMngCom).append("%' and a.conttype = '2' ").toString();
+		tLXCalResultSet = getLXCalTempSet(tSQL, tCalMode);
+		return tLXCalResultSet;
+	}
+
+	public LXCustomRiskInfoTempSet getResult_IRX01003(String tCalMode)
+	{
+		LXCustomRiskInfoTempSet tLXCalResultSet = new LXCustomRiskInfoTempSet();
+		if (tCalMode == null || tCalMode.equals(""))
+		{
+			System.out.println("Lxcalmode没有执行编号calmode!");
+			return null;
+		}
+		String tSQL = "";
+		if (tCalMode.equals("IRX01003"))
+			tSQL = (new StringBuilder("select a.grpcontno,a.contno,a.appntno,a.insuredno,a.appntname,a.insuredname,a.riskcode,a.substr(a.managecom,0,4),'3',a.conttype from lcpol a,llcase b where b.endcasedate =date'")).append(mMakedate).append("' and a.riskcode = b.riskcode ").append(" and a.contno = b.contno and a.managecom like '").append(mMngCom).append("%' and a.conttype = '1' ").append("union select c.grpcontno,c.contno,c.insuredno,c.appntname,c.insuredname,c.riskcode,substr(c.managecom,0,4),'3',c.conttype ").append(" from lcpol c,ljapayperson e where c.grpcontno = e.grpcontno and c.riskcode = e.riskcode and ").append(" e.paycount>=2 and e.confdate = '").append(mMakedate).append("' and c.managecom like '").append(mMngCom).append("%' and c.conttype = '2'").toString();
+		tLXCalResultSet = getLXCalTempSet(tSQL, tCalMode);
+		return tLXCalResultSet;
+	}
+
+	public LXCustomRiskInfoTempSet getResult_IRX01004(String tCalMode)
+	{
+		LXCustomRiskInfoTempSet tLXCalResultSet = new LXCustomRiskInfoTempSet();
+		if (tCalMode == null || tCalMode.equals(""))
+		{
+			System.out.println("Lxcalmode没有执行编号calmode!");
+			return null;
+		}
+		String tSQL = "";
+		if (tCalMode.equals("IRX01004"))
+			tSQL = (new StringBuilder("select a.grpcontno,a.contno,a.appntno,a.appntname,a.insuredno,a.insuredname,a.riskcode,substr(a.managecom,0,4),'4',a.conttype from lbpol a,lpedormain b where b.confdate =date'")).append(mMakedate).append("' ").append(" and a.contno = b.contno and a.managecom like '").append(mMngCom).append("%' and a.conttype = '1' ").append("union select c.grpcontno,c.contno,c.appntname,c.insuredno,c.riskcode,substr(c.managecom,0,4),'4',conttype").append(" from lbpol c,lpedormain e where c.grpcontno = e.contno").append(" and e.confdate = '").append(mMakedate).append("' and c.managecom like '").append(mMngCom).append("%' and c.conttype = '2'").toString();
+		tLXCalResultSet = getLXCalTempSet(tSQL, tCalMode);
+		return tLXCalResultSet;
+	}
+
+	public LXCustomRiskInfoTempSet getResult_IRX01005(String tCalMode)
+	{
+		LXCustomRiskInfoTempSet tLXCalResultSet = new LXCustomRiskInfoTempSet();
+		if (tCalMode == null || tCalMode.equals(""))
+		{
+			System.out.println("Lxcalmode没有执行编号calmode!");
+			return null;
+		}
+		String tSQL = "";
+		if (tCalMode.equals("IRX01005"))
+			tSQL = (new StringBuilder("select a.grpcontno,a.contno,a.appntno,a.insuredno,a.appntname,a.insuredname,a.riskcode,substr(a.managecom,0,4),'5',a.conttype from lcpol a,ljaget b where b.confdate =date'")).append(mMakedate).append("' and a.appntno = b.appntno ").append(" and a.contno = b.otherno and a.managecom like '").append(mMngCom).append("%' and a.conttype = '1' ").append("union select c.grpcontno,c.contno,c.appntno,c.insuredno,c.appntname,c.insuredname,c.riskcode,substr(c.managecom,0,4),'5',c.conttype ").append(" from lcpol c,ljaget e where c.contno = e.otherno and c.appntno = e.appntno ").append(" and e.confdate = '").append(mMakedate).append("' and c.managecom like '").append(mMngCom).append("%' and c.conttype = '2' ").toString();
+		tLXCalResultSet = getLXCalTempSet(tSQL, tCalMode);
+		return tLXCalResultSet;
+	}
+
+	public void buildError(String szFunc, String szErrMsg)
+	{
+		CError cError = new CError();
+		cError.moduleName = className;
+		cError.functionName = szFunc;
+		cError.errorMessage = szErrMsg;
+		mErrors.addOneError(cError);
+	}
+
+	public static void main(String args[])
+	{
+		CalTemp_IC_CustomerInfo mCalMode_IC_CusInfo = new CalTemp_IC_CustomerInfo();
+		String dealno = "";
+		String csnm = "";
+		String appId = "LIS";
+		String calCode = "IRX01001";
+		String crcd = "";
+		String uri = "lis";
+		String makedate = "2012-01-01";
+		String operator = "001";
+		String mngcom = "86";
+		mCalMode_IC_CusInfo.submitData(dealno, csnm, appId, calCode, crcd, uri, makedate, operator, mngcom);
+		VData oVData = new VData();
+		oVData.add(mCalMode_IC_CusInfo.getResult());
+		PubSubmit oPubSubmit = new PubSubmit();
+		if (oPubSubmit.submitData(oVData, "UPDATE"))
+			System.out.println("OK");
+		else
+			System.out.println((new StringBuilder("Eror")).append(oPubSubmit.mErrors.getFirstError()).toString());
+	}
+}

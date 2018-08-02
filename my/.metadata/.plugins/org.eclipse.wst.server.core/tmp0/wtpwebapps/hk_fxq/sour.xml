@@ -1,0 +1,3148 @@
+<?xml version="1.0" encoding="GB2312"?>
+<billToVouchers>
+
+<billToVoucher>
+<bill_type>现金借</bill_type>
+   <way>借</way>
+   <mainItem code="1001" dir_num="0" flag="1" name="现金">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收</bill_type>
+   <way>借</way>
+   <mainItem code="1002" dir_num="0" flag="1" name="银行存款">
+   </mainItem>
+   
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票收</bill_type>
+   <way>借</way>
+   <mainItem code="1002" dir_num="0" flag="1" name="银行支票">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>内部转账借</bill_type>
+   <way>贷</way>
+   <mainItem code="1321" dir_num="0" flag="1" name="内部转账">
+   </mainItem>
+   <auxiliary dir_num="1" flag="1">
+   <segAuxiliary code="02" dir_level="1" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>暂收</bill_type>
+   <way>贷</way>
+   <mainItem code="2120" dir_num="0" flag="1" name="暂收保费">
+   </mainItem>
+
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>直接佣金支出</bill_type>
+   <way>借</way>
+   <mainItem code="4432" dir_num="0" flag="1" name="直接佣金支出">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>应付直接佣金业务</bill_type>
+   <way>贷</way>
+   <mainItem code="2112" dir_num="0" flag="1" name="应付直接佣金业务">
+   </mainItem>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>实交</bill_type>
+   <way>贷</way>
+   <mainItem code="4101" dir_num="0" flag="1" name="保费收入"> 
+   </mainItem>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>新保暂转</bill_type>
+   <way>借</way>
+   <mainItem code="2120" dir_num="0" flag="1" name="暂收保费">   	
+   </mainItem>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>续期暂转</bill_type>
+   <way>借</way>
+   <mainItem code="2121" dir_num="0" flag="1" name="预收保费">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>借暂收</bill_type>
+   <way>借</way>
+   <mainItem code="2120" dir_num="53" flag="1" name="暂收保费">   	
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>预收</bill_type>
+   <way>贷</way>
+   <mainItem code="2121" dir_num="53" flag="1" name="预收保费">
+   </mainItem>
+</billToVoucher>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<billToVoucher>
+<bill_type>现金贷</bill_type>
+   <way>贷</way>
+   <mainItem code="1001" dir_num="0" flag="1" name="现金">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>内部转账贷</bill_type>
+   <way>贷</way>
+   <mainItem code="1321" dir_num="0" flag="1" name="内部转账">
+   </mainItem>
+   <auxiliary dir_num="0" flag="1">
+   </auxiliary>
+</billToVoucher>
+
+
+
+
+
+
+<billToVoucher>
+<bill_type>银行存款收86110301</bill_type>
+   <way>借</way>
+   <mainItem code="100211040401" dir_num="0" flag="1" name="银行存款">   	 	   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86110701</bill_type>
+   <way>借</way>
+   <mainItem code="100211080401" dir_num="0" flag="1" name="银行存款">   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86110501</bill_type>
+   <way>借</way>
+   <mainItem code="100211090401" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86110101</bill_type>
+   <way>借</way>
+   <mainItem code="100211010405" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86110201</bill_type>
+   <way>借</way>
+   <mainItem code="100211030401" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86110801</bill_type>
+   <way>借</way>
+   <mainItem code="100211090403" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86110401</bill_type>
+   <way>借</way>
+   <mainItem code="100211020401" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86111001</bill_type>
+   <way>借</way>
+   <mainItem code="100211050401" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86111401</bill_type>
+   <way>借</way>
+   <mainItem code="100211090405" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86330123</bill_type>
+   <way>借</way>
+   <mainItem code="100211010602" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86330323</bill_type>
+   <way>借</way>
+   <mainItem code="100211040601" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>银行存款收86330423</bill_type>
+   <way>借</way>
+   <mainItem code="100211020601" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86330523</bill_type>
+   <way>借</way>
+   <mainItem code="100211090601" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86330723</bill_type>
+   <way>借</way>
+   <mainItem code="100211080601" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8633010423</bill_type>
+   <way>借</way>
+   <mainItem code="100211010605" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8633030423</bill_type>
+   <way>借</way>
+   <mainItem code="100211040602" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8633020223</bill_type>
+   <way>借</way>
+   <mainItem code="100211030602" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="1" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8633040223</bill_type>
+   <way>借</way>
+   <mainItem code="100211020604" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8633040423</bill_type>
+   <way>借</way>
+   <mainItem code="100211020605" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8633020123</bill_type>
+   <way>借</way>
+   <mainItem code="100211030605" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>银行存款收86130403</bill_type>
+   <way>借</way>
+   <mainItem code="100211020502" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>银行存款收86130303</bill_type>
+   <way>借</way>
+   <mainItem code="100211040502" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86131003</bill_type>
+   <way>借</way>
+   <mainItem code="100211050501" dir_num="0" flag="1" name="银行存款">
+   
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86130103</bill_type>
+   <way>借</way>
+   <mainItem code="100211010501" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86130803</bill_type>
+   <way>借</way>
+   <mainItem code="100211090501" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+
+
+<billToVoucher>
+<bill_type>银行存款收86331823</bill_type>
+   <way>借</way>
+   <mainItem code="100211100601" dir_num="0" flag="1" name="银行存款">
+   
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86320122</bill_type>
+   <way>借</way>
+   <mainItem code="100211010701" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86320422</bill_type>
+   <way>借</way>
+   <mainItem code="100211020701" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86321022</bill_type>
+   <way>借</way>
+   <mainItem code="100211050701" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8632010922</bill_type>
+   <way>借</way>
+   <mainItem code="100211010710" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8632011222</bill_type>
+   <way>借</way>
+   <mainItem code="100211010711" dir_num="0" flag="1" name="银行存款">
+   
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8633040123</bill_type>
+   <way>借</way>
+   <mainItem code="100211020603" dir_num="0" flag="1" name="银行存款">
+   
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8632010222</bill_type>
+   <way>借</way>
+   <mainItem code="100211010722" dir_num="0" flag="1" name="银行存款">
+   
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8632011022</bill_type>
+   <way>借</way>
+   <mainItem code="100211010705" dir_num="0" flag="1" name="银行存款">
+   
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8633010523</bill_type>
+   <way>借</way>
+   <mainItem code="100211010615" dir_num="0" flag="1" name="银行存款">
+   
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8632010322</bill_type>
+   <way>借</way>
+   <mainItem code="100211010725" dir_num="0" flag="1" name="银行存款">
+   
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8613040203</bill_type>
+   <way>借</way>
+   <mainItem code="100211020507" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8633040923</bill_type>
+   <way>借</way>
+   <mainItem code="100211020611" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8613040103</bill_type>
+   <way>借</way>
+   <mainItem code="100211020506" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8613030203</bill_type>
+   <way>借</way>
+   <mainItem code="100211040506" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8613030103</bill_type>
+   <way>借</way>
+   <mainItem code="100211040513" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8613030403</bill_type>
+   <way>借</way>
+   <mainItem code="100211040510" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8613041103</bill_type>
+   <way>借</way>
+   <mainItem code="100211020513" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8613041003</bill_type>
+   <way>借</way>
+   <mainItem code="100211020517" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86370127</bill_type>
+   <way>借</way>
+   <mainItem code="100211010901" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86370427</bill_type>
+   <way>借</way>
+   <mainItem code="100211020901" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86370327</bill_type>
+   <way>借</way>
+   <mainItem code="100211040903" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86310321</bill_type>
+   <way>借</way>
+   <mainItem code="100211041303" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86312121</bill_type>
+   <way>借</way>
+   <mainItem code="100211091302" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86410131</bill_type>
+   <way>借</way>
+   <mainItem code="100211010802" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86411031</bill_type>
+   <way>借</way>
+   <mainItem code="100211050802" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86510341</bill_type>
+   <way>借</way>
+   <mainItem code="100211041002" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8633040123</bill_type>
+   <way>借</way>
+   <mainItem code="100211020603" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86350425</bill_type>
+   <way>借</way>
+   <mainItem code="100211021102" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86350725</bill_type>
+   <way>借</way>
+   <mainItem code="100211080701" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8613040603</bill_type>
+   <way>借</way>
+   <mainItem code="100211020508" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8613040403</bill_type>
+   <way>借</way>
+   <mainItem code="100211020514" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8632011022</bill_type>
+   <way>借</way>
+   <mainItem code="100211010705" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86210411</bill_type>
+   <way>借</way>
+   <mainItem code="100211021201" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8613010503</bill_type>
+   <way>借</way>
+   <mainItem code="100211010504" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8613040503</bill_type>
+   <way>借</way>
+   <mainItem code="100211020510" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86211511</bill_type>
+   <way>借</way>
+   <mainItem code="100211091202" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86350125</bill_type>
+   <way>借</way>
+   <mainItem code="100211011102" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8633040323</bill_type>
+   <way>借</way>
+   <mainItem code="100211020608" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8633030823</bill_type>
+   <way>借</way>
+   <mainItem code="100211040607" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8613030603</bill_type>
+   <way>借</way>
+   <mainItem code="100211040511" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86350325</bill_type>
+   <way>借</way>
+   <mainItem code="100211041101" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86310721</bill_type>
+   <way>借</way>
+   <mainItem code="100211080801" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86310821</bill_type>
+   <way>借</way>
+   <mainItem code="100211091301" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收86210111</bill_type>
+   <way>借</way>
+   <mainItem code="100211011202" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8632040922</bill_type>
+   <way>借</way>
+   <mainItem code="100211020703" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票收861100</bill_type>
+   <way>借</way>
+   <mainItem code="100211090401" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票收861300</bill_type>
+   <way>借</way>
+   <mainItem code="100211020502" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票收861301</bill_type>
+   <way>借</way>
+   <mainItem code="100211020506" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票收861302</bill_type>
+   <way>借</way>
+   <mainItem code="100211020507" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票收861311</bill_type>
+   <way>借</way>
+   <mainItem code="100211020513" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票收863200</bill_type>
+   <way>借</way>
+   <mainItem code="100211010701" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票收863209</bill_type>
+   <way>借</way>
+   <mainItem code="100211010710" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票收863212</bill_type>
+   <way>借</way>
+   <mainItem code="100211010711" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票收863202</bill_type>
+   <way>借</way>
+   <mainItem code="100211010722" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票收863300</bill_type>
+   <way>借</way>
+   <mainItem code="100211010602" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票收863301</bill_type>
+   <way>借</way>
+   <mainItem code="100211020603" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票收863302</bill_type>
+   <way>借</way>
+   <mainItem code="100211020604" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票收863304</bill_type>
+   <way>借</way>
+   <mainItem code="100211020605" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票收863305</bill_type>
+   <way>借</way>
+   <mainItem code="100211010615" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票收863308</bill_type>
+   <way>借</way>
+   <mainItem code="100211040607" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票收863309</bill_type>
+   <way>借</way>
+   <mainItem code="100211020611" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>银行支票收863100</bill_type>
+   <way>借</way>
+   <mainItem code="100211041303" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票收865100</bill_type>
+   <way>借</way>
+   <mainItem code="100211041002" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票收863301</bill_type>
+   <way>借</way>
+   <mainItem code="100211010604" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票收863103</bill_type>
+   <way>借</way>
+   <mainItem code="100211041303" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票收863500</bill_type>
+   <way>借</way>
+   <mainItem code="100211021102" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票收863700</bill_type>
+   <way>借</way>
+   <mainItem code="100211010901" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票收862100</bill_type>
+   <way>借</way>
+   <mainItem code="100211011202" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票支861101</bill_type>
+   <way>贷</way>
+   <mainItem code="100211010404" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票支861304</bill_type>
+   <way>贷</way>
+   <mainItem code="100211020501" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>银行支票支863201</bill_type>
+   <way>贷</way>
+   <mainItem code="100211010701" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票收863210</bill_type>
+   <way>借</way>
+   <mainItem code="100211010705" dir_num="0" flag="1" name="银行存款">
+   	
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8633050123</bill_type>
+   <way>借</way>
+   <mainItem code="100211090603" dir_num="0" flag="1" name="银行存款">
+   
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款收8632030922</bill_type>
+   <way>借</way>
+   <mainItem code="100211040701" dir_num="0" flag="1" name="银行存款">
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票支863304</bill_type>
+   <way>贷</way>
+   <mainItem code="100211020602" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行支票支863318</bill_type>
+   <way>贷</way>
+   <mainItem code="100211100602" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>银行存款支</bill_type>
+   <way>贷</way>
+   <mainItem code="1002" dir_num="0" flag="1" name="银行存款">   	
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支86110701</bill_type>
+   <way>贷</way>
+   <mainItem code="100211080402" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支86110101</bill_type>
+   <way>贷</way>
+   <mainItem code="100211010406" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支86110501</bill_type>
+   <way>贷</way>
+   <mainItem code="100211090402" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支86130403</bill_type>
+   <way>贷</way>
+   <mainItem code="100211020501" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支8633100123</bill_type>
+   <way>贷</way>
+   <mainItem code="100211050601" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支8633010523</bill_type>
+   <way>贷</way>
+   <mainItem code="100211010616" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支8633010723</bill_type>
+   <way>贷</way>
+   <mainItem code="100211010607" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支86130803</bill_type>
+   <way>贷</way>
+   <mainItem code="100211090502" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支8613040203</bill_type>
+   <way>贷</way>
+   <mainItem code="100211020515" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>银行存款支8613040103</bill_type>
+   <way>贷</way>
+   <mainItem code="100211020505" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支8613041103</bill_type>
+   <way>贷</way>
+   <mainItem code="100211020512" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支8613030403</bill_type>
+   <way>贷</way>
+   <mainItem code="100211040509" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支8613041003</bill_type>
+   <way>贷</way>
+   <mainItem code="100211020516" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>银行存款支86370427</bill_type>
+   <way>贷</way>
+   <mainItem code="100211020902" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+
+
+<billToVoucher>
+<bill_type>银行存款支86320122</bill_type>
+   <way>贷</way>
+   <mainItem code="100211010703" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支8632010922</bill_type>
+   <way>贷</way>
+   <mainItem code="100211010709" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支8632010222</bill_type>
+   <way>贷</way>
+   <mainItem code="100211010723" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支8632010322</bill_type>
+   <way>贷</way>
+   <mainItem code="100211010714" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>银行存款支8633011222</bill_type>
+   <way>贷</way>
+   <mainItem code="100211010712" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支8633030423</bill_type>
+   <way>贷</way>
+   <mainItem code="100211040604" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支86330423</bill_type>
+   <way>贷</way>
+   <mainItem code="100211020602" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支86330123</bill_type>
+   <way>贷</way>
+   <mainItem code="100211010603" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支86331823</bill_type>
+   <way>贷</way>
+   <mainItem code="100211100602" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支8633020223</bill_type>
+   <way>贷</way>
+   <mainItem code="100211030603" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支8633030423</bill_type>
+   <way>贷</way>
+   <mainItem code="100211040604" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支8633100123</bill_type>
+   <way>贷</way>
+   <mainItem code="100211050601" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支86310321</bill_type>
+   <way>贷</way>
+   <mainItem code="100211041304" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支86411031</bill_type>
+   <way>贷</way>
+   <mainItem code="100211050803" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支86510341</bill_type>
+   <way>贷</way>
+   <mainItem code="100211041003" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支86350725</bill_type>
+   <way>贷</way>
+   <mainItem code="100211080701" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支8613040603</bill_type>
+   <way>贷</way>
+   <mainItem code="100211020509" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支86350425</bill_type>
+   <way>贷</way>
+   <mainItem code="100211021101" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支8613010503</bill_type>
+   <way>贷</way>
+   <mainItem code="100211010502" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支8632040922</bill_type>
+   <way>贷</way>
+   <mainItem code="100211020704" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支86370127</bill_type>
+   <way>贷</way>
+   <mainItem code="100211010902" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行存款支8633040123</bill_type>
+   <way>贷</way>
+   <mainItem code="100211020613" dir_num="0" flag="1" name="银行存款">
+	
+      </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="现金流量项目"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   </auxiliary>
+</billToVoucher>
+
+
+
+
+
+<billToVoucher>
+<bill_type>保全退费</bill_type>
+   <way>借</way>
+   <mainItem code="4101" dir_num="0" flag="1" name="保费收入"> 
+   </mainItem>
+  
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>犹豫期撤单退费</bill_type>
+   <way>贷</way>
+   <mainItem code="4101" dir_num="53" flag="1" name="保费收入">
+   	<segItem code="0102" dir_level="1" flag="1" name="民生长宁终身保险（分红型）"/>
+   	<segItem code="0201" dir_level="2" flag="1" name="民生金玉满堂两全保险（分红型）"/>
+   	<segItem code="0202" dir_level="3" flag="1" name="民生金榜题名两全保险（分红型）"/>
+   	<segItem code="0203" dir_level="4" flag="1" name="民生长裕两全保险（分红型）"/>
+   	<segItem code="0204" dir_level="5" flag="1" name="民生长顺两全保险（分红型）"/>
+   	<segItem code="0205" dir_level="6" flag="1" name="民生长乐两全保险（分红型）"/>
+   	<segItem code="0301" dir_level="7" flag="1" name="民生安康定期保险"/>
+   	<segItem code="0302" dir_level="8" flag="1" name="民生关爱特种疾病定期寿险保险"/>
+   	<segItem code="0401" dir_level="9" flag="1" name="民生众悦团体年金保险"/>
+   	<segItem code="0402" dir_level="10" flag="1" name="民生团体年金保险"/>
+   	<segItem code="0501" dir_level="11" flag="1" name="民生康吉重大疾病保险"/>
+   	<segItem code="0502" dir_level="12" flag="1" name="民生康泰重大疾病两全保险"/>
+   	<segItem code="0503" dir_level="13" flag="1" name="团体重大疾病保险"/>
+   	<segItem code="0601" dir_level="14" flag="1" name="民生康顺个人意外伤害保险"/>
+   	<segItem code="0602" dir_level="15" flag="1" name="民生康顺个人意外伤害保险（老年计划）"/>
+   	<segItem code="0603" dir_level="16" flag="1" name="航空旅客人身意外伤害保险"/>
+   	<segItem code="0604" dir_level="17" flag="1" name="高倍给付特约保险"/>
+   	<segItem code="0605" dir_level="18" flag="1" name="团体意外伤害保险"/>
+   	<segItem code="0606" dir_level="19" flag="1" name="旅游意外伤害保险"/>
+   	<segItem code="0701" dir_level="20" flag="1" name="附加每日住院给付保险"/>
+   	<segItem code="0702" dir_level="21" flag="1" name="附加意外伤害医疗保险"/>
+   	<segItem code="0703" dir_level="22" flag="1" name="附加住院医疗保险"/>
+   	<segItem code="0704" dir_level="23" flag="1" name="附加团体住院医疗保险"/>
+   	<segItem code="0705" dir_level="24" flag="1" name="附加团体每日住院给付保险"/>
+	<segItem code="0706" dir_level="25" flag="1" name="附加团体意外伤害医疗保险"/>
+	<segItem code="0707" dir_level="26" flag="1" name="附加特种疾病每日住院给付保险"/>
+   	<segItem code="0801" dir_level="27" flag="1" name="提前给付特约保险"/>
+   	<segItem code="0607" dir_level="28" flag="1" name="民生阳光旅游交通工具意外伤害保险"/>
+   	<segItem code="0608" dir_level="29" flag="1" name="民生康顺个人意外伤害保险(学生计划)"/>
+   	<segItem code="0206" dir_level="30" flag="1" name="民生金喜年年两全保险"/>
+   	<segItem code="0708" dir_level="31" flag="1" name="团体商业补充医疗保险"/>
+   	<segItem code="0609" dir_level="32" flag="1" name="民生康顺A意外伤害保险"/>
+   	<segItem code="0610" dir_level="33" flag="1" name="民生阳光旅程交通工具意外伤害保险(折式)"/>
+   	<segItem code="0611" dir_level="34" flag="1" name="民生老年康顺意外伤害保险(折式)"/>
+   	<segItem code="0612" dir_level="35" flag="1" name="民生康顺B意外伤害综合保险"/>
+   	<segItem code="0613" dir_level="36" flag="1" name="民生康顺C人身安康综合保险"/>
+   	<segItem code="0614" dir_level="37" flag="1" name="民生康顺D人身安康综合保险"/>
+    <segItem code="0615" dir_level="38" flag="1" name="团体建筑工地施工人员意外伤害保险"/>   	
+    <segItem code="0616" dir_level="39" flag="1" name="团体公共交通工具意外伤害保险"/>
+    <segItem code="0617" dir_level="40" flag="1" name="附加民生康顺个人意外伤害保险"/>   	   	
+    <segItem code="0504" dir_level="41" flag="1" name="民生康吉重大疾病保险(中介)"/> 
+    <segItem code="0207" dir_level="42" flag="1" name="民生金玉满堂两全保险(中介)"/>   	   	  	   	
+    <segItem code="0303" dir_level="43" flag="1" name="附加豁免保险费定期寿险"/>
+    <segItem code="0403" dir_level="44" flag="1" name="民生长瑞年金保险（分红型）"/>
+    <segItem code="0304" dir_level="45" flag="1" name="团体一年定期保险"/>	
+    <segItem code="0618" dir_level="46" flag="1" name="民生旅客综合意外伤害保险"/> 
+    <segItem code="0619" dir_level="47" flag="1" name="民生团体观光景点意外伤害保险"/>
+    <segItem code="0901" dir_level="48" flag="1" name="民生无忧行综合意外伤害保险"/>
+    <segItem code="0902" dir_level="49" flag="1" name="民生合家欢综合意外伤害保险"/>	
+    <segItem code="0903" dir_level="50" flag="1" name="民生公共交通工具意外伤害保险"/>
+    <segItem code="0904" dir_level="51" flag="1" name="航空旅客意外伤害保险(天勤)"/>
+    <segItem code="0905" dir_level="52" flag="1" name="综合交通意外伤害保险(天勤)"/>
+    <segItem code="0506" dir_level="53" flag="1" name="民生康泰重大疾病保险(少儿计划)"/>
+   </mainItem>
+   <auxiliary dir_num="5" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="销售渠道"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   	<segAuxiliary code="03" dir_level="3" flag="1" name="首续期"/>
+   	<segAuxiliary code="04" dir_level="4" flag="1" name="趸期交"/>
+   	<segAuxiliary code="05" dir_level="5" flag="1" name="险种性质"/>
+   </auxiliary>
+   
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>短险退保金</bill_type>
+   <way>贷</way>
+   <mainItem code="4101" dir_num="53" flag="1" name="保费收入">
+   	<segItem code="0102" dir_level="1" flag="1" name="民生长宁终身保险（分红型）"/>
+   	<segItem code="0201" dir_level="2" flag="1" name="民生金玉满堂两全保险（分红型）"/>
+   	<segItem code="0202" dir_level="3" flag="1" name="民生金榜题名两全保险（分红型）"/>
+   	<segItem code="0203" dir_level="4" flag="1" name="民生长裕两全保险（分红型）"/>
+   	<segItem code="0204" dir_level="5" flag="1" name="民生长顺两全保险（分红型）"/>
+   	<segItem code="0205" dir_level="6" flag="1" name="民生长乐两全保险（分红型）"/>
+   	<segItem code="0301" dir_level="7" flag="1" name="民生安康定期保险"/>
+   	<segItem code="0302" dir_level="8" flag="1" name="民生关爱特种疾病定期寿险保险"/>
+   	<segItem code="0401" dir_level="9" flag="1" name="民生众悦团体年金保险"/>
+   	<segItem code="0402" dir_level="10" flag="1" name="民生团体年金保险"/>
+   	<segItem code="0501" dir_level="11" flag="1" name="民生康吉重大疾病保险"/>
+   	<segItem code="0502" dir_level="12" flag="1" name="民生康泰重大疾病两全保险"/>
+   	<segItem code="0503" dir_level="13" flag="1" name="团体重大疾病保险"/>
+   	<segItem code="0601" dir_level="14" flag="1" name="民生康顺个人意外伤害保险"/>
+   	<segItem code="0602" dir_level="15" flag="1" name="民生康顺个人意外伤害保险（老年计划）"/>
+   	<segItem code="0603" dir_level="16" flag="1" name="航空旅客人身意外伤害保险"/>
+   	<segItem code="0604" dir_level="17" flag="1" name="高倍给付特约保险"/>
+   	<segItem code="0605" dir_level="18" flag="1" name="团体意外伤害保险"/>
+   	<segItem code="0606" dir_level="19" flag="1" name="旅游意外伤害保险"/>
+   	<segItem code="0701" dir_level="20" flag="1" name="附加每日住院给付保险"/>
+   	<segItem code="0702" dir_level="21" flag="1" name="附加意外伤害医疗保险"/>
+   	<segItem code="0703" dir_level="22" flag="1" name="附加住院医疗保险"/>
+   	<segItem code="0704" dir_level="23" flag="1" name="附加团体住院医疗保险"/>
+   	<segItem code="0705" dir_level="24" flag="1" name="附加团体每日住院给付保险"/>
+	<segItem code="0706" dir_level="25" flag="1" name="附加团体意外伤害医疗保险"/>
+	<segItem code="0707" dir_level="26" flag="1" name="附加特种疾病每日住院给付保险"/>
+   	<segItem code="0801" dir_level="27" flag="1" name="提前给付特约保险"/>
+   	<segItem code="0607" dir_level="28" flag="1" name="民生阳光旅游交通工具意外伤害保险"/>
+   	<segItem code="0608" dir_level="29" flag="1" name="民生康顺个人意外伤害保险(学生计划)"/>
+   	<segItem code="0206" dir_level="30" flag="1" name="民生金喜年年两全保险"/>
+   	<segItem code="0708" dir_level="31" flag="1" name="团体商业补充医疗保险"/>
+   	<segItem code="0609" dir_level="32" flag="1" name="民生康顺A意外伤害保险"/>
+   	<segItem code="0610" dir_level="33" flag="1" name="民生阳光旅程交通工具意外伤害保险(折式)"/>
+   	<segItem code="0611" dir_level="34" flag="1" name="民生老年康顺意外伤害保险(折式)"/>
+   	<segItem code="0612" dir_level="35" flag="1" name="民生康顺B意外伤害综合保险"/>
+   	<segItem code="0613" dir_level="36" flag="1" name="民生康顺C人身安康综合保险"/>
+   	<segItem code="0614" dir_level="37" flag="1" name="民生康顺D人身安康综合保险"/>
+    <segItem code="0615" dir_level="38" flag="1" name="团体建筑工地施工人员意外伤害保险"/> 
+    <segItem code="0616" dir_level="39" flag="1" name="团体公共交通工具意外伤害保险"/>
+    <segItem code="0617" dir_level="40" flag="1" name="附加民生康顺个人意外伤害保险"/>   	   	
+    <segItem code="0504" dir_level="41" flag="1" name="民生康吉重大疾病保险(中介)"/> 
+    <segItem code="0207" dir_level="42" flag="1" name="民生金玉满堂两全保险(中介)"/>   	   	  	   	  	
+    <segItem code="0303" dir_level="43" flag="1" name="附加豁免保险费定期寿险"/>
+    <segItem code="0403" dir_level="44" flag="1" name="民生长瑞年金保险（分红型）"/>	
+    <segItem code="0304" dir_level="45" flag="1" name="团体一年定期保险"/>	
+    <segItem code="0618" dir_level="46" flag="1" name="民生旅客综合意外伤害保险"/> 
+    <segItem code="0619" dir_level="47" flag="1" name="民生团体观光景点意外伤害保险"/>
+    <segItem code="0901" dir_level="48" flag="1" name="民生无忧行综合意外伤害保险"/>
+    <segItem code="0902" dir_level="49" flag="1" name="民生合家欢综合意外伤害保险"/>
+    <segItem code="0903" dir_level="50" flag="1" name="民生公共交通工具意外伤害保险"/>
+    <segItem code="0904" dir_level="51" flag="1" name="航空旅客意外伤害保险(天勤)"/>
+    <segItem code="0905" dir_level="52" flag="1" name="综合交通意外伤害保险(天勤)"/>
+    <segItem code="0506" dir_level="53" flag="1" name="民生康泰重大疾病保险(少儿计划)"/>
+   </mainItem>
+   <auxiliary dir_num="5" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="销售渠道"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   	<segAuxiliary code="03" dir_level="3" flag="1" name="首续期"/>
+   	<segAuxiliary code="04" dir_level="4" flag="1" name="趸期交"/>
+   	<segAuxiliary code="05" dir_level="5" flag="1" name="险种性质"/>
+   </auxiliary>
+   
+</billToVoucher>
+
+
+
+
+
+
+
+
+
+
+<billToVoucher>
+<bill_type>应付保户红利</bill_type>
+   <way>借</way>
+   <mainItem code="2143" dir_num="53" flag="1" name="应付保户红利">
+   	<segItem code="0102" dir_level="1" flag="1" name="民生长宁终身保险（分红型）"/>
+   	<segItem code="0201" dir_level="2" flag="1" name="民生金玉满堂两全保险（分红型）"/>
+   	<segItem code="0202" dir_level="3" flag="1" name="民生金榜题名两全保险（分红型）"/>
+   	<segItem code="0203" dir_level="4" flag="1" name="民生长裕两全保险（分红型）"/>
+   	<segItem code="0204" dir_level="5" flag="1" name="民生长顺两全保险（分红型）"/>
+   	<segItem code="0205" dir_level="6" flag="1" name="民生长乐两全保险（分红型）"/>
+   	<segItem code="0301" dir_level="7" flag="1" name="民生安康定期保险"/>
+   	<segItem code="0302" dir_level="8" flag="1" name="民生关爱特种疾病定期寿险保险"/>
+   	<segItem code="0401" dir_level="9" flag="1" name="民生众悦团体年金保险"/>
+   	<segItem code="0402" dir_level="10" flag="1" name="民生团体年金保险"/>
+   	<segItem code="0501" dir_level="11" flag="1" name="民生康吉重大疾病保险"/>
+   	<segItem code="0502" dir_level="12" flag="1" name="民生康泰重大疾病两全保险"/>
+   	<segItem code="0503" dir_level="13" flag="1" name="团体重大疾病保险"/>
+   	<segItem code="0601" dir_level="14" flag="1" name="民生康顺个人意外伤害保险"/>
+   	<segItem code="0602" dir_level="15" flag="1" name="民生康顺个人意外伤害保险（老年计划）"/>
+   	<segItem code="0603" dir_level="16" flag="1" name="航空旅客人身意外伤害保险"/>
+   	<segItem code="0604" dir_level="17" flag="1" name="高倍给付特约保险"/>
+   	<segItem code="0605" dir_level="18" flag="1" name="团体意外伤害保险"/>
+   	<segItem code="0606" dir_level="19" flag="1" name="旅游意外伤害保险"/>
+   	<segItem code="0701" dir_level="20" flag="1" name="附加每日住院给付保险"/>
+   	<segItem code="0702" dir_level="21" flag="1" name="附加意外伤害医疗保险"/>
+   	<segItem code="0703" dir_level="22" flag="1" name="附加住院医疗保险"/>
+   	<segItem code="0704" dir_level="23" flag="1" name="附加团体住院医疗保险"/>
+   	<segItem code="0705" dir_level="24" flag="1" name="附加团体每日住院给付保险"/>
+	<segItem code="0706" dir_level="25" flag="1" name="附加团体意外伤害医疗保险"/>
+	<segItem code="0707" dir_level="26" flag="1" name="附加特种疾病每日住院给付保险"/>
+   	<segItem code="0801" dir_level="27" flag="1" name="提前给付特约保险"/>
+   	<segItem code="0607" dir_level="28" flag="1" name="民生阳光旅游交通工具意外伤害保险"/>
+   	<segItem code="0608" dir_level="29" flag="1" name="民生康顺个人意外伤害保险(学生计划)"/>
+   	<segItem code="0206" dir_level="30" flag="1" name="民生金喜年年两全保险"/>
+   	<segItem code="0708" dir_level="31" flag="1" name="团体商业补充医疗保险"/>
+   	<segItem code="0609" dir_level="32" flag="1" name="民生康顺A意外伤害保险"/>
+   	<segItem code="0610" dir_level="33" flag="1" name="民生阳光旅程交通工具意外伤害保险(折式)"/>
+   	<segItem code="0611" dir_level="34" flag="1" name="民生老年康顺意外伤害保险(折式)"/>
+   	<segItem code="0612" dir_level="35" flag="1" name="民生康顺B意外伤害综合保险"/>
+   	<segItem code="0613" dir_level="36" flag="1" name="民生康顺C人身安康综合保险"/>
+   	<segItem code="0614" dir_level="37" flag="1" name="民生康顺D人身安康综合保险"/>
+    <segItem code="0615" dir_level="38" flag="1" name="团体建筑工地施工人员意外伤害保险"/>   	
+    <segItem code="0616" dir_level="39" flag="1" name="团体公共交通工具意外伤害保险"/>
+    <segItem code="0617" dir_level="40" flag="1" name="附加民生康顺个人意外伤害保险"/>   	   	
+    <segItem code="0504" dir_level="41" flag="1" name="民生康吉重大疾病保险(中介)"/> 
+    <segItem code="0207" dir_level="42" flag="1" name="民生金玉满堂两全保险(中介)"/>   	   	  	   	
+    <segItem code="0303" dir_level="43" flag="1" name="附加豁免保险费定期寿险"/>
+    <segItem code="0403" dir_level="44" flag="1" name="民生长瑞年金保险（分红型）"/>	
+    <segItem code="0304" dir_level="45" flag="1" name="团体一年定期保险"/>	
+    <segItem code="0618" dir_level="46" flag="1" name="民生旅客综合意外伤害保险"/> 
+    <segItem code="0619" dir_level="47" flag="1" name="民生团体观光景点意外伤害保险"/>
+    <segItem code="0901" dir_level="48" flag="1" name="民生无忧行综合意外伤害保险"/>
+    <segItem code="0902" dir_level="49" flag="1" name="民生合家欢综合意外伤害保险"/>
+    <segItem code="0903" dir_level="50" flag="1" name="民生公共交通工具意外伤害保险"/>
+    <segItem code="0904" dir_level="51" flag="1" name="航空旅客意外伤害保险(天勤)"/>
+    <segItem code="0905" dir_level="52" flag="1" name="综合交通意外伤害保险(天勤)"/>
+    <segItem code="0506" dir_level="53" flag="1" name="民生康泰重大疾病保险(少儿计划)"/>
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>其它支出</bill_type>
+   <way>借</way>
+   <mainItem code="2121" dir_num="53" flag="1" name="预收保费">   	
+   	<segItem code="0102" dir_level="1" flag="1" name="民生长宁终身保险（分红型）"/>
+   	<segItem code="0201" dir_level="2" flag="1" name="民生金玉满堂两全保险（分红型）"/>
+   	<segItem code="0202" dir_level="3" flag="1" name="民生金榜题名两全保险（分红型）"/>
+   	<segItem code="0203" dir_level="4" flag="1" name="民生长裕两全保险（分红型）"/>
+   	<segItem code="0204" dir_level="5" flag="1" name="民生长顺两全保险（分红型）"/>
+   	<segItem code="0205" dir_level="6" flag="1" name="民生长乐两全保险（分红型）"/>
+   	<segItem code="0301" dir_level="7" flag="1" name="民生安康定期保险"/>
+   	<segItem code="0302" dir_level="8" flag="1" name="民生关爱特种疾病定期寿险保险"/>
+   	<segItem code="0401" dir_level="9" flag="1" name="民生众悦团体年金保险"/>
+   	<segItem code="0402" dir_level="10" flag="1" name="民生团体年金保险"/>
+   	<segItem code="0501" dir_level="11" flag="1" name="民生康吉重大疾病保险"/>
+   	<segItem code="0502" dir_level="12" flag="1" name="民生康泰重大疾病两全保险"/>
+   	<segItem code="0503" dir_level="13" flag="1" name="团体重大疾病保险"/>
+   	<segItem code="0601" dir_level="14" flag="1" name="民生康顺个人意外伤害保险"/>
+   	<segItem code="0602" dir_level="15" flag="1" name="民生康顺个人意外伤害保险（老年计划）"/>
+   	<segItem code="0603" dir_level="16" flag="1" name="航空旅客人身意外伤害保险"/>
+   	<segItem code="0604" dir_level="17" flag="1" name="高倍给付特约保险"/>
+   	<segItem code="0605" dir_level="18" flag="1" name="团体意外伤害保险"/>
+   	<segItem code="0606" dir_level="19" flag="1" name="旅游意外伤害保险"/>
+   	<segItem code="0701" dir_level="20" flag="1" name="附加每日住院给付保险"/>
+   	<segItem code="0702" dir_level="21" flag="1" name="附加意外伤害医疗保险"/>
+   	<segItem code="0703" dir_level="22" flag="1" name="附加住院医疗保险"/>
+   	<segItem code="0704" dir_level="23" flag="1" name="附加团体住院医疗保险"/>
+   	<segItem code="0705" dir_level="24" flag="1" name="附加团体每日住院给付保险"/>
+	<segItem code="0706" dir_level="25" flag="1" name="附加团体意外伤害医疗保险"/>
+	<segItem code="0707" dir_level="26" flag="1" name="附加特种疾病每日住院给付保险"/>
+   	<segItem code="0801" dir_level="27" flag="1" name="提前给付特约保险"/>
+   	<segItem code="0607" dir_level="28" flag="1" name="民生阳光旅游交通工具意外伤害保险"/>
+   	<segItem code="0608" dir_level="29" flag="1" name="民生康顺个人意外伤害保险(学生计划)"/>
+   	<segItem code="0206" dir_level="30" flag="1" name="民生金喜年年两全保险"/>
+   	<segItem code="0708" dir_level="31" flag="1" name="团体商业补充医疗保险"/>
+   	<segItem code="0609" dir_level="32" flag="1" name="民生康顺A意外伤害保险"/>
+   	<segItem code="0610" dir_level="33" flag="1" name="民生阳光旅程交通工具意外伤害保险(折式)"/>
+   	<segItem code="0611" dir_level="34" flag="1" name="民生老年康顺意外伤害保险(折式)"/>
+   	<segItem code="0612" dir_level="35" flag="1" name="民生康顺B意外伤害综合保险"/>
+   	<segItem code="0613" dir_level="36" flag="1" name="民生康顺C人身安康综合保险"/>
+   	<segItem code="0614" dir_level="37" flag="1" name="民生康顺D人身安康综合保险"/>
+    <segItem code="0615" dir_level="38" flag="1" name="团体建筑工地施工人员意外伤害保险"/>   	
+    <segItem code="0616" dir_level="39" flag="1" name="团体公共交通工具意外伤害保险"/>
+    <segItem code="0617" dir_level="40" flag="1" name="附加民生康顺个人意外伤害保险"/>   	   	
+    <segItem code="0504" dir_level="41" flag="1" name="民生康吉重大疾病保险(中介)"/> 
+    <segItem code="0207" dir_level="42" flag="1" name="民生金玉满堂两全保险(中介)"/>   	   	  	   	
+    <segItem code="0303" dir_level="43" flag="1" name="附加豁免保险费定期寿险"/>
+    <segItem code="0403" dir_level="44" flag="1" name="民生长瑞年金保险（分红型）"/>	
+    <segItem code="0304" dir_level="45" flag="1" name="团体一年定期保险"/>	
+    <segItem code="0618" dir_level="46" flag="1" name="民生旅客综合意外伤害保险"/> 
+    <segItem code="0619" dir_level="47" flag="1" name="民生团体观光景点意外伤害保险"/>
+    <segItem code="0901" dir_level="48" flag="1" name="民生无忧行综合意外伤害保险"/>
+    <segItem code="0902" dir_level="49" flag="1" name="民生合家欢综合意外伤害保险"/>
+    <segItem code="0903" dir_level="50" flag="1" name="民生公共交通工具意外伤害保险"/>
+    <segItem code="0904" dir_level="51" flag="1" name="航空旅客意外伤害保险(天勤)"/>
+    <segItem code="0905" dir_level="52" flag="1" name="综合交通意外伤害保险(天勤)"/>
+    <segItem code="0506" dir_level="53" flag="1" name="民生康泰重大疾病保险(少儿计划)"/>
+   </mainItem>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>银代团险底薪</bill_type>
+   <way>借</way>
+   <mainItem code="44610119" dir_num="0" flag="1" name="职工工资">
+   </mainItem>
+    <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="部门档案"/>
+   	<segAuxiliary code="02" dir_level="1" flag="1" name="费用预算"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>养老保险金</bill_type>
+   <way>借</way>
+   <mainItem code="446101220102" dir_num="0" flag="1" name="劳动保险费养老保险">
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="部门档案"/>
+   	<segAuxiliary code="02" dir_level="1" flag="1" name="费用预算"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>其它应付劳动保险费养老</bill_type>
+   <way>贷</way>
+   <mainItem code="214908" dir_num="0" flag="1" name="其它应付劳动保险费">
+   </mainItem>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>医疗保险金</bill_type>
+   <way>借</way>
+   <mainItem code="446101220202" dir_num="0" flag="1" name="劳动保险费医疗保险金">
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="部门档案"/>
+   	<segAuxiliary code="02" dir_level="1" flag="1" name="费用预算"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>其它应付劳动保险费医疗</bill_type>
+   <way>贷</way>
+   <mainItem code="214909" dir_num="0" flag="1" name="其它应付劳动保险费">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>工伤保险金</bill_type>
+   <way>借</way>
+   <mainItem code="446101220302" dir_num="0" flag="1" name="劳动保险费工伤保险金">
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="部门档案"/>
+   	<segAuxiliary code="02" dir_level="1" flag="1" name="费用预算"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>其它应付劳动保险费工伤</bill_type>
+   <way>贷</way>
+   <mainItem code="214910" dir_num="0" flag="1" name="其它应付劳动保险费">
+   </mainItem>
+   
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>生育保险金</bill_type>
+   <way>借</way>
+   <mainItem code="446101220502" dir_num="0" flag="1" name="劳动保险费工伤保险金">
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="部门档案"/>
+   	<segAuxiliary code="02" dir_level="1" flag="1" name="费用预算"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>其它应付劳动保险费生育</bill_type>
+   <way>贷</way>
+   <mainItem code="214912" dir_num="0" flag="1" name="其它应付劳动保险费">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>待业保险费</bill_type>
+   <way>借</way>
+   <mainItem code="4461012402" dir_num="0" flag="1" name="待业保险费">
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="部门档案"/>
+   	<segAuxiliary code="02" dir_level="1" flag="1" name="费用预算"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>其它应付待业保险费待业</bill_type>
+   <way>贷</way>
+   <mainItem code="214913" dir_num="0" flag="1" name="其它应付劳动保险费">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>住房公积金</bill_type>
+   <way>借</way>
+   <mainItem code="4461011302" dir_num="0" flag="1" name="住房公积金">
+   </mainItem>
+   <auxiliary dir_num="2" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="部门档案"/>
+   	<segAuxiliary code="02" dir_level="1" flag="1" name="费用预算"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>其它应付住房公积金</bill_type>
+   <way>贷</way>
+   <mainItem code="214907" dir_num="0" flag="1" name="其它应付劳动保险费">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行代理外勤绩效</bill_type>
+   <way>借</way>
+   <mainItem code="44320205" dir_num="0" flag="1" name="银行代理外勤绩效">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>银行代理内勤绩效</bill_type>
+   <way>借</way>
+   <mainItem code="44320206" dir_num="0" flag="1" name="银行代理内勤绩效">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>应付工资</bill_type>
+   <way>贷</way>
+   <mainItem code="2141" dir_num="0" flag="1" name="应付工资">
+   </mainItem>
+</billToVoucher>
+
+
+
+
+
+
+<billToVoucher>
+<bill_type>附加佣金业务员佣金支出</bill_type>
+   <way>借</way>
+   <mainItem code="" dir_num="37" flag="1" name="附加佣金业务员佣金支出">
+   	<segItem code="3019" dir_level="1" flag="1" name="创业扶持金"/>
+   	<segItem code="3001" dir_level="2" flag="1" name="创业金"/>
+   	<segItem code="3002" dir_level="3" flag="1" name="转正奖"/>
+   	<segItem code="3003" dir_level="4" flag="1" name="个人年终奖"/>
+   	<segItem code="3004" dir_level="5" flag="1" name="伯乐奖金"/>
+   	<segItem code="3005" dir_level="6" flag="1" name="增员奖金"/>
+   	<segItem code="3006" dir_level="7" flag="1" name="增员年终奖"/>
+   	<segItem code="3007" dir_level="8" flag="1" name="高级理财服务主任特别津贴"/>
+   	<segItem code="3008" dir_level="9" flag="1" name="职务津贴"/>
+   	<segItem code="3009" dir_level="10" flag="1" name="直辖组管理津贴"/>
+   	<segItem code="3010" dir_level="11" flag="1" name="组育成津贴"/>
+   	<segItem code="3011" dir_level="12" flag="1" name="组年终奖金"/>
+   	<segItem code="3012" dir_level="13" flag="1" name="部直辖管理津贴"/>
+   	<segItem code="3013" dir_level="14" flag="1" name="增部津贴"/>
+   	<segItem code="3014" dir_level="15" flag="1" name="营销部年终奖金"/>
+   	<segItem code="3015" dir_level="16" flag="1" name="总监职务底薪"/>
+   	<segItem code="3016" dir_level="17" flag="1" name="总监育成津贴"/>
+   	<segItem code="3017" dir_level="18" flag="1" name="资深总监职务底薪"/>
+   	<segItem code="3018" dir_level="19" flag="1" name="补发初年度佣金"/>
+   	<segItem code="3020" dir_level="20" flag="1" name="加扣款"/>
+   	<segItem code="3021" dir_level="21" flag="1" name="差勤扣款"/>
+   	<segItem code="3022" dir_level="23" flag="1" name="支助薪资"/>
+   	<segItem code="3023" dir_level="24" flag="1" name="招募资金"/>
+   	<segItem code="3024" dir_level="25" flag="1" name="创业奖"/>
+   	<segItem code="3025" dir_level="26" flag="1" name="奖惩款项"/>
+   	<segItem code="3026" dir_level="27" flag="1" name="衔接资金加扣款"/>
+   	<segItem code="3099" dir_level="22" flag="1" name="上期余额"/>
+   	<segItem code="3027" dir_level="28" flag="1" name="底薪"/>
+   	<segItem code="3028" dir_level="29" flag="1" name="社保费用支持金"/>
+   	<segItem code="3029" dir_level="30" flag="1" name="费用补贴"/>
+   	<segItem code="3030" dir_level="31" flag="1" name="养老保险"/>
+   	<segItem code="3031" dir_level="32" flag="1" name="失业保险"/>
+   	<segItem code="3032" dir_level="33" flag="1" name="医疗保险"/>
+   	<segItem code="3033" dir_level="34" flag="1" name="工伤保险"/>
+   	<segItem code="3034" dir_level="35" flag="1" name="住房公积金"/>
+   	<segItem code="3035" dir_level="36" flag="1" name="加扣款3"/>
+   	<segItem code="3036" dir_level="37" flag="1" name="总监的业务拓展津贴"/>
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>应付附加佣金业务员佣金</bill_type>
+   <way>贷</way>
+   <mainItem code="2112" dir_num="0" flag="1" name="应付佣金">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>应付税金</bill_type>
+   <way>贷</way>
+   <mainItem code="2146" dir_num="2" flag="1" name="应付税金">
+   	<segItem code="4001" dir_level="1" flag="1" name="应交营业税"/>
+   	<segItem code="4004" dir_level="2" flag="1" name="应交个人所得税"/>
+   </mainItem>
+</billToVoucher>
+
+
+
+<billToVoucher>
+<bill_type>代理手续费支出</bill_type>
+   <way>借</way>
+   <mainItem code="443101" dir_num="53" flag="1" name="代理手续费支出">
+   	<segItem code="0102" dir_level="1" flag="1" name="民生长宁终身保险（分红型）"/>
+   	<segItem code="0201" dir_level="2" flag="1" name="民生金玉满堂两全保险（分红型）"/>
+   	<segItem code="0202" dir_level="3" flag="1" name="民生金榜题名两全保险（分红型）"/>
+   	<segItem code="0203" dir_level="4" flag="1" name="民生长裕两全保险（分红型）"/>
+   	<segItem code="0204" dir_level="5" flag="1" name="民生长顺两全保险（分红型）"/>
+   	<segItem code="0205" dir_level="6" flag="1" name="民生长乐两全保险（分红型）"/>
+   	<segItem code="0301" dir_level="7" flag="1" name="民生安康定期保险"/>
+   	<segItem code="0302" dir_level="8" flag="1" name="民生关爱特种疾病定期寿险保险"/>
+   	<segItem code="0401" dir_level="9" flag="1" name="民生众悦团体年金保险"/>
+   	<segItem code="0402" dir_level="10" flag="1" name="民生团体年金保险"/>
+   	<segItem code="0501" dir_level="11" flag="1" name="民生康吉重大疾病保险"/>
+   	<segItem code="0502" dir_level="12" flag="1" name="民生康泰重大疾病两全保险"/>
+   	<segItem code="0503" dir_level="13" flag="1" name="团体重大疾病保险"/>
+   	<segItem code="0601" dir_level="14" flag="1" name="民生康顺个人意外伤害保险"/>
+   	<segItem code="0602" dir_level="15" flag="1" name="民生康顺个人意外伤害保险（老年计划）"/>
+   	<segItem code="0603" dir_level="16" flag="1" name="航空旅客人身意外伤害保险"/>
+   	<segItem code="0604" dir_level="17" flag="1" name="高倍给付特约保险"/>
+   	<segItem code="0605" dir_level="18" flag="1" name="团体意外伤害保险"/>
+   	<segItem code="0606" dir_level="19" flag="1" name="旅游意外伤害保险"/>
+   	<segItem code="0701" dir_level="20" flag="1" name="附加每日住院给付保险"/>
+   	<segItem code="0702" dir_level="21" flag="1" name="附加意外伤害医疗保险"/>
+   	<segItem code="0703" dir_level="22" flag="1" name="附加住院医疗保险"/>
+   	<segItem code="0704" dir_level="23" flag="1" name="附加团体住院医疗保险"/>
+   	<segItem code="0705" dir_level="24" flag="1" name="附加团体每日住院给付保险"/>
+	<segItem code="0706" dir_level="25" flag="1" name="附加团体意外伤害医疗保险"/>
+	<segItem code="0707" dir_level="26" flag="1" name="附加特种疾病每日住院给付保险"/>
+   	<segItem code="0801" dir_level="27" flag="1" name="提前给付特约保险"/>
+   	<segItem code="0607" dir_level="28" flag="1" name="民生阳光旅游交通工具意外伤害保险"/>
+   	<segItem code="0608" dir_level="29" flag="1" name="民生康顺个人意外伤害保险(学生计划)"/>
+   	<segItem code="0206" dir_level="30" flag="1" name="民生金喜年年两全保险"/>
+   	<segItem code="0708" dir_level="31" flag="1" name="团体商业补充医疗保险"/>
+   	<segItem code="0609" dir_level="32" flag="1" name="民生康顺A意外伤害保险"/>
+   	<segItem code="0610" dir_level="33" flag="1" name="民生阳光旅程交通工具意外伤害保险(折式)"/>
+   	<segItem code="0611" dir_level="34" flag="1" name="民生老年康顺意外伤害保险(折式)"/>
+   	<segItem code="0612" dir_level="35" flag="1" name="民生康顺B意外伤害综合保险"/>
+   	<segItem code="0613" dir_level="36" flag="1" name="民生康顺C人身安康综合保险"/>
+   	<segItem code="0614" dir_level="37" flag="1" name="民生康顺D人身安康综合保险"/>
+    <segItem code="0615" dir_level="38" flag="1" name="团体建筑工地施工人员意外伤害保险"/>   	
+    <segItem code="0616" dir_level="39" flag="1" name="团体公共交通工具意外伤害保险"/>
+    <segItem code="0617" dir_level="40" flag="1" name="附加民生康顺个人意外伤害保险"/>   	   	
+    <segItem code="0504" dir_level="41" flag="1" name="民生康吉重大疾病保险(中介)"/> 
+    <segItem code="0207" dir_level="42" flag="1" name="民生金玉满堂两全保险(中介)"/>   	   	  	   	
+    <segItem code="0303" dir_level="43" flag="1" name="附加豁免保险费定期寿险"/>
+    <segItem code="0403" dir_level="44" flag="1" name="民生长瑞年金保险（分红型）"/>	
+    <segItem code="0304" dir_level="45" flag="1" name="团体一年定期保险"/>	
+    <segItem code="0618" dir_level="46" flag="1" name="民生旅客综合意外伤害保险"/> 
+    <segItem code="0619" dir_level="47" flag="1" name="民生团体观光景点意外伤害保险"/>
+    <segItem code="0901" dir_level="48" flag="1" name="民生无忧行综合意外伤害保险"/>
+    <segItem code="0902" dir_level="49" flag="1" name="民生合家欢综合意外伤害保险"/>
+    <segItem code="0903" dir_level="50" flag="1" name="民生公共交通工具意外伤害保险"/>
+    <segItem code="0904" dir_level="51" flag="1" name="航空旅客意外伤害保险(天勤)"/>
+    <segItem code="0905" dir_level="52" flag="1" name="综合交通意外伤害保险(天勤)"/>
+    <segItem code="0506" dir_level="53" flag="1" name="民生康泰重大疾病保险(少儿计划)"/>
+   </mainItem>
+   <auxiliary dir_num="5" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="销售渠道"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   	<segAuxiliary code="05" dir_level="5" flag="1" name="险种性质"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>应付手续费业务</bill_type>
+   <way>贷</way>
+   <mainItem code="214912" dir_num="0" flag="1" name="应付手续费">
+   </mainItem>
+</billToVoucher>
+
+
+
+
+
+
+
+
+<billToVoucher>
+<bill_type>年金业务其它应付</bill_type>
+   <way>贷</way>
+   <mainItem code="214401" dir_num="0" flag="1" name="年金其它应付款">
+   	<segItem code="2001" dir_level="1" flag="1" name="分红险"/>
+   	<segItem code="2002" dir_level="2" flag="1" name="投连险"/>
+   	<segItem code="2003" dir_level="3" flag="1" name="普通险"/>
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>年金财务其它应付</bill_type>
+   <way>借</way>
+   <mainItem code="214401" dir_num="0" flag="1" name="年金其它应付款">
+   	<segItem code="2001" dir_level="1" flag="1" name="分红险"/>
+   	<segItem code="2002" dir_level="2" flag="1" name="投连险"/>
+   	<segItem code="2003" dir_level="3" flag="1" name="普通险"/>
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>满期金业务其它应付</bill_type>
+   <way>贷</way>
+   <mainItem code="214402" dir_num="0" flag="1" name="满期金其它应付款">
+   	<segItem code="2001" dir_level="1" flag="1" name="分红险"/>
+   	<segItem code="2002" dir_level="2" flag="1" name="投连险"/>
+   	<segItem code="2003" dir_level="3" flag="1" name="普通险"/>
+   </mainItem>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>满期金财务其它应付</bill_type>
+   <way>借</way>
+   <mainItem code="214402" dir_num="3" flag="1" name="满期金其它应付款">
+   	<segItem code="2001" dir_level="1" flag="1" name="分红险"/>
+   	<segItem code="2002" dir_level="2" flag="1" name="投连险"/>
+   	<segItem code="2003" dir_level="3" flag="1" name="普通险"/>
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>理赔业务其它应付</bill_type>
+   <way>贷</way>
+   <mainItem code="214403" dir_num="3" flag="1" name="理赔其它应付款">
+   	<segItem code="2001" dir_level="1" flag="1" name="分红险"/>
+   	<segItem code="2002" dir_level="2" flag="1" name="投连险"/>
+   	<segItem code="2003" dir_level="3" flag="1" name="普通险"/>
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>理赔财务其它应付</bill_type>
+   <way>借</way>
+   <mainItem code="2109" dir_num="0" flag="1" name="应付业务支出(2109)--理陪--险类">
+   </mainItem>
+</billToVoucher>
+
+
+
+<billToVoucher>
+<bill_type>保全业务其它应付</bill_type>
+   <way>贷</way>
+   <mainItem code="2109" dir_num="0" flag="1" name="应付业务支出-其它">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>借款业务其它应付</bill_type>
+   <way>贷</way>
+   <mainItem code="2109" dir_num="0" flag="1" name="应付业务支出-保单贷款">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>犹豫期撤单业务其它应付</bill_type>
+   <way>贷</way>
+   <mainItem code="214411" dir_num="3" flag="1" name="犹豫期撤单业务其它应付">
+   	<segItem code="2001" dir_level="1" flag="1" name="分红险"/>
+   	<segItem code="2002" dir_level="2" flag="1" name="投连险"/>
+   	<segItem code="2003" dir_level="3" flag="1" name="普通险"/>
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>保全财务其它应付</bill_type>
+   <way>借</way>
+   <mainItem code="2109" dir_num="0" flag="1" name="应付业务支出--其它">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>应付保户红利保单红利</bill_type>
+   <way>借</way>
+   <mainItem code="214801" dir_num="3" flag="1" name="应付保户红利保单红利">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>保户红利利息</bill_type>
+   <way>借</way>
+   <mainItem code="446402" dir_num="0" flag="1" name="保户红利利息">
+   </mainItem>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>红利业务应付其它</bill_type>
+   <way>贷</way>
+   <mainItem code="214405" dir_num="3" flag="1" name="红利其它应付款">
+   	<segItem code="2001" dir_level="1" flag="1" name="分红险"/>
+   	<segItem code="2002" dir_level="2" flag="1" name="投连险"/>
+   	<segItem code="2003" dir_level="3" flag="1" name="普通险"/>
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>红利财务应付其它</bill_type>
+   <way>借</way>
+   <mainItem code="214405" dir_num="3" flag="1" name="红利其它应付款">
+   	<segItem code="2001" dir_level="1" flag="1" name="分红险"/>
+   	<segItem code="2002" dir_level="2" flag="1" name="投连险"/>
+   	<segItem code="2003" dir_level="3" flag="1" name="普通险"/>
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>借应付保户红利累计</bill_type>
+   <way>借</way>
+   <mainItem code="214802" dir_num="0" flag="1" name="应付保户红利累计">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>贷应付保户红利累计</bill_type>
+   <way>贷</way>
+   <mainItem code="214802" dir_num="0" flag="1" name="应付保户红利累计">
+   </mainItem>
+</billToVoucher>
+
+
+
+
+<billToVoucher>
+<bill_type>其它业务应付其它</bill_type>
+   <way>贷</way>
+   <mainItem code="214499" dir_num="3" flag="1" name="其它应付款">
+   	<segItem code="2001" dir_level="1" flag="1" name="分红险"/>
+   	<segItem code="2002" dir_level="2" flag="1" name="投连险"/>
+   	<segItem code="2003" dir_level="3" flag="1" name="普通险"/>
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>其它财务应付其它</bill_type>
+   <way>借</way>
+   <mainItem code="214499" dir_num="3" flag="1" name="其它应付款">
+   	<segItem code="2001" dir_level="1" flag="1" name="分红险"/>
+   	<segItem code="2002" dir_level="2" flag="1" name="投连险"/>
+   	<segItem code="2003" dir_level="3" flag="1" name="普通险"/>
+   </mainItem>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>暂收退费业务其它应付</bill_type>
+   <way>贷</way>
+   <mainItem code="214406" dir_num="3" flag="1" name="暂收退费其它应付款">
+   	<segItem code="2001" dir_level="1" flag="1" name="分红险"/>
+   	<segItem code="2002" dir_level="2" flag="1" name="投连险"/>
+   	<segItem code="2003" dir_level="3" flag="1" name="普通险"/>
+   </mainItem>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>暂收退费财务其它应付</bill_type>
+   <way>借</way>
+   <mainItem code="214406" dir_num="3" flag="1" name="暂收退费其它应付款">
+   	<segItem code="2001" dir_level="1" flag="1" name="分红险"/>
+   	<segItem code="2002" dir_level="2" flag="1" name="投连险"/>
+   	<segItem code="2003" dir_level="3" flag="1" name="普通险"/>
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>死伤医疗业务其它应付</bill_type>
+   <way>贷</way>
+   <mainItem code="2109" dir_num="0" flag="1" name="应付业务支出(2109)--理陪--险类">
+   </mainItem>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>死伤医疗财务其它应付</bill_type>
+   <way>借</way>
+   <mainItem code="2019" dir_num="0" flag="1" name="应付业务支出(2109)--理陪--险类">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>退保业务其它应付</bill_type>
+   <way>贷</way>
+   <mainItem code="2109" dir_num="3" flag="1" name="应付业务支出--退保金">
+   </mainItem>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>退保财务其它应付</bill_type>
+   <way>借</way>
+   <mainItem code="2109" dir_num="0" flag="1" name="应付业务支出-应付退保金">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>借款财务其它应付</bill_type>
+   <way>借</way>
+   <mainItem code="2109" dir_num="3" flag="1" name="应付业务支出-保单贷款">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>自动垫交</bill_type>
+   <way>借</way>
+   <mainItem code="1113" dir_num="0" flag="0" name="自动垫交">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>贷垫交</bill_type>
+   <way>贷</way>
+   <mainItem code="1113" dir_num="0" flag="0" name="自动垫交">
+   </mainItem>
+</billToVoucher>
+
+
+
+
+<billToVoucher>
+<bill_type>赔款支出</bill_type>
+   <way>借</way>
+   <mainItem code="4401" dir_num="0" flag="1" name="赔款支出">
+   </mainItem>
+</billToVoucher>
+
+
+
+
+<billToVoucher>
+<bill_type>死亡给付金</bill_type>
+   <way>借</way>
+   <mainItem code="4402" dir_num="0" flag="1" name="死亡给付">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>医疗给付金</bill_type>
+   <way>借</way>
+   <mainItem code="4406" dir_num="0" flag="1" name="医疗给付">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>伤残给付金</bill_type>
+   <way>借</way>
+   <mainItem code="4405" dir_num="0" flag="1" name="伤残给付">
+   </mainItem>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>理赔退保金</bill_type>
+   <way>借</way>
+   <mainItem code="4411" dir_num="53" flag="1" name="退保金">
+   	<segItem code="0102" dir_level="1" flag="1" name="民生长宁终身保险（分红型）"/>
+   	<segItem code="0201" dir_level="2" flag="1" name="民生金玉满堂两全保险（分红型）"/>
+   	<segItem code="0202" dir_level="3" flag="1" name="民生金榜题名两全保险（分红型）"/>
+   	<segItem code="0203" dir_level="4" flag="1" name="民生长裕两全保险（分红型）"/>
+   	<segItem code="0204" dir_level="5" flag="1" name="民生长顺两全保险（分红型）"/>
+   	<segItem code="0205" dir_level="6" flag="1" name="民生长乐两全保险（分红型）"/>
+   	<segItem code="0301" dir_level="7" flag="1" name="民生安康定期保险"/>
+   	<segItem code="0302" dir_level="8" flag="1" name="民生关爱特种疾病定期寿险保险"/>
+   	<segItem code="0401" dir_level="9" flag="1" name="民生众悦团体年金保险"/>
+   	<segItem code="0402" dir_level="10" flag="1" name="民生团体年金保险"/>
+   	<segItem code="0501" dir_level="11" flag="1" name="民生康吉重大疾病保险"/>
+   	<segItem code="0502" dir_level="12" flag="1" name="民生康泰重大疾病两全保险"/>
+   	<segItem code="0503" dir_level="13" flag="1" name="团体重大疾病保险"/>
+   	<segItem code="0601" dir_level="14" flag="1" name="民生康顺个人意外伤害保险"/>
+   	<segItem code="0602" dir_level="15" flag="1" name="民生康顺个人意外伤害保险（老年计划）"/>
+   	<segItem code="0603" dir_level="16" flag="1" name="航空旅客人身意外伤害保险"/>
+   	<segItem code="0604" dir_level="17" flag="1" name="高倍给付特约保险"/>
+   	<segItem code="0605" dir_level="18" flag="1" name="团体意外伤害保险"/>
+   	<segItem code="0606" dir_level="19" flag="1" name="旅游意外伤害保险"/>
+   	<segItem code="0701" dir_level="20" flag="1" name="附加每日住院给付保险"/>
+   	<segItem code="0702" dir_level="21" flag="1" name="附加意外伤害医疗保险"/>
+   	<segItem code="0703" dir_level="22" flag="1" name="附加住院医疗保险"/>
+   	<segItem code="0704" dir_level="23" flag="1" name="附加团体住院医疗保险"/>
+   	<segItem code="0705" dir_level="24" flag="1" name="附加团体每日住院给付保险"/>
+	<segItem code="0706" dir_level="25" flag="1" name="附加团体意外伤害医疗保险"/>
+	<segItem code="0707" dir_level="26" flag="1" name="附加特种疾病每日住院给付保险"/>
+   	<segItem code="0801" dir_level="27" flag="1" name="提前给付特约保险"/>
+   	<segItem code="0607" dir_level="28" flag="1" name="民生阳光旅游交通工具意外伤害保险"/>
+   	<segItem code="0608" dir_level="29" flag="1" name="民生康顺个人意外伤害保险(学生计划)"/>
+   	<segItem code="0206" dir_level="30" flag="1" name="民生金喜年年两全保险"/>
+   	<segItem code="0708" dir_level="31" flag="1" name="团体商业补充医疗保险"/>
+   	<segItem code="0609" dir_level="32" flag="1" name="民生康顺A意外伤害保险"/>
+   	<segItem code="0610" dir_level="33" flag="1" name="民生阳光旅程交通工具意外伤害保险(折式)"/>
+   	<segItem code="0611" dir_level="34" flag="1" name="民生老年康顺意外伤害保险(折式)"/>
+   	<segItem code="0612" dir_level="35" flag="1" name="民生康顺B意外伤害综合保险"/>
+   	<segItem code="0613" dir_level="36" flag="1" name="民生康顺C人身安康综合保险"/>
+   	<segItem code="0614" dir_level="37" flag="1" name="民生康顺D人身安康综合保险"/>
+    <segItem code="0615" dir_level="38" flag="1" name="团体建筑工地施工人员意外伤害保险"/>   	
+    <segItem code="0616" dir_level="39" flag="1" name="团体公共交通工具意外伤害保险"/>
+    <segItem code="0617" dir_level="40" flag="1" name="附加民生康顺个人意外伤害保险"/>   	   	
+    <segItem code="0504" dir_level="41" flag="1" name="民生康吉重大疾病保险(中介)"/> 
+    <segItem code="0207" dir_level="42" flag="1" name="民生金玉满堂两全保险(中介)"/>   	   	  	   	
+    <segItem code="0303" dir_level="43" flag="1" name="附加豁免保险费定期寿险"/>
+    <segItem code="0403" dir_level="44" flag="1" name="民生长瑞年金保险（分红型）"/>
+    <segItem code="0304" dir_level="45" flag="1" name="团体一年定期保险"/>	
+    <segItem code="0618" dir_level="46" flag="1" name="民生旅客综合意外伤害保险"/> 
+    <segItem code="0619" dir_level="47" flag="1" name="民生团体观光景点意外伤害保险"/>
+    <segItem code="0901" dir_level="48" flag="1" name="民生无忧行综合意外伤害保险"/>
+    <segItem code="0902" dir_level="49" flag="1" name="民生合家欢综合意外伤害保险"/>	
+    <segItem code="0903" dir_level="50" flag="1" name="民生公共交通工具意外伤害保险"/>
+    <segItem code="0904" dir_level="51" flag="1" name="航空旅客意外伤害保险(天勤)"/>
+    <segItem code="0905" dir_level="52" flag="1" name="综合交通意外伤害保险(天勤)"/>
+    <segItem code="0506" dir_level="53" flag="1" name="民生康泰重大疾病保险(少儿计划)"/>
+   </mainItem>
+     <auxiliary dir_num="3" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="销售渠道"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   	<segAuxiliary code="05" dir_level="3" flag="1" name="险种性质"/>
+   </auxiliary>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>理赔退费</bill_type>
+   <way>借</way>
+   <mainItem code="4403" dir_num="53" flag="1" name="预收保费">
+   	<segItem code="0102" dir_level="1" flag="1" name="民生长宁终身保险（分红型）"/>
+   	<segItem code="0201" dir_level="2" flag="1" name="民生金玉满堂两全保险（分红型）"/>
+   	<segItem code="0202" dir_level="3" flag="1" name="民生金榜题名两全保险（分红型）"/>
+   	<segItem code="0203" dir_level="4" flag="1" name="民生长裕两全保险（分红型）"/>
+   	<segItem code="0204" dir_level="5" flag="1" name="民生长顺两全保险（分红型）"/>
+   	<segItem code="0205" dir_level="6" flag="1" name="民生长乐两全保险（分红型）"/>
+   	<segItem code="0301" dir_level="7" flag="1" name="民生安康定期保险"/>
+   	<segItem code="0302" dir_level="8" flag="1" name="民生关爱特种疾病定期寿险保险"/>
+   	<segItem code="0401" dir_level="9" flag="1" name="民生众悦团体年金保险"/>
+   	<segItem code="0402" dir_level="10" flag="1" name="民生团体年金保险"/>
+   	<segItem code="0501" dir_level="11" flag="1" name="民生康吉重大疾病保险"/>
+   	<segItem code="0502" dir_level="12" flag="1" name="民生康泰重大疾病两全保险"/>
+   	<segItem code="0503" dir_level="13" flag="1" name="团体重大疾病保险"/>
+   	<segItem code="0601" dir_level="14" flag="1" name="民生康顺个人意外伤害保险"/>
+   	<segItem code="0602" dir_level="15" flag="1" name="民生康顺个人意外伤害保险（老年计划）"/>
+   	<segItem code="0603" dir_level="16" flag="1" name="航空旅客人身意外伤害保险"/>
+   	<segItem code="0604" dir_level="17" flag="1" name="高倍给付特约保险"/>
+   	<segItem code="0605" dir_level="18" flag="1" name="团体意外伤害保险"/>
+   	<segItem code="0606" dir_level="19" flag="1" name="旅游意外伤害保险"/>
+   	<segItem code="0701" dir_level="20" flag="1" name="附加每日住院给付保险"/>
+   	<segItem code="0702" dir_level="21" flag="1" name="附加意外伤害医疗保险"/>
+   	<segItem code="0703" dir_level="22" flag="1" name="附加住院医疗保险"/>
+   	<segItem code="0704" dir_level="23" flag="1" name="附加团体住院医疗保险"/>
+   	<segItem code="0705" dir_level="24" flag="1" name="附加团体每日住院给付保险"/>
+	<segItem code="0706" dir_level="25" flag="1" name="附加团体意外伤害医疗保险"/>
+	<segItem code="0707" dir_level="26" flag="1" name="附加特种疾病每日住院给付保险"/>
+   	<segItem code="0801" dir_level="27" flag="1" name="提前给付特约保险"/>
+   	<segItem code="0607" dir_level="28" flag="1" name="民生阳光旅游交通工具意外伤害保险"/>
+   	<segItem code="0608" dir_level="29" flag="1" name="民生康顺个人意外伤害保险(学生计划)"/>
+   	<segItem code="0206" dir_level="30" flag="1" name="民生金喜年年两全保险"/>
+   	<segItem code="0708" dir_level="31" flag="1" name="团体商业补充医疗保险"/>
+   	<segItem code="0609" dir_level="32" flag="1" name="民生康顺A意外伤害保险"/>
+   	<segItem code="0610" dir_level="33" flag="1" name="民生阳光旅程交通工具意外伤害保险(折式)"/>
+   	<segItem code="0611" dir_level="34" flag="1" name="民生老年康顺意外伤害保险(折式)"/>
+   	<segItem code="0612" dir_level="35" flag="1" name="民生康顺B意外伤害综合保险"/>
+   	<segItem code="0613" dir_level="36" flag="1" name="民生康顺C人身安康综合保险"/>
+   	<segItem code="0614" dir_level="37" flag="1" name="民生康顺D人身安康综合保险"/>
+    <segItem code="0615" dir_level="38" flag="1" name="团体建筑工地施工人员意外伤害保险"/>   	
+    <segItem code="0616" dir_level="39" flag="1" name="团体公共交通工具意外伤害保险"/>
+    <segItem code="0617" dir_level="40" flag="1" name="附加民生康顺个人意外伤害保险"/>   	   	
+    <segItem code="0504" dir_level="41" flag="1" name="民生康吉重大疾病保险(中介)"/> 
+    <segItem code="0207" dir_level="42" flag="1" name="民生金玉满堂两全保险(中介)"/>   	   	  	   	
+    <segItem code="0303" dir_level="43" flag="1" name="附加豁免保险费定期寿险"/>
+    <segItem code="0403" dir_level="44" flag="1" name="民生长瑞年金保险（分红型）"/>	
+    <segItem code="0304" dir_level="45" flag="1" name="团体一年定期保险"/>	
+    <segItem code="0618" dir_level="46" flag="1" name="民生旅客综合意外伤害保险"/> 
+    <segItem code="0619" dir_level="47" flag="1" name="民生团体观光景点意外伤害保险"/>
+    <segItem code="0901" dir_level="48" flag="1" name="民生无忧行综合意外伤害保险"/>
+    <segItem code="0902" dir_level="49" flag="1" name="民生合家欢综合意外伤害保险"/>
+    <segItem code="0903" dir_level="50" flag="1" name="民生公共交通工具意外伤害保险"/>
+    <segItem code="0904" dir_level="51" flag="1" name="航空旅客意外伤害保险(天勤)"/>
+    <segItem code="0905" dir_level="52" flag="1" name="综合交通意外伤害保险(天勤)"/>
+    <segItem code="0506" dir_level="53" flag="1" name="民生康泰重大疾病保险(少儿计划)"/>
+   </mainItem>
+   <auxiliary dir_num="3" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="销售渠道"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   	<segAuxiliary code="05" dir_level="3" flag="1" name="险种性质"/>
+   </auxiliary>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>满期金</bill_type>
+   <way>借</way>
+   <mainItem code="4403" dir_num="53" flag="1" name="满期给付">
+   	<segItem code="0102" dir_level="1" flag="1" name="民生长宁终身保险（分红型）"/>
+   	<segItem code="0201" dir_level="2" flag="1" name="民生金玉满堂两全保险（分红型）"/>
+   	<segItem code="0202" dir_level="3" flag="1" name="民生金榜题名两全保险（分红型）"/>
+   	<segItem code="0203" dir_level="4" flag="1" name="民生长裕两全保险（分红型）"/>
+   	<segItem code="0204" dir_level="5" flag="1" name="民生长顺两全保险（分红型）"/>
+   	<segItem code="0205" dir_level="6" flag="1" name="民生长乐两全保险（分红型）"/>
+   	<segItem code="0301" dir_level="7" flag="1" name="民生安康定期保险"/>
+   	<segItem code="0302" dir_level="8" flag="1" name="民生关爱特种疾病定期寿险保险"/>
+   	<segItem code="0401" dir_level="9" flag="1" name="民生众悦团体年金保险"/>
+   	<segItem code="0402" dir_level="10" flag="1" name="民生团体年金保险"/>
+   	<segItem code="0501" dir_level="11" flag="1" name="民生康吉重大疾病保险"/>
+   	<segItem code="0502" dir_level="12" flag="1" name="民生康泰重大疾病两全保险"/>
+   	<segItem code="0503" dir_level="13" flag="1" name="团体重大疾病保险"/>
+   	<segItem code="0601" dir_level="14" flag="1" name="民生康顺个人意外伤害保险"/>
+   	<segItem code="0602" dir_level="15" flag="1" name="民生康顺个人意外伤害保险（老年计划）"/>
+   	<segItem code="0603" dir_level="16" flag="1" name="航空旅客人身意外伤害保险"/>
+   	<segItem code="0604" dir_level="17" flag="1" name="高倍给付特约保险"/>
+   	<segItem code="0605" dir_level="18" flag="1" name="团体意外伤害保险"/>
+   	<segItem code="0606" dir_level="19" flag="1" name="旅游意外伤害保险"/>
+   	<segItem code="0701" dir_level="20" flag="1" name="附加每日住院给付保险"/>
+   	<segItem code="0702" dir_level="21" flag="1" name="附加意外伤害医疗保险"/>
+   	<segItem code="0703" dir_level="22" flag="1" name="附加住院医疗保险"/>
+   	<segItem code="0704" dir_level="23" flag="1" name="附加团体住院医疗保险"/>
+   	<segItem code="0705" dir_level="24" flag="1" name="附加团体每日住院给付保险"/>
+	<segItem code="0706" dir_level="25" flag="1" name="附加团体意外伤害医疗保险"/>
+	<segItem code="0707" dir_level="26" flag="1" name="附加特种疾病每日住院给付保险"/>
+   	<segItem code="0801" dir_level="27" flag="1" name="提前给付特约保险"/>
+   	<segItem code="0607" dir_level="28" flag="1" name="民生阳光旅游交通工具意外伤害保险"/>
+   	<segItem code="0608" dir_level="29" flag="1" name="民生康顺个人意外伤害保险(学生计划)"/>
+   	<segItem code="0206" dir_level="30" flag="1" name="民生金喜年年两全保险"/>
+   	<segItem code="0708" dir_level="31" flag="1" name="团体商业补充医疗保险"/>
+   	<segItem code="0609" dir_level="32" flag="1" name="民生康顺A意外伤害保险"/>
+   	<segItem code="0610" dir_level="33" flag="1" name="民生阳光旅程交通工具意外伤害保险(折式)"/>
+   	<segItem code="0611" dir_level="34" flag="1" name="民生老年康顺意外伤害保险(折式)"/>
+   	<segItem code="0612" dir_level="35" flag="1" name="民生康顺B意外伤害综合保险"/>
+   	<segItem code="0613" dir_level="36" flag="1" name="民生康顺C人身安康综合保险"/>
+   	<segItem code="0614" dir_level="37" flag="1" name="民生康顺D人身安康综合保险"/>
+    <segItem code="0615" dir_level="38" flag="1" name="团体建筑工地施工人员意外伤害保险"/>   	
+    <segItem code="0616" dir_level="39" flag="1" name="团体公共交通工具意外伤害保险"/>
+    <segItem code="0617" dir_level="40" flag="1" name="附加民生康顺个人意外伤害保险"/>   	   	
+    <segItem code="0504" dir_level="41" flag="1" name="民生康吉重大疾病保险(中介)"/> 
+    <segItem code="0207" dir_level="42" flag="1" name="民生金玉满堂两全保险(中介)"/>   	   	  	   	
+    <segItem code="0303" dir_level="43" flag="1" name="附加豁免保险费定期寿险"/>
+    <segItem code="0403" dir_level="44" flag="1" name="民生长瑞年金保险（分红型）"/>	
+    <segItem code="0304" dir_level="45" flag="1" name="团体一年定期保险"/>	
+    <segItem code="0618" dir_level="46" flag="1" name="民生旅客综合意外伤害保险"/> 
+    <segItem code="0619" dir_level="47" flag="1" name="民生团体观光景点意外伤害保险"/>
+    <segItem code="0901" dir_level="48" flag="1" name="民生无忧行综合意外伤害保险"/>
+    <segItem code="0902" dir_level="49" flag="1" name="民生合家欢综合意外伤害保险"/>
+    <segItem code="0903" dir_level="50" flag="1" name="民生公共交通工具意外伤害保险"/>
+    <segItem code="0904" dir_level="51" flag="1" name="航空旅客意外伤害保险(天勤)"/>
+    <segItem code="0905" dir_level="52" flag="1" name="综合交通意外伤害保险(天勤)"/>
+    <segItem code="0506" dir_level="53" flag="1" name="民生康泰重大疾病保险(少儿计划)"/>
+   </mainItem>
+     <auxiliary dir_num="3" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="销售渠道"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   	<segAuxiliary code="05" dir_level="3" flag="1" name="险种性质"/>
+   </auxiliary>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>年金</bill_type>
+   <way>借</way>
+   <mainItem code="4404" dir_num="53" flag="1" name="年金给付">
+   	<segItem code="0102" dir_level="1" flag="1" name="民生长宁终身保险（分红型）"/>
+   	<segItem code="0201" dir_level="2" flag="1" name="民生金玉满堂两全保险（分红型）"/>
+   	<segItem code="0202" dir_level="3" flag="1" name="民生金榜题名两全保险（分红型）"/>
+   	<segItem code="0203" dir_level="4" flag="1" name="民生长裕两全保险（分红型）"/>
+   	<segItem code="0204" dir_level="5" flag="1" name="民生长顺两全保险（分红型）"/>
+   	<segItem code="0205" dir_level="6" flag="1" name="民生长乐两全保险（分红型）"/>
+   	<segItem code="0301" dir_level="7" flag="1" name="民生安康定期保险"/>
+   	<segItem code="0302" dir_level="8" flag="1" name="民生关爱特种疾病定期寿险保险"/>
+   	<segItem code="0401" dir_level="9" flag="1" name="民生众悦团体年金保险"/>
+   	<segItem code="0402" dir_level="10" flag="1" name="民生团体年金保险"/>
+   	<segItem code="0501" dir_level="11" flag="1" name="民生康吉重大疾病保险"/>
+   	<segItem code="0502" dir_level="12" flag="1" name="民生康泰重大疾病两全保险"/>
+   	<segItem code="0503" dir_level="13" flag="1" name="团体重大疾病保险"/>
+   	<segItem code="0601" dir_level="14" flag="1" name="民生康顺个人意外伤害保险"/>
+   	<segItem code="0602" dir_level="15" flag="1" name="民生康顺个人意外伤害保险（老年计划）"/>
+   	<segItem code="0603" dir_level="16" flag="1" name="航空旅客人身意外伤害保险"/>
+   	<segItem code="0604" dir_level="17" flag="1" name="高倍给付特约保险"/>
+   	<segItem code="0605" dir_level="18" flag="1" name="团体意外伤害保险"/>
+   	<segItem code="0606" dir_level="19" flag="1" name="旅游意外伤害保险"/>
+   	<segItem code="0701" dir_level="20" flag="1" name="附加每日住院给付保险"/>
+   	<segItem code="0702" dir_level="21" flag="1" name="附加意外伤害医疗保险"/>
+   	<segItem code="0703" dir_level="22" flag="1" name="附加住院医疗保险"/>
+   	<segItem code="0704" dir_level="23" flag="1" name="附加团体住院医疗保险"/>
+   	<segItem code="0705" dir_level="24" flag="1" name="附加团体每日住院给付保险"/>
+	<segItem code="0706" dir_level="25" flag="1" name="附加团体意外伤害医疗保险"/>
+	<segItem code="0707" dir_level="26" flag="1" name="附加特种疾病每日住院给付保险"/>
+   	<segItem code="0801" dir_level="27" flag="1" name="提前给付特约保险"/>
+   	<segItem code="0607" dir_level="28" flag="1" name="民生阳光旅游交通工具意外伤害保险"/>
+   	<segItem code="0608" dir_level="29" flag="1" name="民生康顺个人意外伤害保险(学生计划)"/>
+   	<segItem code="0206" dir_level="30" flag="1" name="民生金喜年年两全保险"/>
+   	<segItem code="0708" dir_level="31" flag="1" name="团体商业补充医疗保险"/>
+   	<segItem code="0609" dir_level="32" flag="1" name="民生康顺A意外伤害保险"/>
+   	<segItem code="0610" dir_level="33" flag="1" name="民生阳光旅程交通工具意外伤害保险(折式)"/>
+   	<segItem code="0611" dir_level="34" flag="1" name="民生老年康顺意外伤害保险(折式)"/>
+   	<segItem code="0612" dir_level="35" flag="1" name="民生康顺B意外伤害综合保险"/>
+   	<segItem code="0613" dir_level="36" flag="1" name="民生康顺C人身安康综合保险"/>
+   	<segItem code="0614" dir_level="37" flag="1" name="民生康顺D人身安康综合保险"/>
+    <segItem code="0615" dir_level="38" flag="1" name="团体建筑工地施工人员意外伤害保险"/>   	
+    <segItem code="0616" dir_level="39" flag="1" name="团体公共交通工具意外伤害保险"/>
+    <segItem code="0617" dir_level="40" flag="1" name="附加民生康顺个人意外伤害保险"/>   	   	
+    <segItem code="0504" dir_level="41" flag="1" name="民生康吉重大疾病保险(中介)"/> 
+    <segItem code="0207" dir_level="42" flag="1" name="民生金玉满堂两全保险(中介)"/>   	   	  	   	
+    <segItem code="0303" dir_level="43" flag="1" name="附加豁免保险费定期寿险"/>
+    <segItem code="0403" dir_level="44" flag="1" name="民生长瑞年金保险（分红型）"/>	
+    <segItem code="0304" dir_level="45" flag="1" name="团体一年定期保险"/>	
+    <segItem code="0618" dir_level="46" flag="1" name="民生旅客综合意外伤害保险"/> 
+    <segItem code="0619" dir_level="47" flag="1" name="民生团体观光景点意外伤害保险"/>
+    <segItem code="0901" dir_level="48" flag="1" name="民生无忧行综合意外伤害保险"/>
+    <segItem code="0902" dir_level="49" flag="1" name="民生合家欢综合意外伤害保险"/>
+    <segItem code="0903" dir_level="50" flag="1" name="民生公共交通工具意外伤害保险"/>
+    <segItem code="0904" dir_level="51" flag="1" name="航空旅客意外伤害保险(天勤)"/>
+    <segItem code="0905" dir_level="52" flag="1" name="综合交通意外伤害保险(天勤)"/>
+    <segItem code="0506" dir_level="53" flag="1" name="民生康泰重大疾病保险(少儿计划)"/>
+    </mainItem>
+     <auxiliary dir_num="3" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="销售渠道"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   	<segAuxiliary code="05" dir_level="3" flag="1" name="险种性质"/>
+   </auxiliary>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>保全退保金</bill_type>
+   <way>借</way>
+   <mainItem code="4411" dir_num="0" flag="1" name="退保金">
+   </mainItem>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>保全收费</bill_type>
+   <way>借</way>
+   <mainItem code="4101" dir_num="53" flag="1" name="保费收入">
+   	<segItem code="0102" dir_level="1" flag="1" name="民生长宁终身保险（分红型）"/>
+   	<segItem code="0201" dir_level="2" flag="1" name="民生金玉满堂两全保险（分红型）"/>
+   	<segItem code="0202" dir_level="3" flag="1" name="民生金榜题名两全保险（分红型）"/>
+   	<segItem code="0203" dir_level="4" flag="1" name="民生长裕两全保险（分红型）"/>
+   	<segItem code="0204" dir_level="5" flag="1" name="民生长顺两全保险（分红型）"/>
+   	<segItem code="0205" dir_level="6" flag="1" name="民生长乐两全保险（分红型）"/>
+   	<segItem code="0301" dir_level="7" flag="1" name="民生安康定期保险"/>
+   	<segItem code="0302" dir_level="8" flag="1" name="民生关爱特种疾病定期寿险保险"/>
+   	<segItem code="0401" dir_level="9" flag="1" name="民生众悦团体年金保险"/>
+   	<segItem code="0402" dir_level="10" flag="1" name="民生团体年金保险"/>
+   	<segItem code="0501" dir_level="11" flag="1" name="民生康吉重大疾病保险"/>
+   	<segItem code="0502" dir_level="12" flag="1" name="民生康泰重大疾病两全保险"/>
+   	<segItem code="0503" dir_level="13" flag="1" name="团体重大疾病保险"/>
+   	<segItem code="0601" dir_level="14" flag="1" name="民生康顺个人意外伤害保险"/>
+   	<segItem code="0602" dir_level="15" flag="1" name="民生康顺个人意外伤害保险（老年计划）"/>
+   	<segItem code="0603" dir_level="16" flag="1" name="航空旅客人身意外伤害保险"/>
+   	<segItem code="0604" dir_level="17" flag="1" name="高倍给付特约保险"/>
+   	<segItem code="0605" dir_level="18" flag="1" name="团体意外伤害保险"/>
+   	<segItem code="0606" dir_level="19" flag="1" name="旅游意外伤害保险"/>
+   	<segItem code="0701" dir_level="20" flag="1" name="附加每日住院给付保险"/>
+   	<segItem code="0702" dir_level="21" flag="1" name="附加意外伤害医疗保险"/>
+   	<segItem code="0703" dir_level="22" flag="1" name="附加住院医疗保险"/>
+   	<segItem code="0704" dir_level="23" flag="1" name="附加团体住院医疗保险"/>
+   	<segItem code="0705" dir_level="24" flag="1" name="附加团体每日住院给付保险"/>
+	<segItem code="0706" dir_level="25" flag="1" name="附加团体意外伤害医疗保险"/>
+	<segItem code="0707" dir_level="26" flag="1" name="附加特种疾病每日住院给付保险"/>
+   	<segItem code="0801" dir_level="27" flag="1" name="提前给付特约保险"/>
+   	<segItem code="0607" dir_level="28" flag="1" name="民生阳光旅游交通工具意外伤害保险"/>
+   	<segItem code="0608" dir_level="29" flag="1" name="民生康顺个人意外伤害保险(学生计划)"/>
+   	<segItem code="0206" dir_level="30" flag="1" name="民生金喜年年两全保险"/>
+   	<segItem code="0708" dir_level="31" flag="1" name="团体商业补充医疗保险"/>
+   	<segItem code="0609" dir_level="32" flag="1" name="民生康顺A意外伤害保险"/>
+   	<segItem code="0610" dir_level="33" flag="1" name="民生阳光旅程交通工具意外伤害保险(折式)"/>
+   	<segItem code="0611" dir_level="34" flag="1" name="民生老年康顺意外伤害保险(折式)"/>
+   	<segItem code="0612" dir_level="35" flag="1" name="民生康顺B意外伤害综合保险"/>
+   	<segItem code="0613" dir_level="36" flag="1" name="民生康顺C人身安康综合保险"/>
+   	<segItem code="0614" dir_level="37" flag="1" name="民生康顺D人身安康综合保险"/>
+    <segItem code="0615" dir_level="38" flag="1" name="团体建筑工地施工人员意外伤害保险"/>   	
+    <segItem code="0616" dir_level="39" flag="1" name="团体公共交通工具意外伤害保险"/>
+    <segItem code="0617" dir_level="40" flag="1" name="附加民生康顺个人意外伤害保险"/>   	   	
+    <segItem code="0504" dir_level="41" flag="1" name="民生康吉重大疾病保险(中介)"/> 
+    <segItem code="0207" dir_level="42" flag="1" name="民生金玉满堂两全保险(中介)"/>   	   	  	   	
+    <segItem code="0303" dir_level="43" flag="1" name="附加豁免保险费定期寿险"/>
+    <segItem code="0403" dir_level="44" flag="1" name="民生长瑞年金保险（分红型）"/>	
+    <segItem code="0304" dir_level="45" flag="1" name="团体一年定期保险"/>	
+    <segItem code="0618" dir_level="46" flag="1" name="民生旅客综合意外伤害保险"/> 
+    <segItem code="0619" dir_level="47" flag="1" name="民生团体观光景点意外伤害保险"/>
+    <segItem code="0901" dir_level="48" flag="1" name="民生无忧行综合意外伤害保险"/>
+    <segItem code="0902" dir_level="49" flag="1" name="民生合家欢综合意外伤害保险"/>
+    <segItem code="0903" dir_level="50" flag="1" name="民生公共交通工具意外伤害保险"/>
+    <segItem code="0904" dir_level="51" flag="1" name="航空旅客意外伤害保险(天勤)"/>
+    <segItem code="0905" dir_level="52" flag="1" name="综合交通意外伤害保险(天勤)"/>
+    <segItem code="0506" dir_level="53" flag="1" name="民生康泰重大疾病保险(少儿计划)"/>
+    </mainItem>
+   <auxiliary dir_num="5" flag="1">
+   	<segAuxiliary code="01" dir_level="1" flag="1" name="销售渠道"/>
+   	<segAuxiliary code="02" dir_level="2" flag="1" name="险种大类"/>
+   	<segAuxiliary code="03" dir_level="3" flag="1" name="首续期"/>
+   	<segAuxiliary code="04" dir_level="4" flag="1" name="趸期交"/>
+   	<segAuxiliary code="05" dir_level="5" flag="1" name="险种性质"/>
+   </auxiliary>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>退余额</bill_type>
+   <way>借</way>
+   <mainItem code="2121" dir_num="0" flag="1" name="预收保费">   	
+   	
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>借款</bill_type>
+   <way>借</way>
+   <mainItem code="1112" dir_num="0" flag="1" name="保户质押贷款">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>贷借款</bill_type>
+   <way>贷</way>
+   <mainItem code="4301" dir_num="0" flag="1" name="保户质押贷款">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>利息收入</bill_type>
+   <way>贷</way>
+   <mainItem code="4301" dir_num="0" flag="1" name="利息收入">
+   </mainItem>
+</billToVoucher>
+
+
+<billToVoucher>
+<bill_type>工本费</bill_type>
+   <way>贷</way>
+   <mainItem code="410902" dir_num="0" flag="1" name="工本费">
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>印花税</bill_type>
+   <way>贷</way>
+   <mainItem code="4451" dir_num="0" flag="1" name="营业费用">
+   </mainItem>
+</billToVoucher>
+
+
+
+<billToVoucher>
+<bill_type>退续期保费</bill_type>
+   <way>借</way>
+   <mainItem code="2121" dir_num="53" flag="1" name="预收保费">   	
+   	<segItem code="0102" dir_level="1" flag="1" name="民生长宁终身保险（分红型）"/>
+   	<segItem code="0201" dir_level="2" flag="1" name="民生金玉满堂两全保险（分红型）"/>
+   	<segItem code="0202" dir_level="3" flag="1" name="民生金榜题名两全保险（分红型）"/>
+   	<segItem code="0203" dir_level="4" flag="1" name="民生长裕两全保险（分红型）"/>
+   	<segItem code="0204" dir_level="5" flag="1" name="民生长顺两全保险（分红型）"/>
+   	<segItem code="0205" dir_level="6" flag="1" name="民生长乐两全保险（分红型）"/>
+   	<segItem code="0301" dir_level="7" flag="1" name="民生安康定期保险"/>
+   	<segItem code="0302" dir_level="8" flag="1" name="民生关爱特种疾病定期寿险保险"/>
+   	<segItem code="0401" dir_level="9" flag="1" name="民生众悦团体年金保险"/>
+   	<segItem code="0402" dir_level="10" flag="1" name="民生团体年金保险"/>
+   	<segItem code="0501" dir_level="11" flag="1" name="民生康吉重大疾病保险"/>
+   	<segItem code="0502" dir_level="12" flag="1" name="民生康泰重大疾病两全保险"/>
+   	<segItem code="0503" dir_level="13" flag="1" name="团体重大疾病保险"/>
+   	<segItem code="0601" dir_level="14" flag="1" name="民生康顺个人意外伤害保险"/>
+   	<segItem code="0602" dir_level="15" flag="1" name="民生康顺个人意外伤害保险（老年计划）"/>
+   	<segItem code="0603" dir_level="16" flag="1" name="航空旅客人身意外伤害保险"/>
+   	<segItem code="0604" dir_level="17" flag="1" name="高倍给付特约保险"/>
+   	<segItem code="0605" dir_level="18" flag="1" name="团体意外伤害保险"/>
+   	<segItem code="0606" dir_level="19" flag="1" name="旅游意外伤害保险"/>
+   	<segItem code="0701" dir_level="20" flag="1" name="附加每日住院给付保险"/>
+   	<segItem code="0702" dir_level="21" flag="1" name="附加意外伤害医疗保险"/>
+   	<segItem code="0703" dir_level="22" flag="1" name="附加住院医疗保险"/>
+   	<segItem code="0704" dir_level="23" flag="1" name="附加团体住院医疗保险"/>
+   	<segItem code="0705" dir_level="24" flag="1" name="附加团体每日住院给付保险"/>
+	<segItem code="0706" dir_level="25" flag="1" name="附加团体意外伤害医疗保险"/>
+	<segItem code="0707" dir_level="26" flag="1" name="附加特种疾病每日住院给付保险"/>
+   	<segItem code="0801" dir_level="27" flag="1" name="提前给付特约保险"/>
+   	<segItem code="0607" dir_level="28" flag="1" name="民生阳光旅游交通工具意外伤害保险"/>
+   	<segItem code="0608" dir_level="29" flag="1" name="民生康顺个人意外伤害保险(学生计划)"/>
+   	<segItem code="0206" dir_level="30" flag="1" name="民生金喜年年两全保险"/>
+   	<segItem code="0708" dir_level="31" flag="1" name="团体商业补充医疗保险"/>
+   	<segItem code="0609" dir_level="32" flag="1" name="民生康顺A意外伤害保险"/>
+   	<segItem code="0610" dir_level="33" flag="1" name="民生阳光旅程交通工具意外伤害保险(折式)"/>
+   	<segItem code="0611" dir_level="34" flag="1" name="民生老年康顺意外伤害保险(折式)"/>
+   	<segItem code="0612" dir_level="35" flag="1" name="民生康顺B意外伤害综合保险"/>
+   	<segItem code="0613" dir_level="36" flag="1" name="民生康顺C人身安康综合保险"/>
+   	<segItem code="0614" dir_level="37" flag="1" name="民生康顺D人身安康综合保险"/>
+    <segItem code="0615" dir_level="38" flag="1" name="团体建筑工地施工人员意外伤害保险"/> 
+    <segItem code="0616" dir_level="39" flag="1" name="团体公共交通工具意外伤害保险"/>
+    <segItem code="0617" dir_level="40" flag="1" name="附加民生康顺个人意外伤害保险"/>   	   	
+    <segItem code="0504" dir_level="41" flag="1" name="民生康吉重大疾病保险(中介)"/> 
+    <segItem code="0207" dir_level="42" flag="1" name="民生金玉满堂两全保险(中介)"/>   	   	  	   	  	
+    <segItem code="0303" dir_level="43" flag="1" name="附加豁免保险费定期寿险"/>
+    <segItem code="0403" dir_level="44" flag="1" name="民生长瑞年金保险（分红型）"/>	
+    <segItem code="0304" dir_level="45" flag="1" name="团体一年定期保险"/>	
+    <segItem code="0618" dir_level="46" flag="1" name="民生旅客综合意外伤害保险"/> 
+    <segItem code="0619" dir_level="47" flag="1" name="民生团体观光景点意外伤害保险"/>
+    <segItem code="0901" dir_level="48" flag="1" name="民生无忧行综合意外伤害保险"/>
+    <segItem code="0902" dir_level="49" flag="1" name="民生合家欢综合意外伤害保险"/>
+    <segItem code="0903" dir_level="50" flag="1" name="民生公共交通工具意外伤害保险"/>
+    <segItem code="0904" dir_level="51" flag="1" name="航空旅客意外伤害保险(天勤)"/>
+    <segItem code="0905" dir_level="52" flag="1" name="综合交通意外伤害保险(天勤)"/>
+    <segItem code="0506" dir_level="53" flag="1" name="民生康泰重大疾病保险(少儿计划)"/>
+   </mainItem>
+</billToVoucher>
+
+<billToVoucher>
+<bill_type>退首期保费</bill_type>
+   <way>借</way>
+   <mainItem code="2120" dir_num="53" flag="1" name="暂收保费">   
+   	<segItem code="0102" dir_level="1" flag="1" name="民生长宁终身保险（分红型）"/>
+   	<segItem code="0201" dir_level="2" flag="1" name="民生金玉满堂两全保险（分红型）"/>
+   	<segItem code="0202" dir_level="3" flag="1" name="民生金榜题名两全保险（分红型）"/>
+   	<segItem code="0203" dir_level="4" flag="1" name="民生长裕两全保险（分红型）"/>
+   	<segItem code="0204" dir_level="5" flag="1" name="民生长顺两全保险（分红型）"/>
+   	<segItem code="0205" dir_level="6" flag="1" name="民生长乐两全保险（分红型）"/>
+   	<segItem code="0301" dir_level="7" flag="1" name="民生安康定期保险"/>
+   	<segItem code="0302" dir_level="8" flag="1" name="民生关爱特种疾病定期寿险保险"/>
+   	<segItem code="0401" dir_level="9" flag="1" name="民生众悦团体年金保险"/>
+   	<segItem code="0402" dir_level="10" flag="1" name="民生团体年金保险"/>
+   	<segItem code="0501" dir_level="11" flag="1" name="民生康吉重大疾病保险"/>
+   	<segItem code="0502" dir_level="12" flag="1" name="民生康泰重大疾病两全保险"/>
+   	<segItem code="0503" dir_level="13" flag="1" name="团体重大疾病保险"/>
+   	<segItem code="0601" dir_level="14" flag="1" name="民生康顺个人意外伤害保险"/>
+   	<segItem code="0602" dir_level="15" flag="1" name="民生康顺个人意外伤害保险（老年计划）"/>
+   	<segItem code="0603" dir_level="16" flag="1" name="航空旅客人身意外伤害保险"/>
+   	<segItem code="0604" dir_level="17" flag="1" name="高倍给付特约保险"/>
+   	<segItem code="0605" dir_level="18" flag="1" name="团体意外伤害保险"/>
+   	<segItem code="0606" dir_level="19" flag="1" name="旅游意外伤害保险"/>
+   	<segItem code="0701" dir_level="20" flag="1" name="附加每日住院给付保险"/>
+   	<segItem code="0702" dir_level="21" flag="1" name="附加意外伤害医疗保险"/>
+   	<segItem code="0703" dir_level="22" flag="1" name="附加住院医疗保险"/>
+   	<segItem code="0704" dir_level="23" flag="1" name="附加团体住院医疗保险"/>
+   	<segItem code="0705" dir_level="24" flag="1" name="附加团体每日住院给付保险"/>
+	<segItem code="0706" dir_level="25" flag="1" name="附加团体意外伤害医疗保险"/>
+	<segItem code="0707" dir_level="26" flag="1" name="附加特种疾病每日住院给付保险"/>
+   	<segItem code="0801" dir_level="27" flag="1" name="提前给付特约保险"/>
+   	<segItem code="0607" dir_level="28" flag="1" name="民生阳光旅游交通工具意外伤害保险"/>
+   	<segItem code="0608" dir_level="29" flag="1" name="民生康顺个人意外伤害保险(学生计划)"/>
+   	<segItem code="0206" dir_level="30" flag="1" name="民生金喜年年两全保险"/>
+   	<segItem code="0708" dir_level="31" flag="1" name="团体商业补充医疗保险"/>
+   	<segItem code="0609" dir_level="32" flag="1" name="民生康顺A意外伤害保险"/>
+   	<segItem code="0610" dir_level="33" flag="1" name="民生阳光旅程交通工具意外伤害保险(折式)"/>
+   	<segItem code="0611" dir_level="34" flag="1" name="民生老年康顺意外伤害保险(折式)"/>
+   	<segItem code="0612" dir_level="35" flag="1" name="民生康顺B意外伤害综合保险"/>
+   	<segItem code="0613" dir_level="36" flag="1" name="民生康顺C人身安康综合保险"/>
+   	<segItem code="0614" dir_level="37" flag="1" name="民生康顺D人身安康综合保险"/>
+    <segItem code="0615" dir_level="38" flag="1" name="团体建筑工地施工人员意外伤害保险"/>   	
+    <segItem code="0616" dir_level="39" flag="1" name="团体公共交通工具意外伤害保险"/>
+    <segItem code="0617" dir_level="40" flag="1" name="附加民生康顺个人意外伤害保险"/>   	   	
+    <segItem code="0504" dir_level="41" flag="1" name="民生康吉重大疾病保险(中介)"/> 
+    <segItem code="0207" dir_level="42" flag="1" name="民生金玉满堂两全保险(中介)"/>   	   	  	   	
+    <segItem code="0303" dir_level="43" flag="1" name="附加豁免保险费定期寿险"/>
+    <segItem code="0403" dir_level="44" flag="1" name="民生长瑞年金保险（分红型）"/>	
+    <segItem code="0304" dir_level="45" flag="1" name="团体一年定期保险"/>	
+    <segItem code="0618" dir_level="46" flag="1" name="民生旅客综合意外伤害保险"/> 
+    <segItem code="0619" dir_level="47" flag="1" name="民生团体观光景点意外伤害保险"/>
+    <segItem code="0901" dir_level="48" flag="1" name="民生无忧行综合意外伤害保险"/>
+    <segItem code="0902" dir_level="49" flag="1" name="民生合家欢综合意外伤害保险"/>
+    <segItem code="0903" dir_level="50" flag="1" name="民生公共交通工具意外伤害保险"/>
+    <segItem code="0904" dir_level="51" flag="1" name="航空旅客意外伤害保险(天勤)"/>
+    <segItem code="0905" dir_level="52" flag="1" name="综合交通意外伤害保险(天勤)"/>
+    <segItem code="0506" dir_level="53" flag="1" name="民生康泰重大疾病保险(少儿计划)"/>
+   </mainItem>
+</billToVoucher>
+
+</billToVouchers>
